@@ -10,7 +10,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LinearGradient from 'react-native-linear-gradient';
 import Intro from './pages/Intro';
 import Start from './pages/Start';
 import Join from './pages/Join';
