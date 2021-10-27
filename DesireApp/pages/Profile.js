@@ -46,7 +46,7 @@ const SubTitle = styled.Text`
 
 const ImageView = styled.View`
   left: 10%;
-  top: 45.43%
+  top: 15.43%
   height: 37.5%
 `;
 const Image = styled.Image`
