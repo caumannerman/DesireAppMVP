@@ -12,6 +12,8 @@ target 'DesireApp' do
     :hermes_enabled => false
   )
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'DesireAppTests' do
     inherit! :complete
     # Pods for testing
