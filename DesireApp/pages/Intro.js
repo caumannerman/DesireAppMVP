@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
+import { ActivityIndicator } from 'react-native';
 
 const Text = styled.Text`
    
@@ -56,7 +57,7 @@ const TmpButton = styled.Button`
     
 `;
 
-function Intro(){
+function Intro(props){
     return(
     
       <Container>
@@ -71,7 +72,9 @@ function Intro(){
                     <Image source={require('../constants/images/Intro.png')}/>
                 </ImageView>
             </Contents>
-            <TmpButton title="임시버튼"></TmpButton>
+            <TmpButton title="임시버튼" onPress={ () => {
+            props.navigation.navigate( 'Start')
+          }}></TmpButton>
 
         </Background>
       </Container>
