@@ -202,9 +202,7 @@ function Profile(props){
 
 
                   <Button>
-                    <ButtonText onPress={() => {
-                      props.navigation.navigate("Homepage")
-                  }}>시작하기</ButtonText>
+                    <ButtonText>시작하기</ButtonText>
                   </Button>
 
                 </TextInputView>
