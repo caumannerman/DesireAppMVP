@@ -14,7 +14,7 @@ import Intro from './pages/Intro';
 import Start from './pages/Start';
 import Join from './pages/Join';
 import Profile from './pages/Profile';
-import Home from './pages/Home';
+import Homepage from './pages/Homepage';
 
 
 
@@ -32,7 +32,7 @@ const App: () => Node = () => {
             <Stack.Screen name="Start" component={Start} />
             <Stack.Screen name="Join" component={Join} />
             <Stack.Screen name="Profile" component={Profile} />
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Homepage" component={Homepage} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

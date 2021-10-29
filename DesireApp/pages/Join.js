@@ -99,10 +99,7 @@ const ButtonText = styled.Text`
   color: #ffffff;
   font-weight: bold;
   font-style: normal;
-  text-align: center;
-  
-
-  
+  text-align: center;  
 `;
 
 
@@ -158,7 +155,9 @@ function Join(props){
                     
   
 
-                  <Button>
+                  <Button onPress={() => {
+                      props.navigation.navigate("Profile")
+                  }}>
                       <ButtonText>가입하기</ButtonText>
                   </Button>
 

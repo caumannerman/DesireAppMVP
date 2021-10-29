@@ -3,9 +3,6 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 
-const Text = styled.Text`
-   
-`;
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -16,7 +13,7 @@ const Background = styled(LinearGradient)`
 `;
 const Contents = styled.View`
   flex: 1;
-  align-items: flex-start;
+  flex-direction: column;
   
   
 `;
@@ -36,26 +33,124 @@ const Title = styled.Text`
   
 `;
 
-const SubTitle = styled.Text`
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 20px;
-  color: #000000;
-`;
+
 
 const ImageView = styled.View`
-  left: 10%;
-  top: 15.43%
-  height: 37.5%
+  left: 11.11%;
+  top: 12.43%
+  height: 96px;
+  width: 77.88%;
+  align-items: center;
+`;
+const ProfileImageView = styled.View`
+  border: #d0d0d0;
+  width: 96px;
+  height: 96px;
+  border-radius: 50px;
+  background: #e3e3e3;
+  align-items: center;
+  justify-content: center;
+
 `;
 const Image = styled.Image`
-  flex: 1;
+  width: 80px;
+  height: 80px;
+  resizeMode: contain;
 `;
 
-const TmpButton = styled.Button`
-    
+const TextInputView = styled.View`
+  top: 20%;
+  
+  flex-direction: column;
+  width: 77.77%
+  height: 55%
+  align-items: center;
+  margin-left: 11.11%;
+  margin-right: 11.11%;
 `;
+const RowBox = styled.View`
+  flex-direction: row;
+  width: 100%;
+  align-items: stretch;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  
+  
+`;
+const Text = styled.Text`
+  height: 20px;
+  width: 65px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #000000;
+  margin-right: 10px;
+  
+
+`;
+const TextInput = styled.TextInput`
+  width : 75%;
+  height: 40px;
+  border: #D0D0D0;
+ 
+  
+  background: #ffffff;
+`;
+const CheckView = styled.ScrollView`
+  
+  height: 230px;
+  width: 75%;
+  border: #ff0000;
+  background: #ffffff;
+  border-radius: 2px;
+  border: #d0d0d0;
+  
+  
+`;
+const Check = styled.TouchableOpacity`  
+  height: 40px;
+  width: 90%;
+  justify-content: center;
+ 
+  
+`;
+const CheckIcon = styled.Text`
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  
+  
+  height: 40px;
+  
+  
+  
+`;
+
+
+const Button = styled.TouchableOpacity`
+  
+  align-items: center;
+  justify-content: center;
+  background-color: #f34e4e;
+
+  border-radius: 4px;
+  height: 40px;
+  width: 100%;
+  margin-top: 20px;
+`;
+
+
+
+const ButtonText = styled.Text`
+  
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;  
+`;
+
 
 function Profile(props){
     return(
@@ -65,17 +160,68 @@ function Profile(props){
             <Contents>
                 <TitleView>
                     <Title>프로필</Title>
-                    <SubTitle>디자이너만을 위한 든든한 맞춤 파트너</SubTitle>
                 </TitleView>
-                
                 <ImageView>
-                    <Image source={require('../constants/images/Intro.png')}/>
+                    <ProfileImageView>
+                      <Image source={require('../constants/images/Start.png')}/>
+                    </ProfileImageView>
+                    
                 </ImageView>
-            </Contents>
-            <TmpButton title="임시버튼" onPress={ () => {
-            props.navigation.navigate( 'Home')
-          }}></TmpButton>
+               
+                <TextInputView>
+                  <RowBox>
+                    <Text>닉네임</Text>
+                    <TextInput placeholder="입력"></TextInput>
+                  </RowBox>
 
+                  <RowBox>
+                    <Text>디자인분야</Text>
+                    <CheckView>
+                        <RowBox>
+                          <Check><CheckIcon>    UIUX</CheckIcon></Check>
+                          <CheckIcon>✅</CheckIcon>
+                        </RowBox>
+
+                        <RowBox>
+                          <Check><CheckIcon>    BIBX</CheckIcon></Check>
+                          <CheckIcon>✅</CheckIcon>
+                        </RowBox>
+
+                        <RowBox>
+                          <Check><CheckIcon>    제품디자인</CheckIcon></Check>
+                          <CheckIcon>✅</CheckIcon>
+                        </RowBox>
+
+                        <RowBox>
+                          <Check><CheckIcon>    시각디자인</CheckIcon></Check>
+                          <CheckIcon>✅</CheckIcon>
+                        </RowBox>
+                        
+                    </CheckView>
+                  </RowBox>
+
+
+                  <Button>
+                    <ButtonText onPress={() => {
+                      props.navigation.navigate("Homepage")
+                  }}>시작하기</ButtonText>
+                  </Button>
+
+                </TextInputView>
+
+               
+
+                
+                
+                
+
+
+
+
+
+
+
+            </Contents>
         </Background>
       </Container>
     
