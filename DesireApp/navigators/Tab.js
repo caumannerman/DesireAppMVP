@@ -21,6 +21,7 @@ const Tab = () => {
                  style={{
                    width:24,
                    height:24,
+                   marginTop: 5,
                    tintColor: focused? '#f89ccc' : '#952bff', 
                  }}
               />
@@ -35,6 +36,7 @@ const Tab = () => {
                  style={{
                    width:24,
                    height:24,
+                   marginTop: 5,
                    tintColor: focused? '#f89ccc' : '#952bff', 
                  }}
               />
@@ -49,6 +51,7 @@ const Tab = () => {
                  style={{
                    width:24,
                    height:24,
+                   marginTop: 5,
                    tintColor: focused? '#f89ccc' : '#952bff'
                  }}
               />
@@ -63,6 +66,7 @@ const Tab = () => {
                  style={{
                    width:24,
                    height:24,
+                   marginTop: 5,
                    tintColor: focused? '#f89ccc' : '#952bff', 
         
                  }}
@@ -78,7 +82,7 @@ const Tab = () => {
                  style={{
                    width:24,
                    height:24,
-                  
+                   marginTop: 5,
                    tintColor: focused? '#f89ccc' : '#952bff', 
             
                  }}

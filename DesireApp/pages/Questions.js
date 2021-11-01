@@ -27,7 +27,7 @@ const TitleView = styled.View`
 
   height: 39px;
   width: 85%;
-  
+
   margin-bottom: 10px;
 `;
 
@@ -40,48 +40,48 @@ const Title = styled.Text`
 `;
 
 
-const TextInputView = styled.View`
-  flex-direction: row;
-  width: 100%
-  height: 40px;
-  
- 
-
-`;
 const Text = styled.Text`
   height: 40px;
   width: 30%;
   border: #0000ff;
-  background: #d0d0d0;
+  background: #f5f5f5;
+  text-align:center;
+  
   
 `;
 
 const TextInput = styled.TextInput`
-  width : 60%;
-  height: 40px;
-  border: #00DfD0;
-  
-  background: #ff00ff;
+  width : 100%;
+  height: 40px;  
+  background: #f5f5f5;
+  border: #b0b0b0;
 `;
 
-const SS = styled.View`
-  border: #00ff00;
-  height: 40px;
-  width: 100%;
-`;
 
 const RowView = styled.View`
   border: #00ff00;
   height: 40px;
   width: 100%;
-  flex-dierection: row;
+  background: #f5f5f5;
+  flex-direction: row;
+  
 `;
 
-const Category = styled.Text`
-
+const Category = styled.TouchableOpacity`
+  height: 40px;
+  border: #0000ff;
+  margin-right: 20px;
+  align-items: center;
+  justify-content: center;
 `;
 
-
+const CategoryText = styled.Text`
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  font-color: #000000;
+  
+`;
 
 
 
@@ -95,12 +95,30 @@ const MainText = styled.TextInput`
 const File = styled.View`
   width: 100%;
   height: 15%;
-  border: #ff0000;
+  border: #d0d0d0;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
+const FileOpacity = styled.TouchableOpacity`
+  width: 25%;
+  height: 100%;
+  
+  justify-content: center;
+  align-items: center;
+
+`;
 const Image = styled.Image`
   resizeMode: contain;
   
+`;
+
+const FileText = styled.Text`
+  color: #000000;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
 `;
 
 
@@ -108,7 +126,7 @@ const Image = styled.Image`
 const SendButton = styled.TouchableOpacity`
   width: 80%;
   height: 40px;
-  border: #ff0000;
+  
   background: #952bff;
   border-radius: 4px;
   align-items: center;
@@ -134,20 +152,42 @@ function Question(props){
                 <Title>질문하기</Title>
               </TitleView>
 
+              <TextInput placeholder="여기에 제목을 입력하세요."></TextInput>
+                
+         
               <RowView>
-                <Text>제목</Text>
-                <TextInput></TextInput>
+              <Text>카테고리 선택</Text>
+                <Category><CategoryText>UIUX</CategoryText></Category>
+                <Category><CategoryText>BIBX</CategoryText></Category>
+                <Category><CategoryText>제품&산업</CategoryText></Category>
+                <Category><CategoryText>툴 사용자</CategoryText></Category>
               </RowView>
 
+
               
-              <MainText></MainText>
-              <File></File>
+              <MainText  placeholder="궁금한 내용을 질문해주세요
+                                -명확한 상황 설명과 받고자 하는 답변내용을 적어주세요&#13;&#10;
+                                -질문을 보내면 수정/삭제가 불가합니다.&#13;&#10;
+                                -모든 이미지 파일은 안전하게 워터마크가 부착됩니다.&#13;&#10;"></MainText>
+              <File>
+                <FileOpacity>
+                  <Image source={require('../constants/images/question/image.png')}/>
+                  <FileText>사진</FileText>
+                </FileOpacity>
+                <FileOpacity>
+                  <Image source={require('../constants/images/question/video.png')}/>
+                  <FileText>동영상</FileText>
+                </FileOpacity>
+                <FileOpacity>
+                  <Image source={require('../constants/images/question/file.png')}/>
+                  <FileText>파일</FileText>
+                </FileOpacity>
+                <FileOpacity>
+                  <Image source={require('../constants/images/question/voice.png')}/>
+                  <FileText>녹음</FileText>
+                </FileOpacity>
+              </File>
               
-
-
-
-
-            
               <SendButton>
                 <SendText>보내기</SendText>
               </SendButton>

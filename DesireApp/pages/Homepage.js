@@ -198,7 +198,7 @@ function Homepage(props){
               </QView>
 
               <MyqChatView>
-                <MyqChatTouch><MyqChatText>내가 한 질문</MyqChatText><MyqChatText>></MyqChatText></MyqChatTouch>
+                <MyqChatTouch><MyqChatText>내가 한 질문</MyqChatText><MyqChatText></MyqChatText></MyqChatTouch>
 
                 <RowView> 
                   <Part></Part>
@@ -210,7 +210,7 @@ function Homepage(props){
               </MyqChatView>
 
               <MyqChatView>
-                <MyqChatTouch><MyqChatText>1대1 채팅</MyqChatText><MyqChatText>></MyqChatText></MyqChatTouch>
+                <MyqChatTouch><MyqChatText>1대1 채팅</MyqChatText><MyqChatText></MyqChatText></MyqChatTouch>
 
                 <RowView>    
                   

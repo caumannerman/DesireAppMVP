@@ -53,6 +53,7 @@ const ButtonView = styled.View`
   
   margin-left: 11.11%;
   margin-right: 11.11%;
+  margin-top: 5%;
 `;
 
 const Button = styled.TouchableOpacity`
@@ -62,9 +63,14 @@ const Button = styled.TouchableOpacity`
   
   align-items: center;
   background-color: #ffffff;
-  border: #ff0000;
+
   margin-right: 10%;
   border-radius: 25px;
+  shadowColor: #b8b8b8;
+  shadow-offset: {width: 0, height: 10};
+  shadow-opacity: 0.9;
+  shadow-radius: 6;
+  elevation: 20;
 
 `;
 
