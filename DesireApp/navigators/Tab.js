@@ -3,10 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View, Image} from 'react-native';
 import Homepage from '../pages/Homepage';
 import Questions from '../pages/Questions';
-import MyQuestions from '../pages/MyQuestions';
-import Chat from '../pages/Chat';
 import SignInStack from './SignInStack';
 import MyquestionStack from './MyquestionStack';
+import ChatStack from './ChatStack';
 
 
 const Tabs = createBottomTabNavigator();
@@ -75,7 +74,7 @@ const Tab = () => {
              <Text style={{color: focused? '#f89ccc' : '#952bff', height: 16,fontSize: 12, textAlign: 'center', fontWeight:'normal'}}>내가 한 질문</Text>
             </View>
           )}}/>
-          <Tabs.Screen name="Chat" component={Chat} options={{ tabBarIcon: ({focused}) => (
+          <Tabs.Screen name="ChatStack" component={ChatStack} options={{ tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center', height: '48px'}}>
               <Image
                  source={require('../constants/images/homepage/chat.png')}

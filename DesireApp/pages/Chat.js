@@ -125,7 +125,7 @@ function Chat(props){
                       <ImageView>
                           <Image source={require('../constants/images/homepage/face.png')}/>
                       </ImageView>
-                      <Part>
+                      <Part onPress={()=> { props.navigation.navigate( 'ChatPrivate')}}>
                           <Username>가상 사용자</Username>
                           <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
                       </Part>
