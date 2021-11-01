@@ -139,6 +139,12 @@ const SendText = styled.Text`
   font-weight: bold;
 
 `;
+const Glass = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  height: 39px;
+  width: 39px;
+`;
 
 function Reply(props){
     return(
@@ -150,6 +156,7 @@ function Reply(props){
 
               <TitleView>
                 <Title>받은답장</Title>
+                <Glass onPress={()=>{props.navigation.goBack()}}><Image source={require('../constants/images/homepage/glasses.png')}/></Glass>
               </TitleView>
 
               
@@ -161,7 +168,7 @@ function Reply(props){
                                 -질문을 보내면 수정/삭제가 불가합니다.&#13;&#10;
                                 -모든 이미지 파일은 안전하게 워터마크가 부착됩니다.&#13;&#10;"></MainText>
               <File>
-                <FileOpacity>
+                <FileOpacity onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
                   <Image source={require('../constants/images/question/image.png')}/>
                   <FileText>사진</FileText>
                 </FileOpacity>

@@ -139,6 +139,12 @@ const SendText = styled.Text`
   font-weight: bold;
 
 `;
+const Glass = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  height: 39px;
+  width: 39px;
+`;
 
 function ReplyDetail(props){
     return(
@@ -150,6 +156,7 @@ function ReplyDetail(props){
 
               <TitleView>
                 <Title>받은답장</Title>
+                <Glass onPress={()=>{props.navigation.goBack()}}><Image source={require('../constants/images/homepage/glasses.png')}/></Glass>
               </TitleView>
 
 
