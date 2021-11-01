@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import Tab from '../navigators/Tab';
+
 
 const Container = styled.SafeAreaView`
   flex: 1;
