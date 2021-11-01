@@ -133,7 +133,7 @@ function MyQuestion(props){
 
               <ScrollView>
                   <RowBox>
-                    <Part>
+                    <Part  onPress={() => {props.navigation.navigate("Reply")}}>
                       <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
                     </Part>
                     <Part>

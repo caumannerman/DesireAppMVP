@@ -6,6 +6,7 @@ import Questions from '../pages/Questions';
 import MyQuestions from '../pages/MyQuestions';
 import Chat from '../pages/Chat';
 import SignInStack from './SignInStack';
+import MyquestionStack from './MyquestionStack';
 
 
 const Tabs = createBottomTabNavigator();
@@ -58,7 +59,7 @@ const Tab = () => {
              <Text style={{color: focused? '#f89ccc' : '#952bff', height: 16,fontSize: 12, textAlign: 'center', fontWeight:'normal'}}>질문하기</Text>
             </View>
           )}}/>
-          <Tabs.Screen name="MyQuestions" component={MyQuestions} options={{ tabBarIcon: ({focused}) => (
+          <Tabs.Screen name="MyquestionStack" component={MyquestionStack} options={{ tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
                  source={require('../constants/images/homepage/question.png')}
