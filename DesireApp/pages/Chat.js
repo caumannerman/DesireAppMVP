@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-
+import {Text, View, TouchableOpacity, ScrollView, Image} from 'react-native'
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -28,7 +28,8 @@ const TitleView = styled.View`
   height: 39px;
   width: 85%;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 45px;
+
 `;
 
 const Title = styled.Text`
@@ -48,63 +49,6 @@ const Glass = styled.TouchableOpacity`
   width: 39px;
 `;
 
-const Image = styled.Image`
-  resizeMode: contain;
-  flex: 1;
-`;
-
-
-const ScrollView = styled.ScrollView`
-  flex: 1;
-  flex-diection: column;
-  border: #999999;
-`;
-
-const RowBox = styled.View`
-  border: #d0d0d0;
-  width: 100%;
-  height: 82px;
-  flex-direction: row;
-`;
-
-const Part = styled.TouchableOpacity`
-  height: 82px;
-  width: 75%;
-  border: #0000ff;
-  border-radius: 16px;
-  flex-direction: column;
-  justify-content: center;
-
-`;
-
-const ImageView = styled.View`
-  height: 82px;
-  width: 82px;
-  border: #ff0000;
-  justify-content: center;
-  align-item: center;
-`;
-
-const Username = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  color: #000000;
-
-`;
-
-const TimeSend = styled.Text`
-  font-size: 10px;
-  font-weight: 300;
-  text-align: center;
-  color: #808080;
-`;
-
-const Firstline = styled.Text`
-  font-size: 12px;
-  font-weight: 300;
-  color: #808080;
-
-`;
 
 
 function Chat(props){
@@ -121,98 +65,215 @@ function Chat(props){
               </TitleView>
 
               <ScrollView>
-                  <RowBox>
-                      <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                      </ImageView>
-                      <Part onPress={()=> { props.navigation.navigate( 'ChatPrivate')}}>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                      </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-                  <RowBox>
-                    <ImageView>
-                          <Image source={require('../constants/images/homepage/face.png')}/>
-                    </ImageView>
-                    <Part>
-                          <Username>가상 사용자</Username>
-                          <Firstline>저도 아웃소싱으로 작업을 해봤어요~</Firstline>
-                    </Part>
-                  </RowBox>
-              </ScrollView>
 
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:91,flexDirection:'row', alignItems:'center'}}
+                    onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                  
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                  
+                    <View style={{flexDirection: 'column' , width:'52%', height: 40}}>
+                      <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:7}}>가상 사용자</Text>
+                      <Text style={{fontSize: 15, fontWeight: '500', color:'#858585', marginBottom:5}}>저도 아웃소싱으로 작업을 해봤어....저도 아웃소싱으로 해봤답니다</Text>
+                    </View>
+
+                    <Text style={{marginBottom:35, fontSize:14, fontWeight:'100'}}>오후 6:20</Text>
+                    
+
+                  </TouchableOpacity>
+
+
+
+
+              </ScrollView>
             </Contents>
         </Background>
       </Container>

@@ -92,7 +92,7 @@ function ReplyDetail(props){
                     <Text style={{color: '#ffffff', fontSize: 14, fontWeight:'600'}}>채팅요청</Text>
                   </TouchableOpacity>
 
-                </View>
+              </View>
 
                 <View style={{flexDirection:'column', width:'100%', height:'40%', alignItems:'center', justifyContent:'center'}}>
 
