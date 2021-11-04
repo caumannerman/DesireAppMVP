@@ -69,7 +69,7 @@ const Button = styled.TouchableOpacity`
   shadowColor: #b8b8b8;
   shadow-offset: {width: 0, height: 10};
   shadow-opacity: 0.9;
-  shadow-radius: 6;
+  shadow-radius: 6px;
   elevation: 20;
 
 `;

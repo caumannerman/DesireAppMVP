@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-
+import {TextInput, Text, Image, TouchableOpacity, View, ScrollView} from 'react-native';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -28,7 +28,7 @@ const TitleView = styled.View`
   height: 39px;
   width: 85%;
 
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const Title = styled.Text`
@@ -40,57 +40,6 @@ const Title = styled.Text`
 `;
 
 
-const Text = styled.Text`
-  height: 40px;
-  width: 30%;
-  border: #0000ff;
-  background: #f5f5f5;
-  text-align:center;
-  
-  
-`;
-
-const TextInput = styled.TextInput`
-  width : 100%;
-  height: 40px;  
-  background: #f5f5f5;
-  border: #b0b0b0;
-`;
-
-
-const RowView = styled.View`
-  border: #00ff00;
-  height: 40px;
-  width: 100%;
-  background: #f5f5f5;
-  flex-direction: row;
-  
-`;
-
-const Category = styled.TouchableOpacity`
-  height: 40px;
-  border: #0000ff;
-  margin-right: 20px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const CategoryText = styled.Text`
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  font-color: #000000;
-  
-`;
-
-
-
-
-const MainText = styled.TextInput`
-  border: #0000ff;
-  width: 100%;
-  height: 35%;
-`;
 
 const File = styled.View`
   width: 100%;
@@ -109,10 +58,6 @@ const FileOpacity = styled.TouchableOpacity`
   align-items: center;
 
 `;
-const Image = styled.Image`
-  resizeMode: contain;
-  
-`;
 
 const FileText = styled.Text`
   color: #000000;
@@ -123,22 +68,7 @@ const FileText = styled.Text`
 
 
 
-const SendButton = styled.TouchableOpacity`
-  width: 80%;
-  height: 40px;
-  
-  background: #952bff;
-  border-radius: 4px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-`;
-const SendText = styled.Text`
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: bold;
 
-`;
 
 function Question(props){
     return(
@@ -152,45 +82,54 @@ function Question(props){
                 <Title>질문하기</Title>
               </TitleView>
 
-              <TextInput placeholder="여기에 제목을 입력하세요."></TextInput>
-                
+              <View style={{width:'100%', height:40, flexDirection:'row'}}>
+                <View style={{width:'30%', alignItems:'center', justifyContent:'center', backgroundColor:'#e5e5e5', borderWidth:0.4, borderColor:'#838383'}}><Text>제목</Text></View>
+                <TextInput placeholder="    제목 입력" style={{borderWidth:3, borderColor:'#ff0000', width:"70%",borderWidth:0.4, borderColor:'#838383'}}></TextInput>
+              </View>
+
+
+              <View style={{width:'100%', height:65,alignItems:'center', flexDirection:'row', backgroundColor:'#e5e5e5', borderWidth:0.2, borderColor:'#838383'}}>
+                <View style={{width:'30%', alignItems:'center', justifyContent:'center'}}><Text>카테고리 선택</Text></View>
+                <ScrollView  style={{ height:'100%'}}  horizontal={true}>
+                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>UIUX</Text></TouchableOpacity>
+                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>BIBX</Text></TouchableOpacity>
+                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>제품&산업</Text></TouchableOpacity>
+                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
+                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
+                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
+                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
+                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
+                </ScrollView>
+              </View>
+
+
+
+              <View style={{borderWidth:0.4, borderColor:'#a0a0a0', width:'100%', height:'35%', alignItems:'center'}}>
+                <TextInput style={{ width:'90%',height:'100%'}} placeholder="궁금한 내용을 질문해주세요 명확한상황 설명과 받고자 하는 답변내용을 적어주세요"></TextInput>
+              </View>
          
-              <RowView>
-              <Text>카테고리 선택</Text>
-                <Category><CategoryText>UIUX</CategoryText></Category>
-                <Category><CategoryText>BIBX</CategoryText></Category>
-                <Category><CategoryText>제품&산업</CategoryText></Category>
-                <Category><CategoryText>툴 사용자</CategoryText></Category>
-              </RowView>
-
-
-              
-              <MainText  placeholder="궁금한 내용을 질문해주세요
-                                -명확한 상황 설명과 받고자 하는 답변내용을 적어주세요&#13;&#10;
-                                -질문을 보내면 수정/삭제가 불가합니다.&#13;&#10;
-                                -모든 이미지 파일은 안전하게 워터마크가 부착됩니다.&#13;&#10;"></MainText>
               <File>
                 <FileOpacity>
-                  <Image source={require('../constants/images/question/image.png')}/>
+                  <Image source={require('../constants/images/question/image.png')} resizeMode="contain"/>
                   <FileText>사진</FileText>
                 </FileOpacity>
                 <FileOpacity>
-                  <Image source={require('../constants/images/question/video.png')}/>
+                  <Image source={require('../constants/images/question/video.png')} resizeMode="contain"/>
                   <FileText>동영상</FileText>
                 </FileOpacity>
                 <FileOpacity>
-                  <Image source={require('../constants/images/question/file.png')}/>
+                  <Image source={require('../constants/images/question/file.png')} resizeMode="contain"/>
                   <FileText>파일</FileText>
                 </FileOpacity>
                 <FileOpacity>
-                  <Image source={require('../constants/images/question/voice.png')}/>
+                  <Image source={require('../constants/images/question/voice.png')} resizeMode="contain"/>
                   <FileText>녹음</FileText>
                 </FileOpacity>
               </File>
               
-              <SendButton>
-                <SendText>보내기</SendText>
-              </SendButton>
+              <TouchableOpacity style={{width:'80%', height:40,marginTop:30,backgroundColor:'#952bff', borderRadius:4 , alignItems:'center', justifyContent:'center'}}>
+                <Text style={{fontSize:14, fontWeight:'bold', color:'#ffffff'}}>보내기</Text>
+              </TouchableOpacity>
 
 
             
