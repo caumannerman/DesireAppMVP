@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-
+import {Text, View, TouchableOpacity, ScrollView, Image} from 'react-native'
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -27,10 +27,12 @@ const TitleView = styled.View`
 
   height: 39px;
   width: 85%;
-
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
-`;
 
+`;
 const Title = styled.Text`
   font-size: 20px;
   font-weight: 800;
@@ -38,113 +40,26 @@ const Title = styled.Text`
   font-style: normal;
   
 `;
-
-
-const Text = styled.Text`
-  height: 40px;
-  width: 30%;
-  border: #0000ff;
-  background: #f5f5f5;
-  text-align:center;
-  
-  
-`;
-
-const TextInput = styled.TextInput`
-  width : 100%;
-  height: 40px;  
-  background: #f5f5f5;
-  border: #b0b0b0;
-`;
-
-
-const RowView = styled.View`
-  border: #00ff00;
-  height: 40px;
-  width: 100%;
-  background: #f5f5f5;
-  flex-direction: row;
-  
-`;
-
-const Category = styled.TouchableOpacity`
-  height: 40px;
-  border: #0000ff;
-  margin-right: 20px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const CategoryText = styled.Text`
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  font-color: #000000;
-  
-`;
-
-
-
-
-const MainText = styled.TextInput`
-  border: #0000ff;
-  width: 100%;
-  height: 35%;
-`;
-
-const File = styled.View`
-  width: 100%;
-  height: 15%;
-  border: #d0d0d0;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FileOpacity = styled.TouchableOpacity`
-  width: 25%;
+const BackButton = styled.TouchableOpacity`
+ 
+  width: 50px;
   height: 100%;
-  
   justify-content: center;
-  align-items: center;
-
-`;
-const Image = styled.Image`
-  resizeMode: contain;
-  
 `;
 
-const FileText = styled.Text`
+
+const BackText = styled.Text`
   color: #000000;
-  font-size: 12px;
-  font-weight: 300;
-  font-style: normal;
-`;
-
-
-
-const SendButton = styled.TouchableOpacity`
-  width: 80%;
-  height: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
   
-  background: #66bbff;
-  border-radius: 4px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-`;
-const SendText = styled.Text`
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: bold;
 
 `;
-const Glass = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  height: 39px;
-  width: 39px;
-`;
+
+
+
+
 
 function ReplyDetail(props){
     return(
@@ -156,17 +71,43 @@ function ReplyDetail(props){
 
               <TitleView>
                 <Title>받은답장</Title>
-                <Glass onPress={()=>{props.navigation.goBack()}}><Image source={require('../constants/images/homepage/glasses.png')}/></Glass>
+                <BackButton onPress={()=>{props.navigation.goBack()}}><BackText>이전</BackText></BackButton>
               </TitleView>
 
+              <View style={{backgroundColor: '#e4ecf7', borderWidth: 1, borderColor:'#d0d0d0', width:'100%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
+                                 >
+                  
+                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  </View>
+                  
+                  <View style={{flexDirection: 'column' }}>
+                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}}>가상 사용자</Text>
+                    <Text style={{fontSize: 12, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
+                    
+                  </View>
 
+                  <TouchableOpacity style={{ width:'25%', height:'40%', borderRadius:7, backgroundColor:'#952bff', marginLeft: '15%', alignItems:'center', justifyContent:'center'}}
+                         onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
+                    <Text style={{color: '#ffffff', fontSize: 14, fontWeight:'600'}}>채팅요청</Text>
+                  </TouchableOpacity>
+
+                </View>
+
+                <View style={{flexDirection:'column', width:'100%', height:'40%', alignItems:'center', justifyContent:'center'}}>
+
+                  <ScrollView style={{width:'80%', marginTop:'10%'}}>
+                    <Text>저는 그리고 모르는게 있으면 예시로 몇 개 만들어서 보내드린 것 중에 설명해주신거랑 맞는게 무엇인지 꼼꼼하게 물어보는게 최선일 듯 합니다.
+                      캡쳐이미지 넣고 세부 스펙이나 더 궁금한거 피그마 링크도 가티 첨부해 주시는 것도 좋을 것 같네요.
+                    </Text>
+                  </ScrollView>
+
+                </View>
+
+                <TouchableOpacity style={{backgroundColor:'#7bb9fa', width: '75%', height: '8%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:20}}>
+                  <Text style={{color:'#ffffff', fontSize:19, fontWeight:'bold'}}>답변 만족도 조사</Text>
+                </TouchableOpacity>
               
-              
-              <SendButton>
-                <SendText>답변 만족도 조사</SendText>
-              </SendButton>
-
-
             
             </Contents>
         </Background>

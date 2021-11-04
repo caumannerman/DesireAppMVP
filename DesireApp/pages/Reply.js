@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-
+import {Text, View, TouchableOpacity, ScrollView, Image} from 'react-native'
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -27,8 +27,12 @@ const TitleView = styled.View`
 
   height: 39px;
   width: 85%;
-
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
+
+
 `;
 
 const Title = styled.Text`
@@ -39,112 +43,17 @@ const Title = styled.Text`
   
 `;
 
-
-const Text = styled.Text`
-  height: 40px;
-  width: 30%;
-  border: #0000ff;
-  background: #f5f5f5;
-  text-align:center;
+const BackButton = styled.TouchableOpacity`
   
-  
-`;
-
-const TextInput = styled.TextInput`
-  width : 100%;
-  height: 40px;  
-  background: #f5f5f5;
-  border: #b0b0b0;
-`;
-
-
-const RowView = styled.View`
-  border: #00ff00;
-  height: 40px;
-  width: 100%;
-  background: #f5f5f5;
-  flex-direction: row;
-  
-`;
-
-const Category = styled.TouchableOpacity`
-  height: 40px;
-  border: #0000ff;
-  margin-right: 20px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const CategoryText = styled.Text`
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  font-color: #000000;
-  
-`;
-
-
-
-
-const MainText = styled.TextInput`
-  border: #0000ff;
-  width: 100%;
-  height: 35%;
-`;
-
-const File = styled.View`
-  width: 100%;
-  height: 15%;
-  border: #d0d0d0;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FileOpacity = styled.TouchableOpacity`
-  width: 25%;
+  width: 50px;
   height: 100%;
-  
   justify-content: center;
-  align-items: center;
-
-`;
-const Image = styled.Image`
-  resizeMode: contain;
-  
-`;
-
-const FileText = styled.Text`
-  color: #000000;
-  font-size: 12px;
-  font-weight: 300;
-  font-style: normal;
 `;
 
 
 
-const SendButton = styled.TouchableOpacity`
-  width: 80%;
-  height: 40px;
-  
-  background: #66bbff;
-  border-radius: 4px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-`;
-const SendText = styled.Text`
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: bold;
 
-`;
-const Glass = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  height: 39px;
-  width: 39px;
-`;
+
 
 function Reply(props){
     return(
@@ -156,41 +65,128 @@ function Reply(props){
 
               <TitleView>
                 <Title>받은답장</Title>
-                <Glass onPress={()=>{props.navigation.goBack()}}><Image source={require('../constants/images/homepage/glasses.png')}/></Glass>
+                <BackButton onPress={()=>{props.navigation.goBack()}}>
+                  <Text style={{color: '#000000', fontSize: 15, fontWeight: '800', textAlign: 'center'}}>이전</Text>
+                </BackButton>
               </TitleView>
+ 
+              <View style={{height:'27%', width: '100%', backgroundColor:'#ffffff', alignItems: 'center', justifyContent: 'center', borderColor:'#d0d0d0', borderWidth: 2}}>
+                
+                <View style={{width: '80%', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
+                  <Text style={{fontWeight: '800', fontSize: 16, color:'#000000'}}>질문의 제목</Text>
+                  <Text style={{fontWeight: 'bold', fontSize: 12, color:'#000000'}}>21.07.23</Text>
+                </View>
+
+                <View style={{ width:'77%', height: '45%'}}>
+                  <Text style={{fontWeight: '300', fontSize: 12, color:'#000000'}}>로렘 입숨(LOREM IPSUM; 줄여서 립숨,LIPSUM)은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트로, 최종 결과물에 들어가는 실제적......</Text>
+                </View>
+
+
+                <TouchableOpacity>
+                  <Text style={{color: '#000000'}}>내가 한 질문 더보기 +</Text>
+                </TouchableOpacity>
+              </View>
+
+
+
+              <Text style={{ fontSize: 20, fontWeight:'500', textAlign:'center', marginTop: '5%'}}>받은 답장 리스트</Text>
+
+              <ScrollView style={{ borderWidth: 1,borderColor: '#d0d0d0', width:'100%', height:'100%', marginTop: 7}}>
+                
+                
+                <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:'85%',marginLeft:'7.5%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
+                                  onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
+                  
+                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  </View>
+                  
+                  <View style={{flexDirection: 'column' }}>
+                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
+                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:'85%',marginLeft:'7.5%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
+                                  onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
+                  
+                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  </View>
+                  
+                  <View style={{flexDirection: 'column' }}>
+                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
+                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:'85%',marginLeft:'7.5%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
+                                  onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
+                  
+                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  </View>
+                  
+                  <View style={{flexDirection: 'column' }}>
+                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
+                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:'85%',marginLeft:'7.5%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
+                                  onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
+                  
+                  <View style={{borderWidth: 2 , borderColor:'#ff80ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  </View>
+                  
+                  <View style={{flexDirection: 'column' }}>
+                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
+                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:'85%',marginLeft:'7.5%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
+                                  onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
+                  
+                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  </View>
+                  
+                  <View style={{flexDirection: 'column' }}>
+                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
+                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:'85%',marginLeft:'7.5%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
+                                  onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
+                  
+                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  </View>
+                  
+                  <View style={{flexDirection: 'column' }}>
+                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
+                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                  </View>
+                </TouchableOpacity>
+
+
+              </ScrollView>
+            
 
               
 
 
               
-              <MainText  placeholder="궁금한 내용을 질문해주세요
-                                -명확한 상황 설명과 받고자 하는 답변내용을 적어주세요&#13;&#10;
-                                -질문을 보내면 수정/삭제가 불가합니다.&#13;&#10;
-                                -모든 이미지 파일은 안전하게 워터마크가 부착됩니다.&#13;&#10;"></MainText>
-              <File>
-                <FileOpacity onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
-                  <Image source={require('../constants/images/question/image.png')}/>
-                  <FileText>사진</FileText>
-                </FileOpacity>
-                <FileOpacity>
-                  <Image source={require('../constants/images/question/video.png')}/>
-                  <FileText>동영상</FileText>
-                </FileOpacity>
-                <FileOpacity>
-                  <Image source={require('../constants/images/question/file.png')}/>
-                  <FileText>파일</FileText>
-                </FileOpacity>
-                <FileOpacity>
-                  <Image source={require('../constants/images/question/voice.png')}/>
-                  <FileText>녹음</FileText>
-                </FileOpacity>
-              </File>
-              
-              <SendButton>
-                <SendText onPress = {() => {
-                    props.navigation.navigate("ReplyDetail")
-                }}>받은 답장 리스트</SendText>
-              </SendButton>
+             
 
 
             

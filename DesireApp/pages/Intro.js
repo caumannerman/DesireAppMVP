@@ -44,7 +44,7 @@ const SubTitle = styled.Text`
   color: #000000;
 `;
 
-const ImageView = styled.View`
+const ImageView = styled.TouchableOpacity`
   left: 10%;
   top: 45.43%
   height: 37.5%
@@ -68,14 +68,12 @@ function Intro(props){
                     <SubTitle>디자이너만을 위한 든든한 맞춤 파트너</SubTitle>
                 </TitleView>
                 
-                <ImageView>
+                <ImageView onPress={ () => {
+                   props.navigation.navigate( 'Start')}}>
                     <Image source={require('../constants/images/Intro.png')}/>
                 </ImageView>
             </Contents>
-            <TmpButton title="임시버튼" onPress={ () => {
-            props.navigation.navigate( 'Start')
-          }}></TmpButton>
-
+            
         </Background>
       </Container>
     
