@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {Text, View, TouchableOpacity, ScrollView, Image} from 'react-native'
+import Satisfaction from '../components/Satisfaction';
 
 const Container = styled.SafeAreaView`
   flex: 1;

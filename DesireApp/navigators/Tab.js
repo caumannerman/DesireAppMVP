@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View, Image} from 'react-native';
-import Homepage from '../pages/Homepage';
+import HomeStack from './HomeStack';
 import Questions from '../pages/Questions';
 import SignInStack from './SignInStack';
 import MyquestionStack from './MyquestionStack';
@@ -28,7 +28,7 @@ const Tab = () => {
             <Text style={{color: focused? '#f89ccc' : '#952bff', height: 16,fontSize: 12, textAlign: 'center', fontWeight:'normal'}}>가입하기</Text>
             </View>
           )}}/>
-          <Tabs.Screen name="Homepage" component={Homepage} options={{ tabBarIcon: ({focused}) => (
+          <Tabs.Screen name="HomeStack" component={HomeStack} options={{ tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
                  source={require('../constants/images/homepage/home.png')}

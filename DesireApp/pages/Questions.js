@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import {TextInput, Text, Image, TouchableOpacity, View, ScrollView} from 'react-native';
-
+import {TextInput, Text, Image, TouchableOpacity, View, ScrollView, Modal, Dimensions} from 'react-native';
+import SimpleModal from '../components/SimpleModal';
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
@@ -71,6 +71,16 @@ const FileText = styled.Text`
 
 
 function Question(props){
+  const [isModalVisible, setisModalVisible] = useState(false);
+  const [chooseData, setchooseData] = useState();
+
+  const changeModalVisible = (bool) => {
+    setisModalVisible(bool);
+  }
+
+  const setData = (data) => {
+    setchooseData(data);
+  }
     return(
     
       <Container>
@@ -103,7 +113,6 @@ function Question(props){
               </View>
 
 
-
               <View style={{borderWidth:0.4, borderColor:'#a0a0a0', width:'100%', height:'35%', alignItems:'center'}}>
                 <TextInput style={{ width:'90%',height:'100%'}} placeholder="궁금한 내용을 질문해주세요 명확한상황 설명과 받고자 하는 답변내용을 적어주세요"></TextInput>
               </View>
@@ -127,10 +136,22 @@ function Question(props){
                 </FileOpacity>
               </File>
               
-              <TouchableOpacity style={{width:'80%', height:40,marginTop:30,backgroundColor:'#952bff', borderRadius:4 , alignItems:'center', justifyContent:'center'}}>
+              <TouchableOpacity style={{width:'80%', height:40,marginTop:30,backgroundColor:'#952bff', borderRadius:4 , alignItems:'center', justifyContent:'center'}}
+                                onPress={()=>{changeModalVisible(true)}}>
                 <Text style={{fontSize:14, fontWeight:'bold', color:'#ffffff'}}>보내기</Text>
               </TouchableOpacity>
 
+           
+              <Modal 
+                transparent={true} animationType='slide' visible={isModalVisible}
+                onRequestClose={() => changeModalVisible(false)}
+               
+                >
+                <SimpleModal style={{alignItems:'center', justifyContent:'center'}}
+                  changeModalVisible={changeModalVisible}
+                  setData={setData}/>
+              </Modal>
+           
 
             
             </Contents>

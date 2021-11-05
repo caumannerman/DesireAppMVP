@@ -3,7 +3,10 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-
+import {Text, View, ScrollView} from 'react-native';
+import Questions from './Questions';
+import Reply from './Reply';
+import ChatPrivate from './ChatPrivate';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -85,8 +88,8 @@ const QText = styled.Text`
   margin-left: 10%;
   top: 1.22%;
   color: #2c2c2c;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 `;
 const QSubText = styled.Text`
   font-style: normal;
@@ -121,7 +124,7 @@ const Image2 = styled.Image`
 const MyqChatView = styled.View`
   top: 5%;
   height: 25%;
-  width: 100%;
+
   flex-direction: column;
   margin-top: 20px;
 `;
@@ -142,22 +145,6 @@ const MyqChatText = styled.Text`
 `;
 const QstView = styled.View`
   border: #ff0000;
-`;
-
-const Row = styled.View`
-  width: 100%;
-  flex-direction: row;
-  flex:1;
-
-`;
-
-const RowView = styled.ScrollView`
-  
-width: 100%;
-  flex-direction: row;
-  flex:1;
-  
-
 `;
 
 
@@ -228,48 +215,81 @@ function Homepage(props){
                   <QSubText>일을하며 생긴 어려움 바로 멘토님에게! </QSubText>
                   <QSubText>마음 편하게 언제 어디든 질문하세요.</QSubText>
 
-                  <Row style={{alignItems: 'center', justifyContent: 'center'}}>
+                  <View style={{alignItems: 'center', justifyContent: 'center', width:'100%', flexDirection:'row'}}>
 
-                  <Button style={{marginLeft: '10%', marginRight:30}}>
+                  <Button style={{marginLeft: '10%', marginRight:30}} onPress={()=>{props.navigation.navigate("Questions")}}>
                     <BText>질문하기</BText>
                   </Button>
                   
-                    <Image2 source={require('../constants/images/homepage/group2173.png')} style={{marginTop: 5}}/>
+                    <Image2 source={require('../constants/images/homepage/group2173.png')}/>
                   
-                  </Row>
+                  </View>
                 </QBox>
               </QView>
+
+
 
               <MyqChatView>
                 <MyqChatTouch><MyqChatText>내가 한 질문</MyqChatText><MyqChatText></MyqChatText></MyqChatTouch>
 
-                <RowView horizontal={true} style = {{ marginTop: 7}} bounces={true} disableIntervalMomentum={true}> 
+                <ScrollView horizontal={true} style = {{ marginTop: 7}} > 
 
-                  <Part><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                </RowView>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                </ScrollView>
 
               </MyqChatView>
+
 
               <MyqChatView>
                 <MyqChatTouch><MyqChatText>1대1 채팅</MyqChatText><MyqChatText></MyqChatText></MyqChatTouch>
 
-                <RowView horizontal={true} style = {{ marginTop: 7}}>    
-                  
-                  <Part>
-                    <PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle>
-                    <Row>
+                
+                <ScrollView horizontal={true} style = {{ marginTop: 7}}>    
+                  <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
+                    <View style={{ flexDirection:'row',marginLeft:13}}>
                       <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
-                    </Row>
+                    </View>
                   </Part>
+                  <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
+                    <View style={{ flexDirection:'row',marginLeft:13}}>
+                      <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
+                    </View>
+                  </Part>
+                  <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
+                    <View style={{ flexDirection:'row',marginLeft:13}}>
+                      <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
+                    </View>
+                  </Part>
+                  <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
+                    <View style={{ flexDirection:'row',marginLeft:13}}>
+                      <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
+                    </View>
+                  </Part>
+                  <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
+                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
+                    <View style={{ flexDirection:'row',marginLeft:13}}>
+                      <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
+                    </View>
+                  </Part>
+                </ScrollView>
 
-                  <Part><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
 
-                </RowView>
               </MyqChatView>
+
+
+
             </Contents>
         </Background>
       </Container>

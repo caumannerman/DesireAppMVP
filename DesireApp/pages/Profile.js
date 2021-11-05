@@ -53,9 +53,9 @@ const ProfileImageView = styled.View`
 
 `;
 const Image = styled.Image`
-  width: 80px;
-  height: 80px;
+  flex:1;
   resizeMode: contain;
+  border-radius: 50px;
 `;
 
 const TextInputView = styled.View`
@@ -163,7 +163,7 @@ function Profile(props){
                 </TitleView>
                 <ImageView>
                     <ProfileImageView>
-                      <Image source={require('../constants/images/Start.png')}/>
+                      <Image source={require('../constants/images/EmptyProfile.png')}/>
                     </ProfileImageView>
                     
                 </ImageView>
