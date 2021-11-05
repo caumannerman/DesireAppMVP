@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import {Text, View, TouchableOpacity, ScrollView, Image} from 'react-native'
+import {Text, View, TouchableOpacity, ScrollView, Image, Modal} from 'react-native'
 import Satisfaction from '../components/Satisfaction';
 
 const Container = styled.SafeAreaView`
@@ -63,6 +63,17 @@ const BackText = styled.Text`
 
 
 function ReplyDetail(props){
+
+  const [isModalVisible, setisModalVisible] = useState(false);
+  const [chooseData, setchooseData] = useState();
+
+  const changeModalVisible = (bool) => {
+    setisModalVisible(bool);
+  }
+
+  const setData = (data) => {
+    setchooseData(data);
+  }
     return(
     
       <Container>
@@ -105,10 +116,20 @@ function ReplyDetail(props){
 
                 </View>
 
-                <TouchableOpacity style={{backgroundColor:'#7bb9fa', width: '75%', height: '8%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:20}}>
+                <TouchableOpacity style={{backgroundColor:'#7bb9fa', width: '75%', height: '8%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:20}}
+                                  onPress={()=>changeModalVisible(true)}>
                   <Text style={{color:'#ffffff', fontSize:19, fontWeight:'bold'}}>답변 만족도 조사</Text>
                 </TouchableOpacity>
               
+                <Modal 
+                transparent={true} animationType='slide' visible={isModalVisible}
+                onRequestClose={() => changeModalVisible(false)}
+               
+                >
+                <Satisfaction 
+                  changeModalVisible={changeModalVisible}
+                  setData={setData}/>
+              </Modal>
             
             </Contents>
         </Background>
