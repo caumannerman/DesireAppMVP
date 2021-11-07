@@ -4,9 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {Text, View, ScrollView} from 'react-native';
-import Questions from './Questions';
-import Reply from './Reply';
-import ChatPrivate from './ChatPrivate';
+
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -205,7 +203,7 @@ function Homepage(props){
 
               <TitleView>
                 <Title>DESIRE</Title>
-                <Alarm><Image source={require('../constants/images/homepage/notifications_24px.png')}/></Alarm>
+                <Alarm onPress={()=>{ props.navigation.navigate("MentorBoard")}}><Image source={require('../constants/images/homepage/notifications_24px.png')}/></Alarm>
               </TitleView>
 
               <QView >
