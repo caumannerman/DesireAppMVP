@@ -114,7 +114,7 @@ function Start(props){
                 </ButtonView>
 
 
-                <View style={{width:'69.7%', height:'30.7%',position: 'absolute', bottom:'7%', left:'15.15%'}}>
+                <View style={{width:'69.7%', height:'30.7%',position: 'absolute', bottom:'7%', left:'15.15%', alignItems:'center'}}>
                     <Image source={require('../constants/images/Start.png')} style={{resizeMode:'contain',flex:1}}/>
                 </View>
 
