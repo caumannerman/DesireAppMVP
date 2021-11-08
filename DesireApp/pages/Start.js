@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ActivityIndicator } from 'react-native';
-import { Dimensions } from 'react-native';
+import { Dimensions, Image, View} from 'react-native';
 
 
-
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -17,100 +17,76 @@ const Background = styled(LinearGradient)`
 const Contents = styled.View`
   flex: 1;
   flex-direction: column;
+
 `;
 
 const TitleView = styled.View`
+  position: absolute;
   font-style: normal;
   left: 11.11%;
-  top: 10.43%
-  
+  top: 10.43%;
+  width: 46.94%;
+  justify-content: space-between;
 `;
 
 const Title = styled.Text`
-  font-weight:800;
-  font-size: 8px;
+  font-weight:600;
+  font-size:  ${ parseInt(WIDTH / 700 * 46.94 )};
+  line-height: 41px;
   color: #000000;
   margin-bottom:1%;
-  
 `;
 
 const SubTitle = styled.Text`
   font-style: normal;
   font-weight: 300;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 17px;
   color: #000000;
 `;
 
 const ButtonView = styled.View`
-  top: 30%;
-  
+  position: absolute;
+  top: 26%;
+  left: 11.11%;
   flex-direction: row;
-  width: 77.77%
-  height: 17%
+  width: 80%
+  height: ${WIDTH * 0.33}
   align-items: center;
-  
-  margin-left: 11.11%;
-  margin-right: 11.11%;
-  margin-top: 5%;
+  justify-content: space-between;
 `;
 
 const Button = styled.TouchableOpacity`
   
   height: 100%;
-  width: 45%;
-  
+  width: ${WIDTH * 0.35};
+  height: ${WIDTH * 0.33};
   align-items: center;
   background-color: #ffffff;
-
-  margin-right: 10%;
-  border-radius: 25px;
-  
+  border-radius: 20px;
+  justify-content: center;
+  border:#929292;
 
 `;
 
 const ButtonText = styled.Text`
 
-  font-size: 30px;
-  font-weight: 500;
+  font-size: ${WIDTH * 0.08}px;
+  font-weight: bold;
   color: #6486ff;
   font-weight: bold;
   font-style: normal;
-  justify-content: center;
-  top: 30%;
-  
+  line-height:${HEIGHT*0.08}px;
 `;
 
 const ButtonText2 = styled.Text`
-  font-size: 12px;
+  font-size: ${WIDTH * 0.03}px;
   font-weight: 500;
   font-style: normal;
-  color: #898989;
-  justify-content: center;
-  align-items: center;
-  top: 40%;
-  
-`;
-const ImageView = styled.View`
-  left: 15.2%;
-  top: 38%;
-  bottom: 8%
-  height: 37.5%
-  
-  width: 69.7%;
-  height: 30.7%;
-  justify-content: center;
-  align-items: center;
-
-`;
-const Image = styled.Image`
-  flex: 1;
-  resizeMode: contain;
-  
+  color: #898989;  
 `;
 
-const WIDTH = Dimensions.get('window').width;
-const HEIGHT = Dimensions.get('window').height;
+
 
 
 function Start(props){
@@ -138,9 +114,9 @@ function Start(props){
                 </ButtonView>
 
 
-                <ImageView>
-                    <Image source={require('../constants/images/Start.png')}/>
-                </ImageView>
+                <View style={{width:'69.7%', height:'30.7%',position: 'absolute', bottom:'7%', left:'15.15%'}}>
+                    <Image source={require('../constants/images/Start.png')} style={{resizeMode:'contain',flex:1}}/>
+                </View>
 
 
             </Contents>
