@@ -94,7 +94,7 @@ function Question(props){
 
               <View style={{width:'100%', height:40, flexDirection:'row'}}>
                 <View style={{width:'30%', alignItems:'center', justifyContent:'center', backgroundColor:'#e5e5e5', borderWidth:0.4, borderColor:'#838383'}}><Text>제목</Text></View>
-                <TextInput placeholder="    제목 입력" style={{borderWidth:3, borderColor:'#ff0000', width:"70%",borderWidth:0.4, borderColor:'#838383'}}></TextInput>
+                <TextInput placeholder="    제목 입력"  style={{borderWidth:3, borderColor:'#ff0000', width:"70%",borderWidth:0.4, borderColor:'#838383'}}></TextInput>
               </View>
 
 

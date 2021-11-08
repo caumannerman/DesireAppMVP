@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
+import { Dimensions } from 'react-native';
+
+
 
 
 const Container = styled.SafeAreaView`
@@ -13,11 +16,7 @@ const Background = styled(LinearGradient)`
 `;
 const Contents = styled.View`
   flex: 1;
-  
   flex-direction: column;
-  
-  
-  
 `;
 
 const TitleView = styled.View`
@@ -28,8 +27,8 @@ const TitleView = styled.View`
 `;
 
 const Title = styled.Text`
-  font-weight:600;
-  font-size: 28px;
+  font-weight:800;
+  font-size: 8px;
   color: #000000;
   margin-bottom:1%;
   
@@ -66,11 +65,7 @@ const Button = styled.TouchableOpacity`
 
   margin-right: 10%;
   border-radius: 25px;
-  shadowColor: #b8b8b8;
-  shadow-offset: {width: 0, height: 10};
-  shadow-opacity: 0.9;
-  shadow-radius: 6px;
-  elevation: 20;
+  
 
 `;
 
@@ -114,6 +109,8 @@ const Image = styled.Image`
   
 `;
 
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 
 function Start(props){

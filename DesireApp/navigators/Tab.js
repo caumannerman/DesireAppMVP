@@ -75,7 +75,7 @@ const Tab = () => {
             </View>
           )}}/>
           <Tabs.Screen name="ChatStack" component={ChatStack} options={{ tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center', justifyContent: 'center', height: '48px'}}>
+            <View style={{alignItems: 'center', justifyContent: 'center', height: 48}}>
               <Image
                  source={require('../constants/images/homepage/chat.png')}
                  resizeMode='contain'

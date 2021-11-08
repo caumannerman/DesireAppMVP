@@ -1,8 +1,10 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { resolvePreset } from '@babel/core';
+import { Alert } from 'react-native';
 
 
 const Container = styled.SafeAreaView`
@@ -81,11 +83,7 @@ const Part = styled.TouchableOpacity`
   border: #d0d0d0;
   flex-direction: column;
   justify-content: center;
-  shadowColor: #b8b8b8;
-  shadow-offset: {width: 0, height: 10};
-  shadow-opacity: 0.9;
-  shadow-radius: 6;
-  elevation: 20;
+ 
   
 
 `;
@@ -119,6 +117,22 @@ const PartReply = styled.Text`
 
 
 function MyQuestion(props){
+
+  const [data, setData] = useState([{title:"FirTitle"}]);
+ // loading
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/v1/questions',{
+      method:"GET"
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      setData(data)
+      setLoading(false)
+    }).catch(error => Alert.alert("error", JSON.stringify(error)))
+  }, [])
+
     return(
     
       <Container>
@@ -127,7 +141,7 @@ function MyQuestion(props){
 
 
               <TitleView>
-                <Title>내가 한 질문</Title>
+                <Title>내가 한 질문{data[0].title}{data.count}</Title>
                 <Glass><Image source={require('../constants/images/homepage/glasses.png')}/></Glass>
               </TitleView>
 
