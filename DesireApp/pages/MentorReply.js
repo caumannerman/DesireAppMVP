@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import {TextInput, Text, Image, TouchableOpacity, View, ScrollView, Modal, Dimensions} from 'react-native';
+import {TextInput, Text, Image, TouchableOpacity, View, Modal, Dimensions} from 'react-native';
 import MentorReplyModal from '../components/MentorReplyModal';
+
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
+
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
@@ -41,16 +43,6 @@ const Title = styled.Text`
   
 `;
 
-
-const File = styled.View`
-  width: 100%;
-  height: 15%;
-  border: #d0d0d0;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
 const FileOpacity = styled.TouchableOpacity`
   width: 25%;
   height: 100%;
@@ -79,11 +71,8 @@ const BackText = styled.Text`
   color: #000000;
   font-size: 15px;
   font-weight: 500;
-  text-align: center;
-  
-
+  text-align: center; 
 `;
-
 
 
 
@@ -112,14 +101,12 @@ function MentorReply(props){
                 <BackButton onPress={()=>{props.navigation.goBack()}}><BackText>이전</BackText></BackButton>
               </TitleView>
 
-            
-
-
+              
               <View style={{borderWidth:0.4, borderColor:'#a0a0a0', width:'100%', height:'35%', alignItems:'center'}}>
                 <TextInput style={{ width:'90%',height:'100%'}} placeholder="성실하게 답변해주세요"></TextInput>
               </View>
          
-              <File>
+              <View style={{width:WIDTH, height: "15%", borderWidth:1, borderColor:'#d0d0d0', flexDirection:'row',alignItems:'center'}}>
                 <FileOpacity>
                   <Image source={require('../constants/images/question/image.png')} resizeMode="contain"/>
                   <FileText>사진</FileText>
@@ -136,9 +123,9 @@ function MentorReply(props){
                   <Image source={require('../constants/images/question/voice.png')} resizeMode="contain"/>
                   <FileText>녹음</FileText>
                 </FileOpacity>
-              </File>
+              </View>
               
-              <TouchableOpacity style={{width:'80%', height:40,marginTop:30,backgroundColor:'#952bff', borderRadius:4 , alignItems:'center', justifyContent:'center'}}
+              <TouchableOpacity style={{width:'80%', height:40,marginTop:30,backgroundColor:'#952bff', borderRadius:4 , alignItems:'center', justifyContent:'center',top:40}}
                                 onPress={()=>{changeModalVisible(true)}}>
                 <Text style={{fontSize:14, fontWeight:'bold', color:'#ffffff'}}>보내기</Text>
               </TouchableOpacity>

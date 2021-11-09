@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import {Text, View, TouchableOpacity, ScrollView, Image, Modal} from 'react-native'
-import Satisfaction from '../components/Satisfaction';
+import {Text, View, TouchableOpacity, Dimensions,ScrollView, Image, Modal} from 'react-native'
+
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -25,7 +25,6 @@ const TitleView = styled.View`
 
   margin-top: 7%;
   margin-left: 10%;
-
   height: 39px;
   width: 85%;
   flex-direction: row;
@@ -77,9 +76,9 @@ function MentorBoardDetail(props){
     return(
     
       <Container>
-        <Background colors={['#ffffff','#f8ecec','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
+        <Background colors={['#ffffff', '#e9fafa','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
             <Contents>
-
+              
 
               <TitleView>
                 <Title>질문 내용</Title>
@@ -87,30 +86,29 @@ function MentorBoardDetail(props){
               </TitleView>
 
              
-                <View style={{borderWidth:1, borderColor:'#d0d0d0',flexDirection:'column', width:'100%', height:'40%', alignItems:'center', justifyContent:'center'}}>
+                <View style={{borderWidth:1, borderColor:'#d0d0d0',flexDirection:'column', width:'100%', height:'45%', alignItems:'center', justifyContent:'center', alignContent:'center',}}>
+                  
+                  <View style={{flexDirection:'row', width:'80%', marginTop:'6%',justifyContent:'space-between', alignItems:'center'}}>
+                    <Text style={{fontWeight:'600', fontSize:17, color:'#000000'}}>질문의 제목</Text>
+                    <Text style={{fontWeight:'bold', fontSize:12, color:'#727272'}}>21.07.23</Text>
+                  </View>
 
                   <ScrollView style={{width:'80%', marginTop:'10%'}}>
-                    <Text>저는 그리고 모르는게 있으면 예시로 몇 개 만들어서 보내드린 것 중에 설명해주신거랑 맞는게 무엇인지 꼼꼼하게 물어보는게 최선일 듯 합니다.
-                      캡쳐이미지 넣고 세부 스펙이나 더 궁금한거 피그마 링크도 가티 첨부해 주시는 것도 좋을 것 같네요.
+                    <Text style={{color:'#000000', fontWeight:'300',lineHeight:20}}>
+                      로렘 입숨(LOREM IPSUM; 줄여서 립숨, LIPSUM)은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피,레이아웃 같은 그래픽 요소나
+                      시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트로, 최종 결과물에 들어가는 실제적인 문장 내용이 채워지기 전에 시각 디자인프로젝트
+                      모형의 채움 글로도 이용된다. 이런 용도로 사용할 때 로렘 입을 그리킹(GREEKING)이라고도 부르며, 때로 로렘 입숨은 공간만 차지하는 
+                      무언가를 지칭하는 용어로도 사용된다.
                     </Text>
                   </ScrollView>
 
                 </View>
 
-                <TouchableOpacity style={{backgroundColor:'#952bff', width: '75%', height: '8%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:20}}
+                <TouchableOpacity style={{backgroundColor:'#952bff', width: '77.77%', height: '6.5%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:50}}
                                   onPress={()=>{props.navigation.navigate("MentorReply")}}>
                   <Text style={{color:'#ffffff', fontSize:19, fontWeight:'bold'}}>답변하기</Text>
                 </TouchableOpacity>
               
-                <Modal 
-                transparent={true} animationType='slide' visible={isModalVisible}
-                onRequestClose={() => changeModalVisible(false)}
-               
-                >
-                <Satisfaction 
-                  changeModalVisible={changeModalVisible}
-                  setData={setData}/>
-              </Modal>
             
             </Contents>
         </Background>

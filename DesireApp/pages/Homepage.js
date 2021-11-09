@@ -1,27 +1,23 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { NavigationContainer } from '@react-navigation/native';
-import {Text, View, ScrollView} from 'react-native';
+import { Dimensions, Image, ScrollView,View, Text} from 'react-native';
 
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
 const Background = styled(LinearGradient)`
-  flex: 1;  
-
+  flex: 1;
 `;
 const Contents = styled.View`
   flex: 1;
-  
   flex-direction: column;
-  
 `;
-
 const TitleView = styled.View`
   flex-direction: row;
- 
   top: 5%;
   left: 5%;
   align-items: center;
@@ -43,11 +39,6 @@ const Alarm = styled.TouchableOpacity`
  
   height: 39px;
   width: 39px;
-`;
-
-const Image = styled.Image`
-  resizeMode: contain;
-  
 `;
 
 const QView = styled.View`
@@ -112,12 +103,6 @@ const BText = styled.Text`
   font-weight: bold;
   
 `;
-const Image2 = styled.Image`
-  resizeMode: contain;
-  flex: 1;
-
-`;
-
 const MyqChatView = styled.View`
   top: 5%;
   height: 25%;
@@ -139,9 +124,6 @@ const MyqChatText = styled.Text`
   width: 30%;
   left: 40px;
  
-`;
-const QstView = styled.View`
-  border: #ff0000;
 `;
 
 
@@ -202,7 +184,7 @@ function Homepage(props){
 
               <TitleView>
                 <Title>DESIRE</Title>
-                <Alarm onPress={()=>{ props.navigation.navigate("MentorBoard")}}><Image source={require('../constants/images/homepage/notifications_24px.png')}/></Alarm>
+                <Alarm onPress={()=>{ props.navigation.navigate("MentorBoard")}}><Image resizeMode="contain" source={require('../constants/images/homepage/notifications_24px.png')}/></Alarm>
               </TitleView>
 
               <QView >
@@ -218,7 +200,7 @@ function Homepage(props){
                     <BText>질문하기</BText>
                   </Button>
                   
-                    <Image2 source={require('../constants/images/homepage/group2173.png')}/>
+                    <Image resizeMode="contain" source={require('../constants/images/homepage/group2173.png')}/>
                   
                   </View>
                 </QBox>
@@ -246,35 +228,35 @@ function Homepage(props){
                 
                 <ScrollView horizontal={true} style = {{ marginTop: 7}}>    
                   <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
-                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Image resizeMode="contain" source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
                     <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
                     <View style={{ flexDirection:'row',marginLeft:13}}>
                       <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
                     </View>
                   </Part>
                   <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
-                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Image resizeMode="contain" source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
                     <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
                     <View style={{ flexDirection:'row',marginLeft:13}}>
                       <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
                     </View>
                   </Part>
                   <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
-                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Image resizeMode="contain" source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
                     <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
                     <View style={{ flexDirection:'row',marginLeft:13}}>
                       <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
                     </View>
                   </Part>
                   <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
-                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Image resizeMode="contain" source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
                     <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
                     <View style={{ flexDirection:'row',marginLeft:13}}>
                       <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>
                     </View>
                   </Part>
                   <Part style= {{justifyContent:'center'}} onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
-                    <Image source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
+                    <Image resizeMode="contain" source={require('../constants/images/homepage/human.png')} style = {{resizeMode:'contain', width:50, height:50, borderWidth:2, borderColor:'#ff9292', borderRadius: 50,marginLeft:13, marginBottom:10}}/>
                     <Text style={{fontSize: 12, fontWeight:'500', color:'#929292', width: 106, marginLeft:13, marginBottom:7}}>해당 부분 제가 이런 식으로 도와...</Text>
                     <View style={{ flexDirection:'row',marginLeft:13}}>
                       <PartReply>채팅 중</PartReply><PartDate>21.10.23</PartDate>

@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Alert } from 'react-native';
-import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native';
+import { Dimensions, Image, ScrollView} from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -120,7 +120,7 @@ function MyQuestion(props){
     return(
     
       <Container>
-        <Background colors={['#ffffff', '#cffafa','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
+        <Background colors={['#ffffff', '#e9fafa','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
             <Contents>
 
 

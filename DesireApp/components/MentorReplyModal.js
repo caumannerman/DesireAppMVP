@@ -17,10 +17,10 @@ const MentorReplyModal = (props) => {
 
   return (
 
-    <View style={{width: WIDTH - 80, height: (HEIGHT/10 *4), backgroundColor:'#ffffff',borderWidth:2, borderColor:'#e58bff',borderRadius:15, alignItems:'center',flexDirection:'column',justifyContent:'space-between',
+    <View style={{width: WIDTH - 80, height: (HEIGHT/10 *4), backgroundColor:'#ffffff',borderWidth:2, borderColor:'#e58bff',borderRadius:5, alignItems:'center',flexDirection:'column',justifyContent:'space-between',
                    position:'absolute', left:40, top:(HEIGHT/10 *2)}}>
       <View style={{height:(HEIGHT/20)}}></View>
-      <Text style={{fontWeight:'500', fontSize:16}}>답변이 발송되었습니다.</Text>
+      <Text style={{fontWeight:'500', fontSize:16, color:'#000000'}}>답변이 발송되었습니다.</Text>
       
       <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
         <TouchableOpacity style={{ height:50, backgroundColor:'#bb7dfc', alignItems:'center',justifyContent:'center',marginBottom:30, borderRadius:2}}
