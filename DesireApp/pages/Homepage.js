@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {Text, View, ScrollView} from 'react-native';
 

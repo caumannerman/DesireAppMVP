@@ -77,15 +77,15 @@ function Profile(props){
                             <Text style={{ textAlignVertical:'center'}}>✔      </Text>
                           </TouchableOpacity>
                           <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      BIBX</Text>
                             <Text style={{ textAlignVertical:'center'}}>✔      </Text>
                           </TouchableOpacity>
                           <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      제품디자인</Text>
                             <Text style={{ textAlignVertical:'center'}}>✔      </Text>
                           </TouchableOpacity>
                           <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      시각디자인</Text>
                             <Text style={{ textAlignVertical:'center'}}>✔      </Text>
                           </TouchableOpacity>
                           <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
