@@ -32,16 +32,16 @@ function Chat(props){
     
       <Container>
         <Background colors={['#ffffff','#f8ecec','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
-            <Contents>
+            <Contents style={{backgroundColor:'#f0f0f0'}}>
 
               <View style={{flexDirection:'row', position:'absolute', top:HEIGHT*0.057,left:WIDTH*0.1111,alignItems:'center',justifyContent:'space-between',width:'80%', height:HEIGHT*0.033}}>
                 <Text style={{ color:'#000000', width:WIDTH*0.2767, height:HEIGHT*0.033 , fontSize:WIDTH*0.0431, fontWeight:'600'}}>진행중인 채팅</Text>
                 <Glass><Image source={require('../constants/images/homepage/glasses.png')}/></Glass>
               </View>
 
-              <ScrollView style={{position:'absolute', top:HEIGHT*0.1114,width:'100%',height:'100%',flexDirection:'column'}}>
+              <ScrollView style={{ borderWidth:1, borderColor:'#dfdfdf',position:'absolute', top:HEIGHT*0.1114,width:'100%',height:'100%',flexDirection:'column'}}>
 
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -55,7 +55,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -69,7 +69,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -83,7 +83,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -97,7 +97,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -111,7 +111,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -125,7 +125,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -139,7 +139,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -153,7 +153,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
@@ -167,7 +167,7 @@ function Chat(props){
 
                     <Text style={{position:'absolute',fontSize:10, fontWeight:'100', left:WIDTH*0.8389, width:WIDTH*0.11,top:'12.19%',height:HEIGHT*0.02,color:'#8c8c8c', fontWeight:'300'}}>오후 6:20</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#e5e5e5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
+                  <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{props.navigation.navigate("ChatPrivate")}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>

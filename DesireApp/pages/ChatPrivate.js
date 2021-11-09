@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import {Text, View, TouchableOpacity, ScrollView, Image} from 'react-native'
+import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native';
+
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -14,14 +15,11 @@ const Background = styled(LinearGradient)`
 `;
 const Contents = styled.View`
   flex: 1;
-  
   flex-direction: column;
-  
 `;
 
 const TitleView = styled.View`
   flex-direction: row;
-  
   top: 5%;
   left: 5%;
   align-items: center;
@@ -38,7 +36,6 @@ const Title = styled.Text`
   font-style: normal;
   align-items: center;
   justify-content: center;
-
 `;
 
 const Glass = styled.TouchableOpacity`

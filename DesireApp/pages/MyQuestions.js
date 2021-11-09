@@ -1,29 +1,25 @@
 import React,{useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { resolvePreset } from '@babel/core';
 import { Alert } from 'react-native';
+import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native';
 
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
 const Background = styled(LinearGradient)`
   flex: 1;  
-
 `;
 const Contents = styled.View`
   flex: 1;
-  
   flex-direction: column;
-  
 `;
 
 const TitleView = styled.View`
   flex-direction: row;
-  
   top: 5%;
   left: 5%;
   align-items: center;
@@ -50,71 +46,59 @@ const Glass = styled.TouchableOpacity`
   width: 39px;
 `;
 
-const Image = styled.Image`
-  resizeMode: contain;
-  
-`;
-
-
-const ScrollView = styled.ScrollView`
-  flex: 1;               
-  flex-diection: column;
-  border: #999999;
-`;
-
 const RowBox = styled.View`
-  width: 100%;
-  height: 132px;
-
+  left: ${WIDTH*0.1111};
+  width: ${WIDTH*0.7722};
+  height: ${WIDTH*0.3639};
   margin-top: 30px;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   `;
 
 const Part = styled.TouchableOpacity`
-  height: 132px;
-  width: 132px;
+  width: ${WIDTH*0.3639};
+  height: ${WIDTH*0.3639};
   border: #c0c0c0;
   border-radius: 16px;
-  margin-right: 4%;
-  margin-left: 4%;
   background: #ffffff;
   border: #d0d0d0;
   flex-direction: column;
   justify-content: center;
- 
-  
 
 `;
 const PartDate = styled.Text`
+  position: absolute
   color: #838383;
   font-style: normal;
   font-weight: bold;
+  width: ${WIDTH*0.182};
   font-size: 12px;
-  margin-bottom: 10px;
-  left: 10%;
+  left: ${WIDTH*0.0429};
+  top: ${WIDTH*0.04};
 `;
 
 const PartTitle = styled.Text`
+  position: absolute
   color: #000000;
   font-style: normal;
   font-weight: bold;
+  width: ${WIDTH*0.28};
+  height: ${WIDTH*0.12};
   font-size: 16px;
-  margin-bottom: 10px;
-  left: 10%;
-  width: 100px;
-  
+  left: ${WIDTH*0.0429};
+  top: ${WIDTH*0.12};
 `;
+
 const PartReply = styled.Text`
+  width: ${WIDTH*0.16};
   color: #952bff;
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
-  left: 10%;
+  left: ${WIDTH*0.0429};
+  top: ${WIDTH*0.11};
 `;
-
-
 
 function MyQuestion(props){
 
@@ -142,10 +126,11 @@ function MyQuestion(props){
 
               <TitleView>
                 <Title>내가 한 질문{data[0].title}{data.count}</Title>
-                <Glass><Image source={require('../constants/images/homepage/glasses.png')}/></Glass>
+                <Glass><Image source={require('../constants/images/homepage/glasses.png')} resizeMode="contain"/></Glass>
               </TitleView>
 
-              <ScrollView>
+              <ScrollView style={{flex:1, flexDirection:'column', borderWidth:1, borderColor:'#999999'}}>
+                  
                   <RowBox>
                     <Part  onPress={() => {props.navigation.navigate("Reply")}}>
                       <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
@@ -154,6 +139,7 @@ function MyQuestion(props){
                       <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
                     </Part>
                   </RowBox>
+
                   <RowBox>
                     <Part>
                       <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
@@ -194,6 +180,23 @@ function MyQuestion(props){
                       <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
                     </Part>
                   </RowBox>
+                  <RowBox>
+                    <Part>
+                      <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
+                    </Part>
+                    <Part>
+                      <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
+                    </Part>
+                  </RowBox>
+                  <RowBox>
+                    <Part>
+                      <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
+                    </Part>
+                    <Part>
+                      <PartDate>21.07.23</PartDate><PartTitle>어도비 XD 사용 방법과 관련하여 질문 드립니다.</PartTitle><PartReply>답장 3개</PartReply>
+                    </Part>
+                  </RowBox>
+                  
               </ScrollView>
 
             </Contents>
