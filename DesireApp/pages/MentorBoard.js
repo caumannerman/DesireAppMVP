@@ -22,7 +22,7 @@ function MentorBoard(props){
     return(
     
       <Container>
-        <Background colors={['#ffffff', '#e9fafa','#ffffff']}start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
+        <Background colors={['#fffafa', '#e9fafa','#ffffff']}start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
             <Contents>
 
               <View style={{position:'absolute', left:'7%', top:HEIGHT*0.044, width:'50%'}}>
