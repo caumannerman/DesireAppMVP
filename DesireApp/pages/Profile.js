@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ActivityIndicator } from 'react-native';
+import { Dimensions, Image, View, TouchableOpacity, Text, TextInput} from 'react-native';
 
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -14,118 +16,104 @@ const Background = styled(LinearGradient)`
 const Contents = styled.View`
   flex: 1;
   flex-direction: column;
-  
-  
-`;
-
-const TitleView = styled.View`
-  font-style: normal;
-  left: 11.11%;
-  top: 10.43%
-  
 `;
 
 const Title = styled.Text`
-  font-weight:800;
-  font-size: 38px;
-  color: #000000;
-  margin-bottom:1%;
+  font-weight:600;
+  font-size: ${WIDTH * 0.073}px;
+  color: #000000;  
+`;
+
+const ButtonText = styled.Text`
   
-`;
-
-
-
-const ImageView = styled.View`
-  left: 11.11%;
-  top: 12.43%
-  height: 96px;
-  width: 77.88%;
-  align-items: center;
-`;
-const ProfileImageView = styled.View`
-  border: #d0d0d0;
-  width: 96px;
-  height: 96px;
-  border-radius: 50px;
-  background: #e3e3e3;
-  align-items: center;
-  justify-content: center;
-
-`;
-const Image = styled.Image`
-  flex:1;
-  resizeMode: contain;
-  border-radius: 50px;
-`;
-
-const TextInputView = styled.View`
-  top: 20%;
-  
-  flex-direction: column;
-  width: 77.77%
-  height: 55%
-  align-items: center;
-  margin-left: 11.11%;
-  margin-right: 11.11%;
-`;
-const RowBox = styled.View`
-  flex-direction: row;
-  width: 100%;
-  align-items: stretch;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  
-  
-`;
-const Text = styled.Text`
-  height: 20px;
-  width: 65px;
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
-  color: #000000;
-  margin-right: 10px;
-  
+  font-weight: bold;
+  color: #ffffff;
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;  
+`;
 
-`;
-const TextInput = styled.TextInput`
-  width : 75%;
-  height: 40px;
-  border: #D0D0D0;
- 
-  
-  background: #ffffff;
-`;
 const CheckView = styled.ScrollView`
-  
-  height: 230px;
-  width: 75%;
+  width: 74%;
   border: #ff0000;
   background: #ffffff;
   border-radius: 2px;
   border: #d0d0d0;
-  
-  
-`;
-const Check = styled.TouchableOpacity`  
-  height: 40px;
-  width: 90%;
-  justify-content: center;
- 
-  
-`;
-const CheckIcon = styled.Text`
-  font-size: 14px;
-  font-weight: 500;
-  font-style: normal;
-  
-  
-  height: 40px;
-  
-  
-  
 `;
 
+
+function Profile(props){
+    return(
+    
+      <Container>
+        <Background colors={['#ffffff','#f8ecec','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
+            <Contents>
+
+                <View style={{position:'absolute',left:"11.11%",top:HEIGHT*0.075 ,width:'22%', height:'5.9%', alignItems:'center',justifyContent:'center'}}>
+                    <Title>프로필</Title>
+                </View>
+
+                <TouchableOpacity style={{borderWidth:1,borderColor:'#d0d0d0',position:'absolute',top:HEIGHT*0.1614, left:'36.66%',alignItems:'center', justifyContent:'center', width:'26.66%', height:(WIDTH*0.2666),
+                          borderRadius:50,backgroundColor:'#e3e3e3',alignItems:'center', justifyContent:'center'}}>
+                      <Image source={require('../constants/images/EmptyProfile.png')} style={{ width:'100%', height:'100%',resizeMode:'contain',borderRadius:50}}/>
+                </TouchableOpacity>
+                <Text style={{position:'absolute', top:HEIGHT*0.315, left:WIDTH*0.408,textAlignVertical:'center',textAlign:'center', color:'#000000',width:WIDTH*0.184,fontSize:WIDTH*0.035}}>프로필 사진</Text>
+               
+                <View style={{position:'absolute', top: HEIGHT*0.3771, left:'11.11%', width:'77.77%', flexDirection:'column', height:HEIGHT*0.335 }}>
+                  
+                  <View style={{flexDirection:'row', width:'100%', justifyContent:'space-between', marginBottom:HEIGHT*0.015, alignContent:'center',justifyContent:'center'}}>
+                    <Text style={{height:HEIGHT *0.06,width:'26%', color:'#000000',fontSize:14,lineHeight:20,textAlignVertical:'center',fontWeight:'500'}}>닉네임</Text>
+                    <TextInput placeholder="     입력" style={{height:HEIGHT*0.06, width:'74%', backgroundColor:'#ffffff', borderWidth:1,borderColor:'#d0d0d0'}}></TextInput>
+                  </View>
+
+                  <View style={{flexDirection:'row', width:'100%', justifyContent:'space-between',alignContent:'center',justifyContent:'center'}}>
+                    <Text style={{height:HEIGHT *0.06,width:'26%', color:'#000000',fontSize:14,lineHeight:20,fontWeight:'500'}}>디자인분야</Text>
+                    
+                    <CheckView style={{height: HEIGHT*0.26}}>
+                          <TouchableOpacity style={{height:10}}></TouchableOpacity>
+                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
+                            <Text style={{fontSize:14, fontWeight:'500',color:'4254660',textAlignVertical:'center', }}>      UIUX</Text>
+                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
+                          </TouchableOpacity>
+
+                    </CheckView>
+                  </View>
+                </View>
+
+                <TouchableOpacity style={{position:'absolute',top:HEIGHT*0.762,left:'11.11%', alignItems:'center', justifyContent:'center', backgroundColor:'#f34e4e',borderRadius:4,height:HEIGHT*0.057, width:'77.77%'}}>
+                    <ButtonText>시작하기</ButtonText>
+                </TouchableOpacity>
+
+
+              
+
+            </Contents>
+        </Background>
+      </Container>
+    
+    )
+}
 
 const Button = styled.TouchableOpacity`
   
@@ -139,92 +127,6 @@ const Button = styled.TouchableOpacity`
   margin-top: 20px;
 `;
 
-
-
-const ButtonText = styled.Text`
-  
-  font-size: 14px;
-  font-weight: bold;
-  color: #ffffff;
-  font-weight: bold;
-  font-style: normal;
-  text-align: center;  
-`;
-
-
-function Profile(props){
-    return(
-    
-      <Container>
-        <Background colors={['#ffffff','#f8ecec','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
-            <Contents>
-                <TitleView>
-                    <Title>프로필</Title>
-                </TitleView>
-                <ImageView>
-                    <ProfileImageView>
-                      <Image source={require('../constants/images/EmptyProfile.png')}/>
-                    </ProfileImageView>
-                    
-                </ImageView>
-               
-                <TextInputView>
-                  <RowBox>
-                    <Text>닉네임</Text>
-                    <TextInput placeholder="입력"></TextInput>
-                  </RowBox>
-
-                  <RowBox>
-                    <Text>디자인분야</Text>
-                    <CheckView>
-                        <RowBox>
-                          <Check><CheckIcon>    UIUX</CheckIcon></Check>
-                          <CheckIcon>✅</CheckIcon>
-                        </RowBox>
-
-                        <RowBox>
-                          <Check><CheckIcon>    BIBX</CheckIcon></Check>
-                          <CheckIcon>✅</CheckIcon>
-                        </RowBox>
-
-                        <RowBox>
-                          <Check><CheckIcon>    제품디자인</CheckIcon></Check>
-                          <CheckIcon>✅</CheckIcon>
-                        </RowBox>
-
-                        <RowBox>
-                          <Check><CheckIcon>    시각디자인</CheckIcon></Check>
-                          <CheckIcon>✅</CheckIcon>
-                        </RowBox>
-                        
-                    </CheckView>
-                  </RowBox>
-
-
-                  <Button>
-                    <ButtonText>시작하기</ButtonText>
-                  </Button>
-
-                </TextInputView>
-
-               
-
-                
-                
-                
-
-
-
-
-
-
-
-            </Contents>
-        </Background>
-      </Container>
-    
-    )
-}
 
 
 export default Profile;
