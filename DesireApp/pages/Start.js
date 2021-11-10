@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Dimensions, Image, View} from 'react-native';
+import { Dimensions, Image, View, Platform} from 'react-native';
 
 
 const WIDTH = Dimensions.get('window').width;
@@ -65,8 +65,20 @@ const Button = styled.TouchableOpacity`
   background-color: #ffffff;
   border-radius: 20px;
   justify-content: center;
-  border:#929292;
-
+  ${Platform.select({
+    ios:{
+      shadowColor: "#5a5a5a",
+       shadowOpacity: 0.8,
+       shadowRadius: 7,
+       shadowOffset: {
+         width: -1,
+         height: 0
+      }
+    },
+    android:{
+      elevation: 15
+    }
+  })};
 `;
 
 const ButtonText = styled.Text`

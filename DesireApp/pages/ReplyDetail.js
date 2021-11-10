@@ -109,7 +109,7 @@ function ReplyDetail(props){
                 <View style={{flexDirection:'column', width:'100%', height:'40%', alignItems:'center', justifyContent:'center'}}>
 
                   <ScrollView style={{width:'80%', marginTop:'10%'}}>
-                    <Text>저는 그리고 모르는게 있으면 예시로 몇 개 만들어서 보내드린 것 중에 설명해주신거랑 맞는게 무엇인지 꼼꼼하게 물어보는게 최선일 듯 합니다.
+                    <Text style={{color:'#000000'}}>저는 그리고 모르는게 있으면 예시로 몇 개 만들어서 보내드린 것 중에 설명해주신거랑 맞는게 무엇인지 꼼꼼하게 물어보는게 최선일 듯 합니다.
                       캡쳐이미지 넣고 세부 스펙이나 더 궁금한거 피그마 링크도 가티 첨부해 주시는 것도 좋을 것 같네요.
                     </Text>
                   </ScrollView>

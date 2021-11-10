@@ -95,12 +95,12 @@ function Homepage(props){
 
  
                 <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.4943, height:WIDTH*0.3639}} > 
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭤보겠</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭤보겠</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭤보겠</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭙겠습니다</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭙겠습니다</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭙겠습니다</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
                 </ScrollView>
              
 
@@ -109,11 +109,11 @@ function Homepage(props){
               <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.7185, width: WIDTH*0.3, height:WIDTH*0.3639}}><Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>1대1 채팅</Text></TouchableOpacity>
 
                 <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.7643, height:HEIGHT*0.2}} > 
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle>어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
                 </ScrollView>
           
 

@@ -78,7 +78,7 @@ function Reply(props){
                 </View>
 
                 <View style={{ width:'77%', height: '45%'}}>
-                  <Text style={{fontWeight: '300', fontSize: 12, color:'#000000'}}>로렘 입숨(LOREM IPSUM; 줄여서 립숨,LIPSUM)은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트로, 최종 결과물에 들어가는 실제적......</Text>
+                  <Text style={{fontWeight: '300', fontSize: 12, color:'#000000'}} numberOfLines={4} ellipsizeMode="tail">로렘 입숨(LOREM IPSUM; 줄여서 립숨,LIPSUM)은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트로, 최종 결과물에 들어가는 실제적......</Text>
                 </View>
 
 
@@ -104,7 +104,7 @@ function Reply(props){
                   <View style={{flexDirection: 'column' }}>
                     <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
                     <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -118,7 +118,7 @@ function Reply(props){
                   <View style={{flexDirection: 'column' }}>
                     <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
                     <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -132,21 +132,7 @@ function Reply(props){
                   <View style={{flexDirection: 'column' }}>
                     <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
                     <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:'85%',marginLeft:'7.5%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
-                                  onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
-                  
-                  <View style={{borderWidth: 2 , borderColor:'#ff80ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
-                  </View>
-                  
-                  <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
-                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -160,7 +146,7 @@ function Reply(props){
                   <View style={{flexDirection: 'column' }}>
                     <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
                     <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -174,9 +160,10 @@ function Reply(props){
                   <View style={{flexDirection: 'column' }}>
                     <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
                     <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000'}}>저도 아웃소싱으로 작업을 해....</Text>
+                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
                   </View>
                 </TouchableOpacity>
+
 
 
               </ScrollView>
