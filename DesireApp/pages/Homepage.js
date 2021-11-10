@@ -25,6 +25,7 @@ const Part = styled.TouchableOpacity`
   border: #ebebeb;
   flex-direction: column;
   justify-content: center;
+ 
 `;
 const PartTitle = styled.Text`
   position: absolute;

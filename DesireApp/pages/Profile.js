@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Dimensions, Image, View, TouchableOpacity, Text, TextInput} from 'react-native';
+import produce from 'immer';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -44,6 +45,20 @@ const CheckView = styled.ScrollView`
 
 
 function Profile(props){
+   const [isPhoto, setPhoto] = useState(false);
+   const changePhoto = (bool) => {
+    setPhoto(bool);
+  }
+
+  const [list, setList] = useState([
+    {category: 'UIUX', isCheck: false},
+    {category: 'BIBX', isCheck: false},
+    {category: '제품디자인', isCheck: false},
+    {category: '시각디자인', isCheck: false},
+  ]);
+
+  
+
     return(
     
       <Container>
@@ -71,31 +86,22 @@ function Profile(props){
                     <Text style={{height:HEIGHT *0.06,width:'26%', color:'#000000',fontSize:14,lineHeight:20,fontWeight:'500'}}>디자인분야</Text>
                     
                     <CheckView style={{height: HEIGHT*0.26}}>
+                          
                           <TouchableOpacity style={{height:10}}></TouchableOpacity>
-                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
-                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      BIBX</Text>
-                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      제품디자인</Text>
-                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      시각디자인</Text>
-                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center', }}>      UIUX</Text>
-                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
-                            <Text style={{fontSize:14, fontWeight:'500',color:'4254660',textAlignVertical:'center', }}>      UIUX</Text>
-                            <Text style={{ textAlignVertical:'center'}}>✔      </Text>
-                          </TouchableOpacity>
+
+                         
+                          {list.map( item =>{
+                            return(
+                              <TouchableOpacity onPress={()=>{ setList( produce( list, draft =>{
+                                  const index = list.indexOf(item);
+                                  draft[index].isCheck = !list[index].isCheck;
+
+                              }))}} style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
+                                <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center',alignSelf:'center' }}>      {item.category}</Text>
+                                <Image style={{width: HEIGHT* 0.025, height:HEIGHT *0.025,  alignSelf:'center', marginRight:25, opacity:(item.isCheck?10:0)}}  source={require('../constants/images/check.png')}></Image> 
+                              </TouchableOpacity>
+                            )
+                          })}
 
                     </CheckView>
                   </View>

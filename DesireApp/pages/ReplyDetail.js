@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import {Text, View, TouchableOpacity, ScrollView, Image, Modal} from 'react-native'
 import Satisfaction from '../components/Satisfaction';
 

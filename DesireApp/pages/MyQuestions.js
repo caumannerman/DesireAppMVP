@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Alert } from 'react-native';
-import { Dimensions, Image, ScrollView} from 'react-native';
+import { Dimensions, Image, ScrollView,Platform} from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -65,6 +65,22 @@ const Part = styled.TouchableOpacity`
   border: #d0d0d0;
   flex-direction: column;
   justify-content: center;
+
+  ${Platform.select({
+    ios:{
+      shadowColor: "#5a5a5a",
+      shadowOpacity: 0.4,
+      shadowRadius: 5,
+      shadowOffset: {
+        width: -1,
+        height: 0
+      }
+    },
+    android:{
+      elevation: 13
+
+    }
+  })};
 
 `;
 const PartDate = styled.Text`
