@@ -13,7 +13,15 @@ import SplashScreen from 'react-native-splash-screen';
 import Tab from './navigators/Tab';
 
 
-const App: () => Node = () => {
+const App = () => {
+
+  useEffect(()=>{
+    setTimeout(() => {
+      SplashScreen.hide();
+    },2000);
+    
+  },[]);
+
   return (
     <>
        

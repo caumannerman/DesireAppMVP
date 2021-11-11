@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View, Image} from 'react-native';
 import HomeStack from './HomeStack';
@@ -12,6 +12,7 @@ const Tabs = createBottomTabNavigator();
 
 const Tab = () => {
   return(
+    
       <Tabs.Navigator screenOptions={{ headerShown: false, "tabBarShowLabel":false, "tabBarStyle":{backgroundColor:'#ffffff', borderRadius:10} }}  >
           <Tabs.Screen name="SignInStack" component={SignInStack} options={{ tabBarIcon: ({focused}) => (
             <View style={{ alignItems: 'center', justifyContent: 'center'}}>

@@ -6,13 +6,13 @@ import Join from '../pages/Join';
 import Profile from '../pages/Profile';
 
 
-
+ //<SIStack.Screen name="Intro" component={Intro} />
 const SIStack = createNativeStackNavigator();
 
 const SignInStack = () => {
   return(
     <SIStack.Navigator screenOptions={{ headerShown: false }}>
-      <SIStack.Screen name="Intro" component={Intro} />
+     
       <SIStack.Screen name="Start" component={Start} />
       <SIStack.Screen name="Join" component={Join} />
       <SIStack.Screen name="Profile" component={Profile} />
