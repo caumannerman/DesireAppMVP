@@ -73,7 +73,7 @@ function Profile(props){
                           borderRadius:50,backgroundColor:'#e3e3e3',alignItems:'center', justifyContent:'center'}}>
                       <Image source={require('../constants/images/EmptyProfile.png')} style={{ width:'100%', height:'100%',resizeMode:'contain',borderRadius:50}}/>
                 </TouchableOpacity>
-                <Text style={{position:'absolute', top:HEIGHT*0.315, left:WIDTH*0.408,textAlignVertical:'center',textAlign:'center', color:'#000000',width:WIDTH*0.184,fontSize:WIDTH*0.035}}>프로필 사진</Text>
+                <Text style={{position:'absolute', top:HEIGHT*0.1714+WIDTH*0.2666, left:WIDTH*0.408,textAlignVertical:'center',textAlign:'center', color:'#000000',width:WIDTH*0.184,fontSize:WIDTH*0.035}}>프로필 사진</Text>
                
                 <View style={{position:'absolute', top: HEIGHT*0.3771, left:'11.11%', width:'77.77%', flexDirection:'column', height:HEIGHT*0.335 }}>
                   
