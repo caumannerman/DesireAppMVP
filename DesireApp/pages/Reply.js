@@ -5,6 +5,7 @@ import {Text, View, TouchableOpacity, ScrollView, Image, Platform,Dimensions} fr
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
+
 const Container = styled.SafeAreaView`
   flex: 1;
 `;

@@ -98,7 +98,7 @@ function Profile(props){
 
                               }))}} style={{flexDirection:'row', width:'100%',height:HEIGHT *0.06, alignContent:'center', justifyContent:'space-between'}}>
                                 <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center',alignSelf:'center' }}>      {item.category}</Text>
-                                <Image style={{width: HEIGHT* 0.025, height:HEIGHT *0.025,  alignSelf:'center', marginRight:25, opacity:(item.isCheck?10:0)}}  source={require('../constants/images/check.png')}></Image> 
+                                <Image style={{width: HEIGHT* 0.025, height:HEIGHT *0.025,  alignSelf:'center', marginRight:25, opacity:(item.isCheck?1:0)}}  source={require('../constants/images/check.png')}></Image> 
                               </TouchableOpacity>
                             )
                           })}
