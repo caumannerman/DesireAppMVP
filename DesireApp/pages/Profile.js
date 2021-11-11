@@ -90,8 +90,7 @@ function Profile(props){
                           <TouchableOpacity style={{height:10}}></TouchableOpacity>
 
                          
-                          {list.map( item =>{
-                            return(
+                          {list.map( item =>
                               <TouchableOpacity onPress={()=>{ setList( produce( list, draft =>{
                                   const index = list.indexOf(item);
                                   draft[index].isCheck = !list[index].isCheck;
@@ -100,8 +99,7 @@ function Profile(props){
                                 <Text style={{fontSize:14, fontWeight:'500',color:'#425466', textAlignVertical:'center',alignSelf:'center' }}>      {item.category}</Text>
                                 <Image style={{width: HEIGHT* 0.025, height:HEIGHT *0.025,  alignSelf:'center', marginRight:25, opacity:(item.isCheck?1:0)}}  source={require('../constants/images/check.png')}></Image> 
                               </TouchableOpacity>
-                            )
-                          })}
+                          )}
 
                     </CheckView>
                   </View>

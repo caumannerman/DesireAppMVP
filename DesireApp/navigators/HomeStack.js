@@ -8,12 +8,14 @@ import ChatPrivate from '../pages/ChatPrivate';
 import MentorBoardDetail from '../pages/MentorBoardDatail';
 import MentorBoard from '../pages/MentorBoard';
 import MentorReply from '../pages/MentorReply';
+import SignIn from '../pages/SignIn';
 
 const HStack = createNativeStackNavigator();
 
 const HomeStack = () => {
   return(
       <HStack.Navigator screenOptions={{ headerShown: false }}>
+          <HStack.Screen name="SignIn" component={SignIn}/>
           <HStack.Screen name="Homepage" component={Homepage}/>
           <HStack.Screen name="Questions" component={Questions}/>
           <HStack.Screen name="Reply" component={Reply}/>

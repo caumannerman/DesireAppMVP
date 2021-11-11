@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {TextInput, Text, Image, TouchableOpacity, View, ScrollView, Modal, Dimensions} from 'react-native';
 import SimpleModal from '../components/SimpleModal';
+import produce from 'immer';
+
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
@@ -79,6 +81,15 @@ function Question(props){
   const setData = (data) => {
     setchooseData(data);
   }
+
+  const [list, setList] = useState([
+    {category: 'UIUX', isCheck: false},
+    {category: 'BIBX', isCheck: false},
+    {category: '제품디자인', isCheck: false},
+    {category: '시각디자인', isCheck: false},
+  ]);
+
+
     return(
     
       <Container>
@@ -99,17 +110,18 @@ function Question(props){
               <View style={{width:'100%', height:65,alignItems:'center', flexDirection:'row', backgroundColor:'#e5e5e5', borderWidth:0.2, borderColor:'#838383'}}>
                 <View style={{width:'30%', alignItems:'center', justifyContent:'center'}}><Text>카테고리 선택</Text></View>
                 <ScrollView  style={{ height:'100%'}}  horizontal={true}>
-                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>UIUX</Text></TouchableOpacity>
-                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>BIBX</Text></TouchableOpacity>
-                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>제품&산업</Text></TouchableOpacity>
-                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
-                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
-                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
-                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
-                  <TouchableOpacity style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:14, color:'#ffffff', fontWeight:'bold', marginHorizontal:10}}>툴 사용</Text></TouchableOpacity>
+                  
+                  {list.map( item =>
+                              <TouchableOpacity onPress={()=>{ setList( produce( list, draft =>{
+                                  const index = list.indexOf(item);
+                                  draft[index].isCheck = !list[index].isCheck;
+
+                              }))}} style={{ height:41,marginTop:12, marginLeft:15, borderRadius:20, backgroundColor:(item.isCheck?'#952bff':'#e5e5e5'), alignItems:'center', justifyContent:'center'}}>
+                                <Text style={{fontSize:14, color:(item.isCheck?'#ffffff':'#000000'), fontWeight:(item.isCheck?'bold':'300'), marginHorizontal:10}}>{item.category}</Text>
+                              </TouchableOpacity>
+                          )}
                 </ScrollView>
               </View>
-
 
               <View style={{borderWidth:0.4, borderColor:'#a0a0a0', width:'100%', height:'35%', alignItems:'center'}}>
                 <TextInput style={{ width:'90%',height:'100%'}} placeholder={`궁금한 내용을 질문해주세요 

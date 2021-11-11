@@ -4,9 +4,6 @@ import MyQuestions from '../pages/MyQuestions';
 import Reply from '../pages/Reply';
 import ReplyDetail from '../pages/ReplyDetail';
 
-
-
-
 const MQStack = createNativeStackNavigator();
 
 const MyquestionStack = () => {
