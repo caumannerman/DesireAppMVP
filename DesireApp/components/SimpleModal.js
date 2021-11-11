@@ -2,7 +2,7 @@ import React from 'react';
 import{
     StyleSheet, Text, View, TouchableOpacity, Dimensions, Button
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+
 
 
 const WIDTH = Dimensions.get('window').width;
