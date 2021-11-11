@@ -71,7 +71,7 @@ function Profile(props){
 
                 <TouchableOpacity style={{borderWidth:1,borderColor:'#d0d0d0',position:'absolute',top:HEIGHT*0.1614, left:'36.66%',alignItems:'center', justifyContent:'center', width:'26.66%', height:(WIDTH*0.2666),
                           borderRadius:50,backgroundColor:'#e3e3e3',alignItems:'center', justifyContent:'center'}}>
-                      <Image source={require('../constants/images/EmptyProfile.png')} style={{ width:'100%', height:'100%',resizeMode:'contain',borderRadius:50}}/>
+                      <Image source={require('../constants/images/EmptyProfile.png')} style={{ width: (isPhoto?'100%':'45%'), height:(isPhoto?'100%':'45%'),resizeMode:'contain',borderRadius:(isPhoto?50:0)}}/>
                 </TouchableOpacity>
                 <Text style={{position:'absolute', top:HEIGHT*0.1714+WIDTH*0.2666, left:WIDTH*0.408,textAlignVertical:'center',textAlign:'center', color:'#000000',width:WIDTH*0.184,fontSize:WIDTH*0.035}}>프로필 사진</Text>
                
@@ -120,19 +120,6 @@ function Profile(props){
     
     )
 }
-
-const Button = styled.TouchableOpacity`
-  
-  align-items: center;
-  justify-content: center;
-  background-color: #f34e4e;
-
-  border-radius: 4px;
-  height: 40px;
-  width: 100%;
-  margin-top: 20px;
-`;
-
 
 
 export default Profile;

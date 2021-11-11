@@ -141,7 +141,7 @@ function MyQuestion(props){
 
 
               <TitleView>
-                <Title>내가 한 질문{data[0].title}{data.count}</Title>
+                <Title>내가 한 질문</Title>
                 <Glass><Image source={require('../constants/images/homepage/glasses.png')} resizeMode="contain"/></Glass>
               </TitleView>
 
