@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Dimensions, Image, View, Platform} from 'react-native';
-
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -102,6 +101,7 @@ const ButtonText2 = styled.Text`
 
 
 function Start(props){
+
     return(
     
       <Container>
@@ -115,11 +115,11 @@ function Start(props){
                 
 
                 <ButtonView>
-                  <Button onPress={ () => {props.navigation.navigate( 'Join')}} >
+                  <Button onPress={ () => {props.navigation.navigate( 'Join', {mmChoice:"ME"});}} >
                       <ButtonText>멘티</ButtonText>
                       <ButtonText2>질문자로 가입</ButtonText2>
                   </Button >
-                    <Button onPress={ () => {props.navigation.navigate( 'Join')}}>
+                    <Button onPress={ () => {props.navigation.navigate( 'Join', {mmChoice:"MO"});}}>
                       <ButtonText>멘토</ButtonText>
                       <ButtonText2>답변자로 가입</ButtonText2>
                     </Button>

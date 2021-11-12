@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import{
-    StyleSheet, Text, View, TouchableOpacity, Dimensions, Button
+    Text, View, TouchableOpacity, Dimensions, Button
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import produce from 'immer';
 
 
 const WIDTH = Dimensions.get('window').width;
@@ -14,6 +14,13 @@ const Satisfaction = (props) => {
       props.changeModalVisible(bool);
       props.setData(data);
   }
+  const [list, setList] = useState([
+    {category: '아쉬운 답변', isCheck: false},
+    {category: '보통', isCheck: false},
+    {category: '필요한 답변', isCheck: false},
+
+  ]);
+
 
   return (
 
@@ -21,19 +28,30 @@ const Satisfaction = (props) => {
                    position:'absolute', left:WIDTH*0.1111, top:HEIGHT*0.1511}}>
      
       <Text style={{position:'absolute', top:WIDTH*0.1231,fontWeight:'700', fontSize:15, color:'#000000'}}>해당 답변이 도움이 되었나요?</Text>
-      
+      <View style={{position:'absolute',top:WIDTH*0.270, left:WIDTH*0.15,flexDirection:'column', alignItems:'center', justifyContent:'center'}}><View style={{backgroundColor:'#dddddd', width:WIDTH*0.4777, height:5}}></View><Text style={{marginTop:10}}></Text></View>
       <View style={{borerWidth:2, borderColor:'#0000ff',position:'absolute', top:WIDTH*0.2434,left: WIDTH*0.047,height:WIDTH*0.14,width:WIDTH*0.6833,flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-        <TouchableOpacity style={{flexDirection:'column', alignItems:'center', justifyContent:'center'}}><View style={{backgroundColor:'#dddddd', width:WIDTH*0.08, height:WIDTH*0.08 ,borderRadius:30 }}></View><Text style={{marginTop:10}}>아쉬운 답변</Text></TouchableOpacity>
-       
-        <TouchableOpacity style={{flexDirection:'column', alignItems:'center', justifyContent:'center'}}><View style={{backgroundColor:'#dddddd', width:WIDTH*0.08, height:WIDTH*0.08 ,borderRadius:30 }}></View><Text style={{marginTop:10}}>보통</Text></TouchableOpacity>
         
-        <TouchableOpacity style={{flexDirection:'column', alignItems:'center', justifyContent:'center'}}><View style={{backgroundColor:'#dddddd', width:WIDTH*0.08, height:WIDTH*0.08 ,borderRadius:30 }}></View><Text style={{marginTop:10}}>필요한 답변</Text></TouchableOpacity>
+        {list.map( item =>
+                              <TouchableOpacity onPress={()=>{ setList( produce( list, draft =>{
+                                  const index = list.indexOf(item);
+                                  if(!draft[index].isCheck){
+                                    draft[0].isCheck = false;
+                                    draft[1].isCheck = false;
+                                    draft[2].isCheck = false;
+                                    draft[index].isCheck = true;
+                                  }
+                                  else{
+                                    draft[index].isCheck = !list[index].isCheck;
+                                  }
+
+
+                              }))}} style={{flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+                                 <View style={{backgroundColor:(item.isCheck?'#952bff':'#dddddd'), width:WIDTH*0.08, height:WIDTH*0.08 ,borderRadius:30 }}></View>
+                                 <Text style={{marginTop:10}}>{item.category}</Text>
+                              </TouchableOpacity>
+                          )}
       </View>
-      <View style={{position:'absolute',top:WIDTH*0.274, left:WIDTH*0.15,flexDirection:'column', alignItems:'center', justifyContent:'center'}}><View style={{backgroundColor:'#dddddd', width:WIDTH*0.4777, height:5}}></View><Text style={{marginTop:10}}></Text></View>
-
-
-
-
+     
       <TouchableOpacity style={{position:'absolute',top:WIDTH*0.454,left:WIDTH*0.319,  width:WIDTH*0.411,backgroundColor:'#f4e8ff', borderRadius:25, height: WIDTH*0.0615, alignItems:'center', justifyContent:'center'}}><Text style={{color:'#000000',fontSize:10,color:'#696969' }}>멘토에게 추가 리워드 지급</Text></TouchableOpacity>
 
 

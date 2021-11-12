@@ -13,6 +13,7 @@
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "axios": "^0.24.0",
     "immer": "^9.0.6",
     "lodash": "^4.17.21",
     "react": "17.0.2",

@@ -2,8 +2,8 @@ import React,{useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View, Image} from 'react-native';
 import HomeStack from './HomeStack';
-import Questions from '../pages/Questions';
 import SignInStack from './SignInStack';
+import QuestionStack from './QuestionStack';
 import MyquestionStack from './MyquestionStack';
 import ChatStack from './ChatStack';
 
@@ -44,7 +44,7 @@ const Tab = () => {
              <Text style={{color: focused? '#f89ccc' : '#952bff', height: 16,fontSize: 12, textAlign: 'center', fontWeight:'normal'}}>홈</Text>
             </View>
           )}}/>
-          <Tabs.Screen name="Questions" component={Questions} options={{ tabBarIcon: ({focused}) => (
+          <Tabs.Screen name="QuestionStack" component={QuestionStack} options={{ tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
                  source={require('../constants/images/homepage/glasses.png')}

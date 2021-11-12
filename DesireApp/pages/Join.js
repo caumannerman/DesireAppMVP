@@ -94,7 +94,7 @@ function Join(props){
   }
   
     return(
-    
+      
       <Container>
         <Background colors={['#ffffff','#f8ecec','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
             <Contents>
@@ -121,12 +121,8 @@ function Join(props){
                     else if(tmplst[2] === false){
                       changeModal3Visible(true)
                     }
-                    else{// 이메일, 비번 형식이 맞음 
-                      //백엔드로 보내고 다음화면
-
-
-
-                      props.navigation.navigate("Profile")
+                    else{
+                      props.navigation.navigate("Profile",{mmChoice:props.route.params.mmChoice,email:email,pwd:password})
                     }
 
                     }}>

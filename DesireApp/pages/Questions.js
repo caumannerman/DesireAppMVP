@@ -67,9 +67,6 @@ const FileText = styled.Text`
 `;
 
 
-
-
-
 function Question(props){
   const [isModalVisible, setisModalVisible] = useState(false);
   const [chooseData, setchooseData] = useState();
@@ -158,7 +155,8 @@ function Question(props){
            
               <Modal 
                 transparent={true} animationType='slide' visible={isModalVisible}
-                onRequestClose={() => changeModalVisible(false)}
+               
+                onDismiss={()=> alert({chooseData}) }
                
                 >
                 <SimpleModal style={{alignItems:'center', justifyContent:'center'}}
