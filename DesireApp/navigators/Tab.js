@@ -27,7 +27,7 @@ const Tab = () => {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: {backgroundColor: '#ffffff', borderRadius: 10},
+        tabBarStyle: {backgroundColor: '#ffffff'},
       }}>
       <Tabs.Screen
         name="SignInStack"
@@ -49,9 +49,10 @@ const Tab = () => {
                 style={{
                   color: focused ? '#f89ccc' : '#952bff',
                   height: 16,
-                  fontSize: 12,
+                  fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
+                  marginTop:3,
                 }}>
                 가입하기
               </Text>
@@ -79,9 +80,10 @@ const Tab = () => {
                 style={{
                   color: focused ? '#f89ccc' : '#952bff',
                   height: 16,
-                  fontSize: 12,
+                  fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
+                  marginTop:3,
                 }}>
                 홈
               </Text>
@@ -109,9 +111,10 @@ const Tab = () => {
                 style={{
                   color: focused ? '#f89ccc' : '#952bff',
                   height: 16,
-                  fontSize: 12,
+                  fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
+                  marginTop:3,
                 }}>
                 질문하기
               </Text>
@@ -139,9 +142,10 @@ const Tab = () => {
                 style={{
                   color: focused ? '#f89ccc' : '#952bff',
                   height: 16,
-                  fontSize: 12,
+                  fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
+                  marginTop:3,
                 }}>
                 내가 한 질문
               </Text>
@@ -174,9 +178,10 @@ const Tab = () => {
                 style={{
                   color: focused ? '#f89ccc' : '#952bff',
                   height: 16,
-                  fontSize: 12,
+                  fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
+                  marginTop:3,
                 }}>
                 1대1 채팅
               </Text>
