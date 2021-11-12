@@ -50,6 +50,42 @@ const CheckView = styled.ScrollView`
   border: #d0d0d0;
 `;
 
+<<<<<<< Updated upstream
+=======
+async function registerUser({
+  email,
+  password,
+  nickname,
+  designFields,
+  mmChoice,
+  profileImage,
+}) {
+  const formData = new FormData();
+  formData.append('email', email);
+  formData.append('password', password);
+  formData.append('nickname', nickname);
+  designFields.map(designField => {
+    formData.append('design_fields', designField); // UI/UX, BI/BX, 제품디자인, 시각디자인 중 택 여러 개 (designFields = ["UI/UX", "제품디자인"])
+  });
+  formData.append('acc_type', mmChoice); // "ME", "MO"
+  //formData.append('profile_image', profileImage);
+
+  console.log(designFields);
+  console.log(mmChoice);
+  console.log(`${BACKEND_URL}/api/v1/users/`);
+  
+  await axios
+    .post(`${BACKEND_URL}/api/v1/users/`, formData)
+    .then(() => {
+      
+    })
+    .catch(err => {
+      console.error(err.response.data);
+    });
+    
+}
+
+>>>>>>> Stashed changes
 function Profile(props) {
   const [nickname, setNickname] = useState('');
   const [isPhoto, setPhoto] = useState(false);

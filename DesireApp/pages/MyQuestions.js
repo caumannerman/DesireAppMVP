@@ -3,6 +3,9 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Alert } from 'react-native';
 import { Dimensions, Image, ScrollView,Platform} from 'react-native';
+import axios from 'axios';
+import {BACKEND_URL} from '../constants/constants';
+
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -116,23 +119,23 @@ const PartReply = styled.Text`
   top: ${WIDTH*0.11};
 `;
 
-function MyQuestion(props){
 
-  const [data, setData] = useState([{title:"FirTitle"}]);
- // loading
-  const [loading, setLoading] = useState(true)
+
+
+
+function MyQuestion(props){
+ 
+  const [questionList, setQuestionList] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/v1/questions',{
-      method:"GET"
-    })
+     axios.get(`${BACKEND_URL}/api/v1/questions/`)
     .then(resp => resp.json())
     .then(data => {
-      setData(data)
-      setLoading(false)
+      setQuestionList(data)
     }).catch(error => Alert.alert("error", JSON.stringify(error)))
-  }, [])
+  }, []);
 
+  alert(questionList)
     return(
     
       <Container>

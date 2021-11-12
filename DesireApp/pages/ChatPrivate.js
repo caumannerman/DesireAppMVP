@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native';
+import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView, TextInput} from 'react-native';
+import produce from 'immer';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -47,26 +48,24 @@ const Glass = styled.TouchableOpacity`
 
 const ChatView = styled.View`
   width: 75%;
-
-  background: #999999;
   border-radius: 24px;
   margin-bottom: 17px;
-  margin-left: 5%;
   justify-content: center;
+
+  margin-left: 5%;
+  background: #999999;
   
 `;
 
 
 const MyChatView = styled.View`
   width: 75%;
-  
-  background: #bb7dfc;
   border-radius: 24px;
-  margin-left: 20%;
   margin-bottom: 17px;
   justify-content: center;
 
-  
+  margin-left: 20%;
+  background: #bb7dfc;
 `;
 
 const ChatText = styled.Text`
@@ -82,6 +81,16 @@ const ChatText = styled.Text`
 `;
 
 function Chat(props){
+    const [nowChat, setNowChat] = useState('');
+    //이건 원래 시작할 때 useEffect로 받아와야함 
+    const [chatList, setChatList] = useState([
+      { text:"안녕하세요", id:'I', nickname:''},
+      { text:"이런 부분은 제가 도와드릴게요", id:'U', nickname:''},
+      { text:"답변 내용이 많은 도움이 되었습니다.",  id:'I', nickname:''},
+      { text:"아닙니다",  id:'U', nickname:''},
+
+    ]);
+
     return(
     
       <Container>
@@ -114,13 +123,37 @@ function Chat(props){
 
                 <ScrollView style={{  }}>
                   <Text style={{textAlign: 'center', marginTop:30, marginBottom: 30}}>멘토님과 1대1 매칭을 통해 궁금한 것을 물어보세요.</Text>
-       
-                  <ChatView><ChatText>이런 부분은 제가 도와드릴게요.</ChatText></ChatView>
-                  <ChatView><ChatText>캡쳐이미지 넣고 세부 스펙이나 더 궁금하신 점 피그마 링크도 같이 첨부해주시는 것도 좋을 것 같네요.</ChatText></ChatView>
+                  
+                  {chatList.map(item => (
+                    (item.id==='U'?<ChatView>
+                    <ChatText>
+                      {item.text}
+                    </ChatText>
+                    
+                  </ChatView> :
+                  <MyChatView>
+                  <ChatText>
+                    {item.text}
+                  </ChatText>
+                  
+                </MyChatView>)
+                  
 
-                  <MyChatView><ChatText>답변 내용이 많은 도움이 되었습니다.</ChatText></MyChatView>
-
+                ))}
                 </ScrollView>
+                 
+                <View style={{width:'100%', height: 50,  backgroundColor:'#ffffff', alignItems:'center', flexDirection:'row'}}>
+                  <TouchableOpacity  style={{width:'10%', height:50,  alignItems:'center', justifyContent:'center'}}>
+                    <Image source={require('../constants/images/addfile.png')} resizeMode='contain'  style={{width:'40%',height:'40%'}}/>
+                  </TouchableOpacity>
+                  <TextInput style={{width:'74%', height: 40,  backgroundColor:'#ffffff'}} onChangeText={(text)=>setNowChat(text)}></TextInput>
+
+                  <TouchableOpacity  style={{width:'10%', height:50, magrinRight:'3%',alignItems:'center', justifyContent:'center'}}
+                           onPress={()=> { if(nowChat!==''){setChatList( chatList.concat({text:nowChat, id:'I'}))}}  }>
+                  <Image source={require('../constants/images/chatsend.png')} resizeMode='contain' style={{width:'60%',height:'60%'}}/>
+                   </TouchableOpacity>
+                  
+                </View>
 
             </Contents>
         </Background>
