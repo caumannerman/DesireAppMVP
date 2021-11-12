@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Dimensions, Image, ScrollView,View, Text, TouchableOpacity} from 'react-native';
+import { Dimensions,  ScrollView,View, Text, TouchableOpacity} from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -25,7 +25,6 @@ const Part = styled.TouchableOpacity`
   border: #ebebeb;
   flex-direction: column;
   justify-content: center;
- 
 `;
 const PartTitle = styled.Text`
   position: absolute;
@@ -46,10 +45,20 @@ const PartReply = styled.Text`
   font-weight:bold;
   font-size: 12px;
 `;
+const PartChat = styled.Text`
+  position: absolute;
+  left: 11.45%;
+  top: 78%;
+  color: #952bff;
+  font-style: normal;
+  font-weight:bold;
+  font-size: 12px;
+`;
+
 const PartDate = styled.Text`
   position: absolute;
   left: 50%;
-  top: 74.3%;
+  top: 78%;
   color: #acacac;
   font-style: normal;
   font-weight: 500;
@@ -63,11 +72,29 @@ const BText = styled.Text`
   font-weight: bold;
 `;
 
+const PartText = styled.Text`
+  position: absolute;
+  left: 11.45%;
+  top: 50%;
+  color: #828282;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  width: 77.77%;
+`;
+
+const Image = styled.Image`
+  position: absolute;
+  left: 11.45%;
+  top: 12%;
+  
+`;
+
 function Homepage(props){
     return(
     
       <Container>
-        <Background colors={['#ffffff','#f8ecec','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
+        <Background colors={['#ecf9ff','#ffffff','#f8f0f0']} start={{x: 0.1, y: 0.2}} end={{x: 0.8, y: 0.8}} locations={[0,0.3,0.5]} >
             <Contents>
 
 
@@ -91,7 +118,10 @@ function Homepage(props){
               </View>
 
                
-              <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.4514 , width: WIDTH*0.3, height:HEIGHT*0.033}}><Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>내가 한 질문</Text></TouchableOpacity>
+              <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.4514 , width: WIDTH*0.3, height:HEIGHT*0.033}} 
+              onPress={()=>{props.navigation.navigate("MyquestionStack")}}>
+                <Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>내가 한 질문  »</Text>
+                </TouchableOpacity>
          
 
  
@@ -107,14 +137,17 @@ function Homepage(props){
 
 
 
-              <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.7185, width: WIDTH*0.3, height:WIDTH*0.3639}}><Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>1대1 채팅</Text></TouchableOpacity>
+              <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.7185, width: WIDTH*0.3, height:WIDTH*0.3639}} 
+              onPress={()=>{props.navigation.navigate("ChatStack")}}>
+                <Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>1대1 채팅     »</Text>
+                </TouchableOpacity>
 
                 <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.7643, height:HEIGHT*0.2}} > 
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여 질문하겠습니다</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
+                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
                 </ScrollView>
           
 
