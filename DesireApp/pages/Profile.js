@@ -10,8 +10,8 @@ import {
   TextInput,
 } from 'react-native';
 import produce from 'immer';
-import axios from 'axios';
-import {BACKEND_URL} from '../constants/constants';
+
+import {registerUser} from '../services/UserService';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -49,41 +49,6 @@ const CheckView = styled.ScrollView`
   border-radius: 2px;
   border: #d0d0d0;
 `;
-
-async function registerUser({
-  email,
-  password,
-  nickname,
-  designFields,
-  mmChoice,
-  profileImage,
-}) {
-  const formData = new FormData();
-  formData.append('email', email);
-  formData.append('password', password);
-  formData.append('nickname', nickname);
-  designFields.map(designField => {
-    formData.append('design_fields', designField); // UI/UX, BI/BX, 제품디자인, 시각디자인 중 택 여러 개 (designFields = ["UI/UX", "제품디자인"])
-  });
-  formData.append('acc_type', mmChoice); // "ME", "MO"
-  //formData.append('profile_image', profileImage);
-
-  console.log(designFields);
-  console.log(mmChoice);
-  console.log(`${BACKEND_URL}/api/v1/users/`);
-
-  props.navigation.navigate("HomeStack");
-  
-  return await axios
-    .post(`${BACKEND_URL}/api/v1/users/`, formData)
-    .then(() => {
-      
-    })
-    .catch(err => {
-      console.error(err.response.data);
-    });
-    
-}
 
 function Profile(props) {
   const [nickname, setNickname] = useState('');
@@ -286,6 +251,7 @@ function Profile(props) {
               const selectedDesignFieldNames = designFields
                 .filter(designField => designField.isCheck)
                 .map(designFieldName => designFieldName.value);
+
               registerUser({
                 email: props.route.params.email,
                 password: props.route.params.pwd,
@@ -293,8 +259,8 @@ function Profile(props) {
                 nickname,
                 designFields: selectedDesignFieldNames,
                 profileImage,
-              }); 
-              props.navigation.navigate("HomeStack");
+              });
+              props.navigation.navigate('HomeStack');
             }}>
             <ButtonText>시작하기</ButtonText>
           </TouchableOpacity>
