@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Alert } from 'react-native';
-import { Dimensions, Image, ScrollView,Platform} from 'react-native';
+import { Alert ,Dimensions, Image, ScrollView,Platform, FlatList} from 'react-native';
 import axios from 'axios';
 import {BACKEND_URL} from '../constants/constants';
+import { ActivityIndicator } from 'react-native';
 
 
 const WIDTH = Dimensions.get('window').width;
@@ -101,10 +101,10 @@ const PartTitle = styled.Text`
   position: absolute
   color: #000000;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 900;
   width: ${WIDTH*0.28};
   height: ${WIDTH*0.12};
-  font-size: 16px;
+  font-size: 16.5px;
   left: ${WIDTH*0.0429};
   top: ${WIDTH*0.12};
 `;
@@ -123,21 +123,27 @@ const PartReply = styled.Text`
 
 
 
+
+
 function MyQuestion(props){
  
   const [questionList, setQuestionList] = useState([]);
+  
+  const getQuestionList = () => {
+    axios.get(`${BACKEND_URL}/api/v1/questions/`)
+   .then(res => {
+     setQuestionList(res.data.results);
+     console.log("success")
+   });
+  };
+  
+    useEffect(()=>{
+      getQuestionList();
+    },[]);
 
-  useEffect(() => {
-     axios.get(`${BACKEND_URL}/api/v1/questions/`)
-    .then(resp => resp.json())
-    .then(data => {
-      setQuestionList(data)
-    }).catch(error => Alert.alert("error", JSON.stringify(error)))
-  }, []);
-
-  alert(questionList)
+ 
     return(
-    
+      
       <Container>
         <Background colors={['#ffffff', '#e9fafa','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
             <Contents>
@@ -148,6 +154,8 @@ function MyQuestion(props){
                 <Glass><Image source={require('../constants/images/homepage/glasses.png')} resizeMode="contain"/></Glass>
               </TitleView>
 
+
+            
               <ScrollView style={{flex:1, flexDirection:'column', borderWidth:1, borderColor:'#999999'}}>
                   
                   <RowBox>
