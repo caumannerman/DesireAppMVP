@@ -85,7 +85,7 @@ function Reply(props){
     return(
     
       <Container>
-        <Background colors={['#ffffff','#f8ecec','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
+        <Background colors={(isQVisible?['#ffffff','#fff3f3','#edfcff']:['#ffffff','#f8ecec','#ffffff'])} start={{x: 0.1, y: 0.2}} end={{x: 1.2, y: 1.2}} locations={[0,0.15,0.4]} >
             <Contents>
 
 
@@ -96,7 +96,7 @@ function Reply(props){
                 </BackButton>
               </TitleView>
  
-              <View style={{height:isQVisible? HEIGHT*0.67:'37%', width: '100%', backgroundColor:'#ffffff',  borderColor:'#d0d0d0', borderWidth: 2, alignItems:'center', justifyContent:'center'}}>
+              <View style={{height:isQVisible? HEIGHT*0.67:'37%', width: '100%', backgroundColor:((isQVisible?"rgba(255,255,255,0)":"rgba(255,255,255,1)")), borderColor:'#d0d0d0', borderWidth: 2, alignItems:'center', justifyContent:'center'}}>
                  
                   <View style={{width: '80%', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
                     <Text style={{fontWeight: '800', fontSize: 16, color:'#000000'}}>질문의 제목</Text>
