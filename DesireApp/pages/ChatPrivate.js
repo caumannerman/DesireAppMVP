@@ -146,10 +146,10 @@ function Chat(props){
                   <TouchableOpacity  style={{width:'10%', height:50,  alignItems:'center', justifyContent:'center'}}>
                     <Image source={require('../constants/images/addfile.png')} resizeMode='contain'  style={{width:'40%',height:'40%'}}/>
                   </TouchableOpacity>
-                  <TextInput style={{width:'74%', height: 40,  backgroundColor:'#ffffff'}} onChangeText={(text)=>setNowChat(text)}></TextInput>
+                  <TextInput style={{width:'74%', height: 40,  backgroundColor:'#ffffff'}} onChangeText={(text)=>setNowChat(text)} value={nowChat} onSubmitEditing={()=>{setNowChat("")}}></TextInput>
 
                   <TouchableOpacity  style={{width:'10%', height:50, magrinRight:'3%',alignItems:'center', justifyContent:'center'}}
-                           onPress={()=> { if(nowChat!==''){setChatList( chatList.concat({text:nowChat, id:'I'}))}}  }>
+                           onPress={()=> { {if(nowChat!==''){setChatList( chatList.concat({text:nowChat, id:'I'},{text:"잠시 후에 답변 드리겠습니다", id:'U'}))};}}  }>
                   <Image source={require('../constants/images/chatsend.png')} resizeMode='contain' style={{width:'60%',height:'60%'}}/>
                    </TouchableOpacity>
                   
