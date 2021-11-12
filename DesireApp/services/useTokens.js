@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {gcs} from './types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function useTokens() {
   const getTokens = async () => {
@@ -13,9 +13,10 @@ export default function useTokens() {
 
   const [tokens, setTokens] = useState(getTokens());
 
-  const isLoggedIn = (() => {
-    return !!(tokens && tokens.accessToken);
-  })();
+  const isLoggedIn = async () => {
+    const accessToken = await AsyncStorage.getItem('accessToken');
+    return accessToken ? true : false;
+  };
 
   async function saveTokens(tokens) {
     if (tokens) {

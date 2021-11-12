@@ -7,9 +7,13 @@ import QuestionStack from './QuestionStack';
 import MyquestionStack from './MyquestionStack';
 import ChatStack from './ChatStack';
 
+import useTokens from '../services/useTokens';
+
 const Tabs = createBottomTabNavigator();
 
 const Tab = () => {
+  const {isLoggedIn} = useTokens();
+
   const styles = {
     view: {
       alignItems: 'center',
@@ -21,6 +25,12 @@ const Tab = () => {
       height: 48,
     },
   };
+
+  useEffect(() => {
+    (async () => {
+      console.log(await isLoggedIn());
+    })();
+  }, [isLoggedIn]);
 
   return (
     <Tabs.Navigator
@@ -52,7 +62,7 @@ const Tab = () => {
                   fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
-                  marginTop:3,
+                  marginTop: 3,
                 }}>
                 가입하기
               </Text>
@@ -83,7 +93,7 @@ const Tab = () => {
                   fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
-                  marginTop:3,
+                  marginTop: 3,
                 }}>
                 홈
               </Text>
@@ -114,7 +124,7 @@ const Tab = () => {
                   fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
-                  marginTop:3,
+                  marginTop: 3,
                 }}>
                 질문하기
               </Text>
@@ -145,7 +155,7 @@ const Tab = () => {
                   fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
-                  marginTop:3,
+                  marginTop: 3,
                 }}>
                 내가 한 질문
               </Text>
@@ -181,7 +191,7 @@ const Tab = () => {
                   fontSize: 10,
                   textAlign: 'center',
                   fontWeight: 'normal',
-                  marginTop:3,
+                  marginTop: 3,
                 }}>
                 1대1 채팅
               </Text>

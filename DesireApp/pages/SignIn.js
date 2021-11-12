@@ -105,7 +105,7 @@ function Join(props) {
             />
 
             <Button
-              onPress={() => {
+              onPress={async () => {
                 //여기서 DB에 있는 아이디 ,비번이랑 비교
                 const tmplst = [
                   validator.isEmail(email),
@@ -122,7 +122,7 @@ function Join(props) {
                 } else {
                   // 유효하다면 로그인정보 저장하고 홈페이지로 전황
                   // props.navigation.navigate('Homepage');
-                  login({email, password});
+                  await login({email, password});
                 }
               }}>
               <ButtonText>로그인</ButtonText>
