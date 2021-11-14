@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Dimensions, Image, View, Modal} from 'react-native';
@@ -6,7 +6,8 @@ import validator from 'validator';
 import produce from 'immer';
 import SignInCorrect from '../components/SignInCorrect';
 
-import {login} from '../services/AuthService';
+import {login, logout} from '../services/AuthService';
+import useAuth from '../services/useAuth';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -64,11 +65,22 @@ function Join(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const {isLoggedIn} = useAuth();
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const [isModal1Visible, setisModal1Visible] = useState(false);
 
   const changeModal1Visible = bool => {
     setisModal1Visible(bool);
   };
+
+  useEffect(() => {
+    (async () => {
+      const tempLoggedIn = await isLoggedIn();
+      console.info('isLoggedIn: ', tempLoggedIn);
+      setLoggedIn(tempLoggedIn);
+    })();
+  }, []);
 
   return (
     <Container>
@@ -127,6 +139,15 @@ function Join(props) {
               }}>
               <ButtonText>로그인</ButtonText>
             </Button>
+
+            {loggedIn && (
+              <Button
+                onPress={async () => {
+                  await logout();
+                }}>
+                <ButtonText>로그아웃</ButtonText>
+              </Button>
+            )}
           </View>
 
           <View
