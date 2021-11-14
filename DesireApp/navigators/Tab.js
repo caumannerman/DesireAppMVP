@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text, View, Image} from 'react-native';
 import HomeStack from './HomeStack';
@@ -7,12 +7,13 @@ import QuestionStack from './QuestionStack';
 import MyquestionStack from './MyquestionStack';
 import ChatStack from './ChatStack';
 
-import useTokens from '../services/useTokens';
+import useAuth from '../services/useAuth';
 
 const Tabs = createBottomTabNavigator();
 
 const Tab = () => {
-  const {isLoggedIn} = useTokens();
+  const {isLoggedIn} = useAuth();
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const styles = {
     view: {
@@ -28,9 +29,11 @@ const Tab = () => {
 
   useEffect(() => {
     (async () => {
-      console.log(await isLoggedIn());
+      const tempLoggedIn = await isLoggedIn();
+      console.log('isLoggedIn: ', tempLoggedIn);
+      setLoggedIn(tempLoggedIn);
     })();
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <Tabs.Navigator
