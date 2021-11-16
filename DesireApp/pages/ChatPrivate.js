@@ -1,8 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView, TextInput} from 'react-native';
-import produce from 'immer';
+import ChatMessageService from '../services/ChatMessageService';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -80,7 +80,11 @@ const ChatText = styled.Text`
   
 `;
 
-function Chat(props){
+function ChatPrivate(props){
+
+  // 임시로 넣어놓은 내 아이디 
+  const tmpMyId = '8136385e-42af-493f-a938-f7b6fdc97e69'
+
     const [nowChat, setNowChat] = useState('');
     //이건 원래 시작할 때 useEffect로 받아와야함 
     const [chatList, setChatList] = useState([
@@ -90,6 +94,27 @@ function Chat(props){
       { text:"아닙니다",  id:'U', nickname:''},
 
     ]);
+
+
+      //props로 받은 answerId로 가져온 answer정보를 담을 곳
+    const [chatMessages, setChatMessages] = useState([]);
+
+    const fetchChatMessages = async () => {
+      await ChatMessageService.getList({
+        ordering: '-created_on - descending',
+        chatRoomId: props.route.params.chatroomid,
+      
+      }).then(res => {
+        setChatMessages(res.data.results);
+        console.log(res.data.results);
+      });
+    };
+  
+    useEffect(() => {
+      fetchChatMessages();
+    }, []);
+
+  
 
     return(
     
@@ -124,22 +149,24 @@ function Chat(props){
                 <ScrollView style={{  }}>
                   <Text style={{textAlign: 'center', marginTop:30, marginBottom: 30}}>멘토님과 1대1 매칭을 통해 궁금한 것을 물어보세요.</Text>
                   
-                  {chatList.map(item => (
-                    (item.id==='U'?<ChatView>
-                    <ChatText>
-                      {item.text}
-                    </ChatText>
-                    
-                  </ChatView> :
-                  <MyChatView>
-                  <ChatText>
-                    {item.text}
-                  </ChatText>
-                  
-                </MyChatView>)
-                  
+                  {chatMessages.map(item => (
+                    (item.user.id===tmpMyId?
+                      <MyChatView>
+                        <ChatText>
+                          {item.content}
+                        </ChatText>
+                      
+                      </MyChatView> :
 
-                ))}
+
+                      <ChatView>
+                        <ChatText>
+                          {item.content}
+                        </ChatText>
+                      </ChatView>
+                    )
+                  ))}
+
                 </ScrollView>
                  
                 <View style={{width:'100%', height: 50,  backgroundColor:'#ffffff', alignItems:'center', flexDirection:'row'}}>
@@ -163,4 +190,4 @@ function Chat(props){
 }
 
 
-export default Chat;
+export default ChatPrivate;
