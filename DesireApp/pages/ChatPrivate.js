@@ -86,15 +86,7 @@ function ChatPrivate(props){
   const tmpMyId = '8136385e-42af-493f-a938-f7b6fdc97e69'
 
     const [nowChat, setNowChat] = useState('');
-    //이건 원래 시작할 때 useEffect로 받아와야함 
-    const [chatList, setChatList] = useState([
-      { text:"안녕하세요", id:'I', nickname:''},
-      { text:"이런 부분은 제가 도와드릴게요", id:'U', nickname:''},
-      { text:"답변 내용이 많은 도움이 되었습니다.",  id:'I', nickname:''},
-      { text:"아닙니다",  id:'U', nickname:''},
-
-    ]);
-
+   
 
       //props로 받은 answerId로 가져온 answer정보를 담을 곳
     const [chatMessages, setChatMessages] = useState([]);
@@ -112,8 +104,22 @@ function ChatPrivate(props){
   
     useEffect(() => {
       fetchChatMessages();
-    }, []);
-
+    }, );
+    
+    const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+    // 전송버튼 누르면 chat을 서버로 보냄
+   
+    const postChatMessage = async () => {
+  
+      await ChatMessageService.create({
+        userId: TEMP_USER_ID,
+        chatRoomId: props.route.params.chatroomid,
+        content: nowChat,
+        
+      }).then(() => {
+        alert('tjdrhd')
+      });
+    };
   
 
     return(
@@ -132,7 +138,7 @@ function ChatPrivate(props){
                   </View>
                   
                   <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:2}}>가상 사용자</Text>
+                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:2}}>{props.route.params.chatrecipient}</Text>
                     <Text style={{fontSize: 15, fontWeight: '500', color:'#a0a0a0', marginBottom:3}}>2MIN</Text>
                     
                   </View>
@@ -170,15 +176,16 @@ function ChatPrivate(props){
                 </ScrollView>
                  
                 <View style={{width:'100%', height: 50,  backgroundColor:'#ffffff', alignItems:'center', flexDirection:'row'}}>
-                  <TouchableOpacity  style={{width:'10%', height:50,  alignItems:'center', justifyContent:'center'}}>
-                    <Image source={require('../constants/images/addfile.png')} resizeMode='contain'  style={{width:'40%',height:'40%'}}/>
-                  </TouchableOpacity>
-                  <TextInput style={{width:'74%', height: 40,  backgroundColor:'#ffffff'}} onChangeText={(text)=>setNowChat(text)} value={nowChat} onSubmitEditing={()=>{setNowChat("")}}></TextInput>
+                    <TouchableOpacity  style={{width:'10%', height:50,  alignItems:'center', justifyContent:'center'}}>
+                      <Image source={require('../constants/images/addfile.png')} resizeMode='contain'  style={{width:'40%',height:'40%'}}/>
+                    </TouchableOpacity>
 
-                  <TouchableOpacity  style={{width:'10%', height:50, magrinRight:'3%',alignItems:'center', justifyContent:'center'}}
-                           onPress={()=> { {if(nowChat!==''){setChatList( chatList.concat({text:nowChat, id:'I'},{text:"잠시 후에 답변 드리겠습니다", id:'U'}))};}}  }>
-                  <Image source={require('../constants/images/chatsend.png')} resizeMode='contain' style={{width:'60%',height:'60%'}}/>
-                   </TouchableOpacity>
+                    <TextInput style={{width:'74%', height: 40,  backgroundColor:'#ffffff'}} onChangeText={(text)=>setNowChat(text)} value={nowChat} onSubmitEditing={()=>{setNowChat("")}}></TextInput>
+
+                    <TouchableOpacity  style={{width:'10%', height:50, magrinRight:'3%',alignItems:'center', justifyContent:'center'}}
+                           onPress={()=> {if(nowChat !== ""){ postChatMessage();setNowChat("")} } }>
+                      <Image source={require('../constants/images/chatsend.png')} resizeMode='contain' style={{width:'60%',height:'60%'}}/>
+                    </TouchableOpacity>
                   
                 </View>
 

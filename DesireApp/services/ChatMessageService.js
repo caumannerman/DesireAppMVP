@@ -3,7 +3,7 @@ import axios from 'axios';
 import {API_V1_URL} from '../constants/constants';
 
 class ChatMessageService {
-  PAGINATION_LIMIT = 10;
+  PAGINATION_LIMIT = 30;
 
   async create({
     userId,

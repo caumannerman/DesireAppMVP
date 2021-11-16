@@ -68,7 +68,7 @@ function Chat(props){
                   <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#f5f5f5', width:'100%',  height:HEIGHT*0.1114,flexDirection:'row', alignItems:'center'}}
                     onPress={()=>{
                       const chatroomid = chatroom.id;
-                      props.navigation.navigate("ChatPrivate", {chatroomid:chatroomid})}}>
+                      props.navigation.navigate("ChatPrivate", {chatroomid:chatroomid, chatrecipient:chatroom.recipient.nickname})}}>
                   
                     <View style={{height: WIDTH*0.1333, width: WIDTH*0.1333, borderRadius: 50,left:WIDTH*0.1138}}>
                       <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
