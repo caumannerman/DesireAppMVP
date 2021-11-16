@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Text, View, TouchableOpacity, ScrollView, Image, Modal} from 'react-native'
 import Satisfaction from '../components/Satisfaction';
-
+import AnswerService from '../services/AnswerService';
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
@@ -72,6 +72,26 @@ function ReplyDetail(props){
   const setData = (data) => {
     setchooseData(data);
   }
+
+  //props로 받은 answerId로 가져온 answer정보를 담을 곳
+  const [nowAnswer, setNowAnswer] = useState({});
+
+  const fetchAnswer = async () => {
+    await AnswerService.getOne({
+      id: props.route.params.answerId,
+    }).then(res => {
+      setNowAnswer(res.data);
+      console.log(res.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchAnswer();
+
+  }, []);
+
+  
+
     return(
     
       <Container>
@@ -92,7 +112,7 @@ function ReplyDetail(props){
                   </View>
                   
                   <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}}>가상 사용자</Text>
+                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}}>{nowAnswer && nowAnswer.user &&  nowAnswer.user.email}</Text>
                     <Text style={{fontSize: 12, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
                     
                   </View>
@@ -107,9 +127,7 @@ function ReplyDetail(props){
                 <View style={{flexDirection:'column', width:'100%', height:'40%', alignItems:'center', justifyContent:'center'}}>
 
                   <ScrollView style={{width:'80%', marginTop:'10%'}}>
-                    <Text style={{color:'#000000'}}>저는 그리고 모르는게 있으면 예시로 몇 개 만들어서 보내드린 것 중에 설명해주신거랑 맞는게 무엇인지 꼼꼼하게 물어보는게 최선일 듯 합니다.
-                      캡쳐이미지 넣고 세부 스펙이나 더 궁금한거 피그마 링크도 가티 첨부해 주시는 것도 좋을 것 같네요.
-                    </Text>
+                    <Text style={{color:'#000000'}}>{nowAnswer.content}</Text>
                   </ScrollView>
 
                 </View>
