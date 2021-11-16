@@ -15,6 +15,7 @@ import Tab from './navigators/Tab';
 
 const App = () => {
   console.disableYellowBox = true; 
+  
   useEffect(()=>{
     setTimeout(() => {
       SplashScreen.hide();

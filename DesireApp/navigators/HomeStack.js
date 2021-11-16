@@ -17,8 +17,10 @@ const HStack = createNativeStackNavigator();
 const HomeStack = () => {
   return (
     <HStack.Navigator screenOptions={{headerShown: false}}>
+      
       <HStack.Screen name="SignIn" component={SignIn} />
       <HStack.Screen name="Homepage" component={Homepage} />
+      
       <HStack.Screen name="Questions" component={Questions} />
       <HStack.Screen name="Reply" component={Reply} />
       <HStack.Screen name="ChatPrivate" component={ChatPrivate} />

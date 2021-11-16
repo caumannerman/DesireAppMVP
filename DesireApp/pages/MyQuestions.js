@@ -14,6 +14,7 @@ import {BACKEND_URL} from '../constants/constants';
 import {ActivityIndicator} from 'react-native';
 import QuestionService from '../services/QuestionService';
 
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -131,7 +132,7 @@ function MyQuestion(props) {
       offset: 0,
       limit: 1000,
       ordering: '-created_on',
-      userId: '',
+      userId: '8136385e-42af-493f-a938-f7b6fdc97e69',
     }).then(res => {
       setQuestionList(res.data.results);
       console.log(res.data.results);
@@ -141,6 +142,8 @@ function MyQuestion(props) {
   useEffect(() => {
     fetchQuestionList();
   }, []);
+
+ 
 
   return (
     <Container>
@@ -166,32 +169,40 @@ function MyQuestion(props) {
               flexDirection: 'column',
               borderWidth: 1,
               borderColor: '#999999',
-            }}>
+            }}
+            numColumns={2}>
             {questionList.map(question => (
               <RowBox>
                 <Part
                   onPress={() => {
-                    props.navigation.navigate('Reply');
+                    const question_id = question.id;
+                    props.navigation.navigate('Reply', {questionId:question_id});
                   }}>
-                  <PartDate>21.07.23</PartDate>
+                   
+                  <PartDate>{question.created_on.substring(2,4)}.{question.created_on.substring(5,7)}.{question.created_on.substring(8,10)}</PartDate>
                   <PartTitle numberOfLines={2} ellipsizeMode="tail">
                     {question.title}
                   </PartTitle>
-                  <PartReply>답장 3개</PartReply>
+                  <PartReply>답장 {question.answer_count}개</PartReply>
                 </Part>
-                <Part>
-                  <PartDate>21.07.23</PartDate>
+                <Part
+                  onPress={() => {
+                    props.navigation.navigate('Reply', {questionId:question.id});
+                  }}>
+                  <PartDate>{question.created_on.substring(2,4)}.{question.created_on.substring(5,7)}.{question.created_on.substring(8,10)}</PartDate>
                   <PartTitle numberOfLines={2} ellipsizeMode="tail">
                     {question.title}
                   </PartTitle>
-                  <PartReply>답장 3개</PartReply>
+                  <PartReply>답장 {question.answer_count}개</PartReply>
                 </Part>
               </RowBox>
             ))}
           </ScrollView>
+
         </Contents>
       </Background>
     </Container>
+  
   );
 }
 
