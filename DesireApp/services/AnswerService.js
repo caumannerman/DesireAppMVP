@@ -34,7 +34,7 @@ class AnswerService {
       limit,
       ordering,
       user__id: userId,
-      questionId,
+      question__id:questionId,
     };
 
     return await axios
