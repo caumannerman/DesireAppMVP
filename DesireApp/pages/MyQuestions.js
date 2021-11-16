@@ -187,7 +187,8 @@ function MyQuestion(props) {
                 </Part>
                 <Part
                   onPress={() => {
-                    props.navigation.navigate('Reply', {questionId:question.id});
+                    const question_id = question.id;
+                    props.navigation.navigate('Reply', {questionId:question_id});
                   }}>
                   <PartDate>{question.created_on.substring(2,4)}.{question.created_on.substring(5,7)}.{question.created_on.substring(8,10)}</PartDate>
                   <PartTitle numberOfLines={2} ellipsizeMode="tail">
