@@ -40,6 +40,9 @@ const TitleView = styled.View`
   width: 85%;
 
   margin-bottom: 5px;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
 `;
 
 const Title = styled.Text`
@@ -47,6 +50,7 @@ const Title = styled.Text`
   font-weight: 800;
   color: #000000;
   font-style: normal;
+  margin-bottom: 10;
 `;
 
 const File = styled.View`
@@ -72,6 +76,14 @@ const FileText = styled.Text`
   font-weight: 300;
   font-style: normal;
 `;
+
+const BackButton = styled.TouchableOpacity`
+  width: 50px;
+  height: 100%;
+  justify-content: center;
+  margin-bottom: 10;
+`;
+
 
 function Question(props) {
   const [isModalVisible, setisModalVisible] = useState(false);
@@ -121,6 +133,9 @@ function Question(props) {
         <Contents>
           <TitleView>
             <Title>질문하기</Title>
+            <BackButton onPress={()=>{props.navigation.navigate("Homepage")}}>
+                  <Text style={{color: '#000000', fontSize: 15, fontWeight: '800', textAlign: 'center', marginRight:10}}>이전</Text>
+                </BackButton>
           </TitleView>
 
           <View style={{width: '100%', height: 40, flexDirection: 'row'}}>
