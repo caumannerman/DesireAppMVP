@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Text, View, TouchableOpacity, ScrollView, Image, Platform,Dimensions} from 'react-native'
+import QuestionService from '../services/QuestionService';
+import AnswerService from '../services/AnswerService';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -51,10 +53,12 @@ const ReplyButton = styled.TouchableOpacity`
   background:#ffffff;
   width:85%;
   margin-left:7.5%;
-  margin-top:20px;
+  margin-top: 10px;
+  margin-bottom:12px;
   height: 91px;
   flex-direction: row;
   align-items: center;
+  
 
   ${Platform.select({
     ios:{
@@ -67,7 +71,7 @@ const ReplyButton = styled.TouchableOpacity`
       }
     },
     android:{
-      elevation: 15
+      elevation: 7
     }
   })};
 `;
@@ -81,6 +85,41 @@ function Reply(props){
   const changeQVisible = (bool) => {
     setQVisible(bool);
   }
+
+//props로 받은 QuestionID로 가져온 question정보를 담을 곳
+  const [nowQuestion, setNowQuestion] = useState({});
+  //해당 질문에 달린 Answer들을 저장할 곳
+  const [nowQuestionAnswer, setNowQuestionAnswer] = useState([]);
+
+  const fetchQuestion = async () => {
+    await QuestionService.getOne({
+      id: props.route.params.questionId,
+    }).then(res => {
+      setNowQuestion(res.data);
+      console.log(res.data);
+    });
+  };
+
+  const fetchAnswer = async() =>{
+    await AnswerService.getList({
+      offset: 0,
+      limit: 1000,
+      ordering: '-created_on',
+      userId:'',
+      questionId: props.route.params.questionId,
+    }).then(res => {
+      setNowQuestionAnswer(res.data.results);
+      console.log(res.data.results);
+      console.log("가져오기 성공");
+    });
+  }
+
+  useEffect(() => {
+    fetchAnswer();
+    fetchQuestion();
+  }, []);
+
+  
 
     return(
     
@@ -99,12 +138,12 @@ function Reply(props){
               <View style={{height:isQVisible? HEIGHT*0.67:'37%', width: '100%', backgroundColor:((isQVisible?"rgba(255,255,255,0)":"rgba(255,255,255,1)")), borderColor:'#d0d0d0', borderWidth: 2, alignItems:'center', justifyContent:'center'}}>
                  
                   <View style={{width: '80%', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
-                    <Text style={{fontWeight: '800', fontSize: 16, color:'#000000'}}>질문의 제목</Text>
-                    <Text style={{fontWeight: 'bold', fontSize: 12, color:'#000000'}}>21.07.23</Text>
+                    <Text style={{fontWeight: '800', fontSize: 16, color:'#000000'}} >{nowQuestion.title}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 12, color:'#000000'}}>{nowQuestion.created_on}</Text>
                   </View>
 
                   <View style={{ width:'77%', height: '45%'}}>
-                    <Text style={{fontWeight: '300', fontSize: 12, color:'#000000'}} numberOfLines={isQVisible?20:4} ellipsizeMode="tail">로렘 입숨(LOREM IPSUM; 줄여서 립숨,LIPSUM)은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트로, 최종 결과물에 들어가는 실제적 로렘 입숨(LOREM IPSUM; 줄여서 립숨,LIPSUM)은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피, 레이아웃 같은 그래픽 요소나 시각적 연출을 보여줄 때 </Text>
+                    <Text style={{fontWeight: '300', fontSize: 12, color:'#000000'}} numberOfLines={isQVisible?20:4} ellipsizeMode="tail">{nowQuestion.question_text}</Text>
                   </View>
 
 
@@ -120,72 +159,29 @@ function Reply(props){
 
               <ScrollView style={{ borderWidth: 1,borderColor: '#d0d0d0', width:'100%', height:'100%', marginTop: 7}}>
                 
+
+                {nowQuestionAnswer.map(answer => (
+                   
+                  <ReplyButton   onPress={()=>{const answer_id = answer.id;
+                                props.navigation.navigate("ReplyDetail", {answerId:answer_id})}}>
+                    
+                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    </View>
+                    
+                    <View style={{flexDirection: 'column',width:'67%' }}>
+                      <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>{answer.user.nickname}</Text>
+                      <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
+                      <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">{answer.content}</Text>
+                    </View>
+                  </ReplyButton>
+              
+                ))}
+
+               
                 
-                <ReplyButton   onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
-                  
-                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
-                  </View>
-                  
-                  <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
-                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
-                  </View>
-                </ReplyButton>
 
-                <ReplyButton onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
-                  
-                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
-                  </View>
-                  
-                  <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
-                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
-                  </View>
-                </ReplyButton>
-
-                <ReplyButton onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
-                  
-                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
-                  </View>
-                  
-                  <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
-                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
-                  </View>
-                </ReplyButton>
-
-                <ReplyButton  onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
-                  
-                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
-                  </View>
-                  
-                  <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
-                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
-                  </View>
-                </ReplyButton>
-
-                <ReplyButton onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
-                  
-                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
-                  </View>
-                  
-                  <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>가상 사용자</Text>
-                    <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
-                    <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">저도 아웃소싱으로 작업을 해봤습니다. 두 번 정도</Text>
-                  </View>
-                </ReplyButton>
-
+                
 
 
               </ScrollView>
