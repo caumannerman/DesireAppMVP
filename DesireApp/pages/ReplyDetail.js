@@ -121,7 +121,7 @@ function ReplyDetail(props){
       recipientId:props.route.params.answerRecipient,
     }).then(res => {
        setChatRoomNum(res.data.count);
-       alert(res.data.count);
+   
       console.log(res.data.count);
     });
   };

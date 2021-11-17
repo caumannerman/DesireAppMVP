@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Dimensions,  ScrollView,View, Text, TouchableOpacity} from 'react-native';
+import QuestionService from '../services/QuestionService';
+import ChatRoomService from '../services/ChatRoomService';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -91,6 +93,47 @@ const Image = styled.Image`
 `;
 
 function Homepage(props){
+  
+  const TEMP_USER_ID = "8136385e-42af-493f-a938-f7b6fdc97e69";
+  const TEMP_USER_NICKNAME = "새싹디자이너";
+
+  const [questionList, setQuestionList] = useState([]);
+  const fetchQuestionList = async () => {
+    await QuestionService.getList({
+      offset: 0,
+      limit: 1000,
+      ordering: '-created_on',
+      userId: TEMP_USER_ID,
+    }).then(res => {
+      setQuestionList(res.data.results);
+      console.log(res.data.results);
+    });
+  };
+
+  //props로 받은 answerId로 가져온 answer정보를 담을 곳--내가 sender인 채팅방만 가져오면 됨 
+  const [chatRoomList, setChatRoomList] = useState([]);
+  const fetchCRList = async () => {
+    await ChatRoomService.getList({
+      ordering: '-created_on',
+      senderId: TEMP_USER_ID,
+    
+    }).then(res => {
+      setChatRoomList(res.data.results);
+      console.log(res.data.results);
+    });
+  };
+
+  useEffect(() => {
+    fetchQuestionList();
+    fetchCRList();
+  }, []);
+
+
+
+
+
+
+
     return(
     
       <Container>
@@ -103,13 +146,13 @@ function Homepage(props){
                 <TouchableOpacity style={{height:'100%', width:40}} onPress={()=>{ props.navigation.navigate("MentorBoard")}}><Image resizeMode="contain" style={{flex:1}} source={require('../constants/images/homepage/notifications_24px.png')}/></TouchableOpacity>
               </View>
 
-              <Text style={{position:'absolute', top:HEIGHT*0.1014, left:WIDTH*0.1111,color:'#929292', fontSize:14,fontWeight:'500'}}>닉네임님, 환영합니다.</Text>
+              <Text style={{position:'absolute', top:HEIGHT*0.1014, left:WIDTH*0.1111,color:'#929292', fontSize:14,fontWeight:'500'}}>  {TEMP_USER_NICKNAME}님, 환영합니다.</Text>
               <View style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.1457,width:WIDTH*0.7778, height: WIDTH*0.5444, flexDirection:'column',borderRadius:16,borderWidth:1, borderColor:'#ebebeb', backgroundColor:'#ffffff'}}>
                   <Text style={{position:'absolute', top:'11%', left:'7.14%',fontSize:16,fontWeight:'bold',color:'#2c2c2c'}}>디자인 일을 하며 생긴 어려움</Text>
                   <Text style={{position:'absolute', top:'25.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>일을하며 생긴 어려움 바로 멘토님에게! </Text>
                   <Text style={{position:'absolute', top:'35.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>마음 편하게 언제 어디든 질문하세요.</Text>
 
-                  <TouchableOpacity style={{position:'absolute', top:'51.6%', left:'7.14%',backgroundColor:'#952bff', borderRadius:4,justifyContent:'center',width:WIDTH*0.2987,height:WIDTH*0.1049}} onPress={()=>{props.navigation.navigate("Questions")}}>
+                  <TouchableOpacity style={{position:'absolute', top:'51.6%', left:'7.14%',backgroundColor:'#952bff', borderRadius:4,justifyContent:'center',width:WIDTH*0.2987,height:WIDTH*0.1049}} onPress={()=>{props.navigation.navigate("QuestionStack")}}>
                       <BText>질문하기</BText>
                   </TouchableOpacity>
 
@@ -126,12 +169,12 @@ function Homepage(props){
 
  
                 <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.4943, height:WIDTH*0.3639}} > 
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭤보겠</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭤보겠</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭤보겠</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭙겠습니다</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭙겠습니다</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("Reply")}}><PartTitle numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여여쭙겠습니다</PartTitle><PartReply>답장 3개</PartReply><PartDate>21.10.23</PartDate></Part>
+                {questionList.map(question => (
+                  <Part onPress={() => {
+                    const question_id = question.id;
+                    props.navigation.navigate('Reply', {questionId:question_id});
+                  }}><PartTitle numberOfLines={2} ellipsizeMode="tail">{question.title}</PartTitle><PartReply>답장 {question.answer_count}개</PartReply><PartDate>{question.created_on.substring(2,4)}.{question.created_on.substring(5,7)}.{question.created_on.substring(8,10)}</PartDate></Part>
+                ))}
                 </ScrollView>
              
 
@@ -143,12 +186,19 @@ function Homepage(props){
                 </TouchableOpacity>
 
                 <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.7643, height:HEIGHT*0.2}} > 
-                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하여 질문하겠습니다</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
-                  <Part onPress={()=>{props.navigation.navigate("ChatPrivate")}}><Image source={require('../constants/images/homepage/human.png')} ></Image><PartText numberOfLines={2} ellipsizeMode="tail">어도비 XD 사용 방법과 관련하..</PartText><PartChat>채팅 중</PartChat><PartDate>21.10.23</PartDate></Part>
-                </ScrollView>
+                  {chatRoomList.map(chatroom => (
+                  <Part  onPress={()=>{
+                    const chatroomid = chatroom.id;
+                    props.navigation.navigate("ChatPrivate", {chatroomid:chatroomid, chatrecipient:chatroom.recipient.nickname})}}>
+                      <Image source={require('../constants/images/homepage/human.png')} ></Image>
+                      <PartText numberOfLines={2} ellipsizeMode="tail">{chatroom&&chatroom.latest_chat_message&&chatroom.latest_chat_message.content}</PartText>
+                      <PartChat>채팅 중</PartChat>
+                      <PartDate>{chatroom.created_on&&chatroom.created_on.slice(2,4)}.{chatroom.created_on&&chatroom.created_on.slice(5,7)}.{chatroom.created_on&&chatroom.created_on.slice(8,10)}</PartDate>
+                  </Part>
+                  
+                
+                  ))}
+                 </ScrollView>
           
 
 
