@@ -5,6 +5,7 @@ import {Text, View, TouchableOpacity, ScrollView, Image, Modal} from 'react-nati
 import Satisfaction from '../components/Satisfaction';
 import AnswerService from '../services/AnswerService';
 import AnswerEvaluationService from '../services/AnswerEvaluationService';
+import ChatRoomService from '../services/ChatRoomService';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -75,6 +76,7 @@ function ReplyDetail(props){
   const [nowAnswer, setNowAnswer] = useState({});
   //해당 답변에 평가가 달렸는지 여부
   const [nowAnswerSatisfaction, setNowAnswerSatisfaction] = useState(0);
+  const [chatRoomNum, setChatRoomNum] = useState(0);
 
   const changeModalVisible = (bool) => {
     setisModalVisible(bool);
@@ -112,16 +114,40 @@ function ReplyDetail(props){
     });
   };
 
+  const checkChatRoom = async () => {
+    
+    await ChatRoomService.getList({
+      senderId: TEMP_USER_ID,
+      recipientId:props.route.params.answerRecipient,
+    }).then(res => {
+       setChatRoomNum(res.data.count);
+       alert(res.data.count);
+      console.log(res.data.count);
+    });
+  };
+
+  const onSubmit = async () => {
+
+    await ChatRoomService.create({
+      senderId: TEMP_USER_ID,
+      recipientId: props.route.params.answerRecipient,
+     
+    }).then(() => {
+      alert("채팅을 요청하였습니다.");
+      setChatRoomNum(1);
+      
+    });
+    
+  };
+
+  
+
+
   useEffect(() => {
     fetchAnswer();
-    fetchAnswerSatisfactionList();
+    fetchAnswerSatisfactionList()
+    checkChatRoom();
   }, [nowAnswerSatisfaction]);
-
-
-
-  
-
-  
 
     return(
     
@@ -150,7 +176,7 @@ function ReplyDetail(props){
                   </View>
 
                   <TouchableOpacity style={{ position:'absolute', left:'70%', top:'30%',width:'25%', height:'40%', borderRadius:7, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}
-                         onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
+                         onPress={()=>{ if(chatRoomNum === 0){onSubmit()}else{alert("이미 해당사용자와 채팅방이 있습니다.")}}}>
                     <Text style={{color: '#ffffff', fontSize: 14, fontWeight:'600'}}>채팅요청</Text>
                   </TouchableOpacity>
 
