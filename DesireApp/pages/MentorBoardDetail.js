@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Text, View, TouchableOpacity, Dimensions,ScrollView, Image, Modal} from 'react-native'
+import QuestionService from '../services/QuestionService';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -57,24 +58,27 @@ const BackText = styled.Text`
 
 `;
 
-
-
-
-
 function MentorBoardDetail(props){
+  
+  //props로 받은 QuestionID로 가져온 question정보를 담을 곳
+  const [nowQuestion, setNowQuestion] = useState({});
 
-  const [isModalVisible, setisModalVisible] = useState(false);
-  const [chooseData, setchooseData] = useState();
+  const fetchQuestion = async () => {
+    await QuestionService.getOne({
+      id: props.route.params.questionid,
+    }).then(res => {
+      setNowQuestion(res.data);
+      console.log(res.data);
+    });
+  };
 
-  const changeModalVisible = (bool) => {
-    setisModalVisible(bool);
-  }
 
-  const setData = (data) => {
-    setchooseData(data);
-  }
+  useEffect(() => {
+    fetchQuestion();
+ },[]);
+  
     return(
-    
+      
       <Container>
         <Background colors={['#ffffff', '#e9fafa','#ffffff']} start={{x: 0.3, y: 0.3}} end={{x: 1.2, y: 1.2}} locations={[0,0.3,0.7]} >
             <Contents>
@@ -89,16 +93,13 @@ function MentorBoardDetail(props){
                 <View style={{borderWidth:1, borderColor:'#d0d0d0',flexDirection:'column', width:'100%', height:'45%', alignItems:'center', justifyContent:'center', alignContent:'center',}}>
                   
                   <View style={{flexDirection:'row', width:'80%', marginTop:'6%',justifyContent:'space-between', alignItems:'center'}}>
-                    <Text style={{fontWeight:'600', fontSize:17, color:'#000000'}}>질문의 제목</Text>
-                    <Text style={{fontWeight:'bold', fontSize:12, color:'#727272'}}>21.07.23</Text>
+                    <Text style={{fontWeight:'600', fontSize:17, color:'#000000'}}>{nowQuestion.title}</Text>
+                    <Text style={{fontWeight:'bold', fontSize:12, color:'#727272'}}>{nowQuestion&&nowQuestion.created_on&&nowQuestion.created_on.slice(2,10)}</Text>
                   </View>
 
                   <ScrollView style={{width:'80%', marginTop:'10%'}}>
                     <Text style={{color:'#000000', fontWeight:'300',lineHeight:20}}>
-                      로렘 입숨(LOREM IPSUM; 줄여서 립숨, LIPSUM)은 출판이나 그래픽 디자인 분야에서 폰트, 타이포그래피,레이아웃 같은 그래픽 요소나
-                      시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트로, 최종 결과물에 들어가는 실제적인 문장 내용이 채워지기 전에 시각 디자인프로젝트
-                      모형의 채움 글로도 이용된다. 이런 용도로 사용할 때 로렘 입을 그리킹(GREEKING)이라고도 부르며, 때로 로렘 입숨은 공간만 차지하는 
-                      무언가를 지칭하는 용어로도 사용된다.
+                    {nowQuestion.question_text}
                     </Text>
                   </ScrollView>
 
