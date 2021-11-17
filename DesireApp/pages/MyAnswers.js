@@ -79,36 +79,25 @@ const ReplyButton = styled.TouchableOpacity`
 
 
 function MyAnswers(props){
-
-  const [isQVisible, setQVisible] = useState(false);
+  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
 
   const changeQVisible = (bool) => {
     setQVisible(bool);
   }
 
-//props로 받은 QuestionID로 가져온 question정보를 담을 곳
-  const [nowQuestion, setNowQuestion] = useState({});
-  //해당 질문에 달린 Answer들을 저장할 곳
-  const [nowQuestionAnswer, setNowQuestionAnswer] = useState([]);
+  //User id가 한 Answer들을 저장할 곳
+  const [nowIdMyAnswer, setNowIdMyAnswer] = useState([]);
 
-  const fetchQuestion = async () => {
-    await QuestionService.getOne({
-      id: props.route.params.questionId,
-    }).then(res => {
-      setNowQuestion(res.data);
-      console.log(res.data);
-    });
-  };
+
 
   const fetchAnswer = async() =>{
     await AnswerService.getList({
       offset: 0,
       limit: 1000,
       ordering: '-created_on',
-      userId:'',
-      questionId: props.route.params.questionId,
+      userId:TEMP_USER_ID,
     }).then(res => {
-      setNowQuestionAnswer(res.data.results);
+      setNowIdMyAnswer(res.data.results);
       console.log(res.data.results);
       console.log("가져오기 성공");
     });
@@ -116,7 +105,6 @@ function MyAnswers(props){
 
   useEffect(() => {
     fetchAnswer();
-    fetchQuestion();
   }, []);
 
   
@@ -124,54 +112,33 @@ function MyAnswers(props){
     return(
     
       <Container>
-        <Background colors={(isQVisible?['#ffffff','#fff3f3','#edfcff']:['#ffffff','#f8ecec','#ffffff'])} start={{x: 0.1, y: 0.2}} end={{x: 1.2, y: 1.2}} locations={[0,0.15,0.4]} >
+        <Background colors={['#ffffff','#f8ecec','#ffffff']} start={{x: 0.1, y: 0.2}} end={{x: 1.2, y: 1.2}} locations={[0,0.15,0.4]} >
             <Contents>
 
 
               <TitleView>
-                <Title>받은답장</Title>
+                <Title>내가 한 답변</Title>
                 <BackButton onPress={()=>{props.navigation.goBack()}}>
                   <Text style={{color: '#000000', fontSize: 15, fontWeight: '800', textAlign: 'center'}}>이전</Text>
                 </BackButton>
               </TitleView>
  
-              <View style={{height:isQVisible? HEIGHT*0.67:'37%', width: '100%', backgroundColor:((isQVisible?"rgba(255,255,255,0)":"rgba(255,255,255,1)")), borderColor:'#d0d0d0', borderWidth: 2, alignItems:'center', justifyContent:'center'}}>
-                 
-                  <View style={{width: '80%', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
-                    <Text style={{fontWeight: '800', fontSize: 16, color:'#000000'}} >{nowQuestion.title}</Text>
-                    <Text style={{fontWeight: 'bold', fontSize: 12, color:'#000000'}}>{nowQuestion.created_on}</Text>
-                  </View>
-
-                  <View style={{ width:'77%', height: '45%'}}>
-                    <Text style={{fontWeight: '300', fontSize: 12, color:'#000000'}} numberOfLines={isQVisible?20:4} ellipsizeMode="tail">{nowQuestion.question_text}</Text>
-                  </View>
-
-
-                  <TouchableOpacity  onPress={()=>changeQVisible(!isQVisible)}>
-                    <Text style={{color: '#000000'}}>{isQVisible?'줄이기':'내가 한 질문 더보기 +'}</Text>
-                  </TouchableOpacity>
-
-              </View>
-
-
-
-              <Text style={{ fontSize: 20, fontWeight:'500', textAlign:'center', marginTop: '5%', color:'#000000'}}>받은 답장 리스트</Text>
+              <Text style={{ fontSize: 20, fontWeight:'500', textAlign:'center', marginTop: '5%', color:'#000000'}}>답변 리스트</Text>
 
               <ScrollView style={{ borderWidth: 1,borderColor: '#d0d0d0', width:'100%', height:'100%', marginTop: 7}}>
                 
 
-                {nowQuestionAnswer.map(answer => (
+                {nowIdMyAnswer.map(answer => (
                    
                   <ReplyButton   onPress={()=>{const answer_id = answer.id;
-                                              const answer_recipient_id = answer.user.id;
-                                props.navigation.navigate("ReplyDetail", {answerId:answer_id, answerRecipient:answer_recipient_id})}}>
+                                props.navigation.navigate("MyAnswerDetail", {answerId:answer_id})}}>
                     
                     <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
                       <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
                     </View>
                     
                     <View style={{flexDirection: 'column',width:'67%' }}>
-                      <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>{answer.user.nickname}</Text>
+                      <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>질문자닉네임</Text>
                       <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
                       <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">{answer.content}</Text>
                     </View>
