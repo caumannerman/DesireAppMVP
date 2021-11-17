@@ -11,7 +11,7 @@ const QBoardStack = () => {
     <QBStack.Navigator screenOptions={{headerShown: false}}>
       <QBStack.Screen name="MentorBoard" component={MentorBoard} />
       <QBStack.Screen name="MentorBoardDetail" component={MentorBoardDetail} />
-      <QBStack.Screen name="MentorReply " component={MentorReply } />
+      <QBStack.Screen name="MentorReply" component={MentorReply } />
     </QBStack.Navigator>
   );
 };

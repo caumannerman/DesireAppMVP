@@ -58,7 +58,7 @@ function MentorBoard(props){
             <Contents>
 
               <View style={{position:'absolute', left:'7%', top:HEIGHT*0.044, width:'50%'}}>
-                <Text style={{fontSize:20, fontWeight:'600', color:'#000000'}}>답변 게시판</Text>
+                <Text style={{fontSize:20, fontWeight:'600', color:'#000000'}}>질문 게시판</Text>
               </View>
               
               <View style={{position:'absolute', top:HEIGHT*0.1068,width:'100%', height:HEIGHT*0.095, alignItems:'center',justifyContent:'center', flexDirection:'row',borderWidth:0.2, borderColor:'#838383'}}>
@@ -105,18 +105,18 @@ function MentorBoard(props){
                 {questionList.map(question => (
                   <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:WIDTH*0.9135, height:HEIGHT*0.16,
                             left:WIDTH*0.0432, flexDirection:'column', borderRadius:12, marginTop:15, justifyContent:'center'}}
-                                    onPress={()=>{props.navigation.navigate("MentorBoardDetail")}}>
+                                    onPress={()=>{props.navigation.navigate("MentorBoardDetail", {questionid:question.id})}}>
                     
                     <View style={{ width:WIDTH*0.85,height:HEIGHT*0.035, left:WIDTH*0.03, marginBottom: HEIGHT*0.01, flexDirection:'row', alignItems:'center'}}>
                       <ScrollView horizontal={true} style={{ flexDirection:'row'}}>
                         <View style={{ height:HEIGHT*0.035,  marginRight:4, borderRadius:14, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:10.5, color:'#ffffff', fontWeight:'bold', marginHorizontal:5}}>BIBX</Text></View>
                         <View style={{ height:HEIGHT*0.035,  marginRight:4, borderRadius:14, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:10.5, color:'#ffffff', fontWeight:'bold', marginHorizontal:5}}>직장생활 대처</Text></View>
                       </ScrollView>
-                      <Text style={{fontSize:10, fontWeight:'300',color:'#000000'}}>3시간 전</Text>
+                      <Text style={{fontSize:10, fontWeight:'300',color:'#000000'}}>{question&&question.updated_on&&question.updated_on.slice(2,10)}</Text>
                     </View>
 
                     <View style={{ left:WIDTH*0.03, width:WIDTH*0.7166, marginBottom: HEIGHT*0.007}}><Text style={{fontSize:14,fontWeight:'bold',color:'#000000'}}>{question.title}</Text></View>
-                    <View style={{ left:WIDTH*0.03, width:WIDTH*0.65}}><Text style={{fontSize:12,fontWeight:'300',color:'#000000'}}>혹시 회사에서 아웃소싱으로 개발자와 협력해보신 디자이너 분 계신가요? 코딩을 잘 모르는 상태에서...</Text></View>
+                    <View style={{ left:WIDTH*0.03, width:WIDTH*0.65}}><Text style={{fontSize:12,fontWeight:'300',color:'#000000'}}>{question.question_text}</Text></View>
 
                   </TouchableOpacity>
                 ))}
