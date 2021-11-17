@@ -109,9 +109,10 @@ function MentorBoard(props){
                     
                     <View style={{ width:WIDTH*0.85,height:HEIGHT*0.035, left:WIDTH*0.03, marginBottom: HEIGHT*0.01, flexDirection:'row', alignItems:'center'}}>
                       <ScrollView horizontal={true} style={{ flexDirection:'row'}}>
-                        <View style={{ height:HEIGHT*0.035,  marginRight:4, borderRadius:14, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:10.5, color:'#ffffff', fontWeight:'bold', marginHorizontal:5}}>BIBX</Text></View>
-                        <View style={{ height:HEIGHT*0.035,  marginRight:4, borderRadius:14, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:10.5, color:'#ffffff', fontWeight:'bold', marginHorizontal:5}}>직장생활 대처</Text></View>
-                      </ScrollView>
+                      {question.categories.map(qcategory => (
+                        <View style={{ height:HEIGHT*0.035,  marginRight:4, borderRadius:14, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}><Text style={{fontSize:10.5, color:'#ffffff', fontWeight:'bold', marginHorizontal:5}}>{qcategory}</Text></View>
+                      ))}
+                        </ScrollView>
                       <Text style={{fontSize:10, fontWeight:'300',color:'#000000'}}>{question&&question.updated_on&&question.updated_on.slice(2,10)}</Text>
                     </View>
 
