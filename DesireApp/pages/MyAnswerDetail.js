@@ -68,31 +68,8 @@ function MyAnswerDetail(props){
 
   const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
 
-
-  const [isModalVisible, setisModalVisible] = useState(false);
-  const [chooseData, setChooseData] = useState('');
-  const [chooseButton, setChooseButton] = useState('');
   //props로 받은 answerId로 가져온 answer정보를 담을 곳
   const [nowAnswer, setNowAnswer] = useState({});
-  //해당 답변에 평가가 달렸는지 여부
-  const [nowAnswerSatisfaction, setNowAnswerSatisfaction] = useState(0);
-  const [chatRoomNum, setChatRoomNum] = useState(0);
-
-  const changeModalVisible = (bool) => {
-    setisModalVisible(bool);
-  }
-
-  const setData = (data) => {
-    setChooseData(data);
-  }
-
-  const setCButton = (data) =>{
-    setChooseButton(data);
-  }
-  const setNAS = (data) => {
-    setNowAnswerSatisfaction(data);
-  }
-  
 
   const fetchAnswer = async () => {
     await AnswerService.getOne({
@@ -103,51 +80,12 @@ function MyAnswerDetail(props){
     });
   };
 
-  const fetchAnswerSatisfactionList = async () => {
-    await AnswerEvaluationService.getList({
-      userId: TEMP_USER_ID,
-      answerId:props.route.params.answerId
-    }).then(res => {
-      setNAS(res.data.count);
-     
-      console.log(res.data.count);
-    });
-  };
 
-  const checkChatRoom = async () => {
-    
-    await ChatRoomService.getList({
-      senderId: TEMP_USER_ID,
-      recipientId:props.route.params.answerRecipient,
-    }).then(res => {
-       setChatRoomNum(res.data.count);
-   
-      console.log(res.data.count);
-    });
-  };
-
-  const onSubmit = async () => {
-
-    await ChatRoomService.create({
-      senderId: TEMP_USER_ID,
-      recipientId: props.route.params.answerRecipient,
-     
-    }).then(() => {
-      alert("채팅을 요청하였습니다.");
-      setChatRoomNum(1);
-      
-    });
-    
-  };
-
-  
 
 
   useEffect(() => {
     fetchAnswer();
-    fetchAnswerSatisfactionList()
-    checkChatRoom();
-  }, [nowAnswerSatisfaction]);
+  }, []);
 
     return(
     
@@ -157,7 +95,7 @@ function MyAnswerDetail(props){
 
 
               <TitleView>
-                <Title>받은답장</Title>
+                <Title>내가 한 답변</Title>
                 <BackButton onPress={()=>{props.navigation.goBack()}}><BackText>이전</BackText></BackButton>
               </TitleView>
 
@@ -170,15 +108,12 @@ function MyAnswerDetail(props){
                   
                   <View style={{flexDirection: 'column', width:'40%'}}>
                     <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}} numberOfLines={2} ellipsizeMode="tail">
-                      {nowAnswer && nowAnswer.user &&  nowAnswer.user.nickname}</Text>
+                      상대 닉네임</Text>
                     <Text style={{fontSize: 12, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
                     
                   </View>
 
-                  <TouchableOpacity style={{ position:'absolute', left:'70%', top:'30%',width:'25%', height:'40%', borderRadius:7, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}
-                         onPress={()=>{ if(chatRoomNum === 0){onSubmit()}else{alert("이미 해당사용자와 채팅방이 있습니다.")}}}>
-                    <Text style={{color: '#ffffff', fontSize: 14, fontWeight:'600'}}>채팅요청</Text>
-                  </TouchableOpacity>
+                  
 
               </View>
 
@@ -190,24 +125,7 @@ function MyAnswerDetail(props){
 
                 </View>
 
-                <TouchableOpacity style={{backgroundColor:(nowAnswerSatisfaction?'#000000':'#7bb9fa'), width: '75%', height: '8%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:20}}
-                                  onPress={()=>{if(!nowAnswerSatisfaction){changeModalVisible(true)}
-                                                else{alert("이미 답변하셨습니다."); }}}>
-                  <Text style={{color:'#ffffff', fontSize:19, fontWeight:'bold'}}>답변 만족도 조사</Text>
-                </TouchableOpacity>
-              
-                <Modal 
-                transparent={true} animationType='slide' visible={isModalVisible}
-                onRequestClose={() => changeModalVisible(false)}
-               
-                >
-                <Satisfaction 
-                  changeModalVisible={changeModalVisible}
-                  setData={setData}
-                  setCButton={setCButton}
-                  setNAS={setNAS}
-                  answerid={props.route.params.answerId}/>
-              </Modal>
+                
             
             </Contents>
         </Background>

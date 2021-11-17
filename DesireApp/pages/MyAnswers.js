@@ -2,7 +2,6 @@ import React, {useState,useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Text, View, TouchableOpacity, ScrollView, Image, Platform,Dimensions} from 'react-native'
-import QuestionService from '../services/QuestionService';
 import AnswerService from '../services/AnswerService';
 
 const WIDTH = Dimensions.get('window').width;
