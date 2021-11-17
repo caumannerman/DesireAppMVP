@@ -3,6 +3,7 @@ import{
     Text, View, TouchableOpacity, Dimensions, Button
 } from 'react-native';
 import produce from 'immer';
+import AnswerEvaluationService from '../services/AnswerEvaluationService';
 
 
 const WIDTH = Dimensions.get('window').width;
@@ -10,16 +11,35 @@ const HEIGHT = Dimensions.get('window').height;
 
 const Satisfaction = (props) => {
 
-   closeModal = (bool,data) => {
+   closeModal = (bool,data,data2) => {
       props.changeModalVisible(bool);
       props.setData(data);
+      props.setCButton(data2);
   }
   const [list, setList] = useState([
-    {category: '아쉬운 답변', isCheck: false},
-    {category: '보통', isCheck: false},
-    {category: '필요한 답변', isCheck: false},
+    {category: '아쉬운 답변', isCheck: false,value:"NG"},
+    {category: '보통', isCheck: false, value:"OK"},
+    {category: '필요한 답변', isCheck: false, value:"GR"},
 
   ]);
+ 
+  const [lastChoice, setLastChoice] = useState('');
+
+  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+
+  const onSubmit = async () => {
+    
+    await AnswerEvaluationService.create({
+      userId: TEMP_USER_ID,
+      answerId: props.answerid,
+      evaluation: lastChoice,
+     
+    }).then(() => {
+      closeModal(false,lastChoice, 'SM');
+    });
+  };
+
+
 
 
   return (
@@ -39,9 +59,12 @@ const Satisfaction = (props) => {
                                     draft[1].isCheck = false;
                                     draft[2].isCheck = false;
                                     draft[index].isCheck = true;
+                                    setLastChoice(draft[index].value);
                                   }
                                   else{
                                     draft[index].isCheck = !list[index].isCheck;
+                                    setLastChoice('');
+                     
                                   }
 
 
@@ -58,12 +81,12 @@ const Satisfaction = (props) => {
       <View style={{position:'absolute', top:WIDTH*0.5803,width:WIDTH*0.5888,flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
 
         <TouchableOpacity style={{ width:WIDTH*0.25, height:WIDTH*0.095, backgroundColor:'#727272', alignItems:'center',justifyContent:'center', borderRadius:4}}
-                onPress={()=> closeModal(false, 'Cancel')}>
+                onPress={()=> closeModal(false, lastChoice,'CL')}>
                     <Text style={{color:'#ffffff', fontSize:14,fontWeight:'600', marginHorizontal:20}}>취소</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={{ width:WIDTH*0.25, height:WIDTH*0.095, backgroundColor:'#f34242', alignItems:'center',justifyContent:'center', borderRadius:4}}
-                       onPress={()=> closeModal(false, 'Ok')}>
+                       onPress={()=> {if(lastChoice!==''){onSubmit();}}}>
                     <Text style={{color:'#ffffff',fontSize:14,fontWeight:'600', marginHorizontal:20}}>제출하기</Text>
         </TouchableOpacity>
 
