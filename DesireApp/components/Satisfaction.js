@@ -11,10 +11,11 @@ const HEIGHT = Dimensions.get('window').height;
 
 const Satisfaction = (props) => {
 
-   closeModal = (bool,data,data2) => {
+   closeModal = (bool,data,data2,satisNum) => {
       props.changeModalVisible(bool);
       props.setData(data);
       props.setCButton(data2);
+      props.setNAS(satisNum);
   }
   const [list, setList] = useState([
     {category: '아쉬운 답변', isCheck: false,value:"NG"},
@@ -35,7 +36,7 @@ const Satisfaction = (props) => {
       evaluation: lastChoice,
      
     }).then(() => {
-      closeModal(false,lastChoice, 'SM');
+      closeModal(false,lastChoice, 'SM',1);
     });
   };
 
@@ -81,7 +82,7 @@ const Satisfaction = (props) => {
       <View style={{position:'absolute', top:WIDTH*0.5803,width:WIDTH*0.5888,flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
 
         <TouchableOpacity style={{ width:WIDTH*0.25, height:WIDTH*0.095, backgroundColor:'#727272', alignItems:'center',justifyContent:'center', borderRadius:4}}
-                onPress={()=> closeModal(false, lastChoice,'CL')}>
+                onPress={()=> closeModal(false, lastChoice,'CL',0)}>
                     <Text style={{color:'#ffffff', fontSize:14,fontWeight:'600', marginHorizontal:20}}>취소</Text>
         </TouchableOpacity>
 

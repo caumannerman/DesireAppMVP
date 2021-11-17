@@ -163,7 +163,8 @@ function Reply(props){
                 {nowQuestionAnswer.map(answer => (
                    
                   <ReplyButton   onPress={()=>{const answer_id = answer.id;
-                                props.navigation.navigate("ReplyDetail", {answerId:answer_id})}}>
+                                              const answer_recipient_id = answer.user.id;
+                                props.navigation.navigate("ReplyDetail", {answerId:answer_id, answerRecipient:answer_recipient_id})}}>
                     
                     <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
                       <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
