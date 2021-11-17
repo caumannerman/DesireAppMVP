@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {TextInput, Text, Image, TouchableOpacity, View, Dimensions} from 'react-native';
@@ -79,13 +79,22 @@ const BackText = styled.Text`
 function MentorReply(props){
 
   const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+  const [answerText, setAnswerText] = useState('');
+  
+  const onSubmit = async () => {
+
+    await AnswerService.create({
+      userId: TEMP_USER_ID,
+      content: answerText,
+      questionId: props.route.params.questionid
+    }).then(() => {
+      alert("전송하였습니다");
+      setAnswerText('');
+      props.navigation.navigate("HomeStack");
+    });
+  };
 
 
-
-  alert(props.route.params.questionid);
-  useEffect(() => {
-
- },[]);
   
     return(
     
@@ -101,7 +110,7 @@ function MentorReply(props){
 
               
               <View style={{borderWidth:0.4, borderColor:'#a0a0a0', width:'100%', height:'35%', alignItems:'center'}}>
-                <TextInput style={{ width:'90%',height:'100%'}} placeholder="성실하게 답변해주세요"></TextInput>
+                <TextInput style={{ width:'90%',height:'100%'}} placeholder="성실하게 답변해주세요" onChangeText={text => setAnswerText(text)} value={answerText}></TextInput>
               </View>
          
               <View style={{width:WIDTH, height: "15%", borderWidth:1, borderColor:'#d0d0d0', flexDirection:'row',alignItems:'center'}}>
@@ -124,7 +133,7 @@ function MentorReply(props){
               </View>
               
               <TouchableOpacity style={{width:'80%', height:40,marginTop:30,backgroundColor:'#952bff', borderRadius:4 , alignItems:'center', justifyContent:'center',top:40}}
-                                onPress={()=>{changeModalVisible(true)}}>
+                                onPress={()=>{onSubmit()}}>
                 <Text style={{fontSize:14, fontWeight:'bold', color:'#ffffff'}}>보내기</Text>
               </TouchableOpacity>
             
