@@ -80,14 +80,8 @@ const ReplyButton = styled.TouchableOpacity`
 function MyAnswers(props){
   const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
 
-  const changeQVisible = (bool) => {
-    setQVisible(bool);
-  }
-
   //User id가 한 Answer들을 저장할 곳
   const [nowIdMyAnswer, setNowIdMyAnswer] = useState([]);
-
-
 
   const fetchAnswer = async() =>{
     await AnswerService.getList({
