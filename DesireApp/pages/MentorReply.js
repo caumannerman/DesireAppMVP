@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {TextInput, Text, Image, TouchableOpacity, View, Modal, Dimensions} from 'react-native';
-import MentorReplyModal from '../components/MentorReplyModal';
+import {TextInput, Text, Image, TouchableOpacity, View, Dimensions} from 'react-native';
+import AnswerService from '../services/AnswerService';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -77,18 +77,16 @@ const BackText = styled.Text`
 
 
 function MentorReply(props){
-  const [isModalVisible, setisModalVisible] = useState(false);
-  const [chooseData, setchooseData] = useState();
 
-  const changeModalVisible = (bool) => {
-    setisModalVisible(bool);
-  }
-
-  const setData = (data) => {
-    setchooseData(data);
-  }
+  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
 
 
+
+  alert(props.route.params.questionid);
+  useEffect(() => {
+
+ },[]);
+  
     return(
     
       <Container>
@@ -129,19 +127,6 @@ function MentorReply(props){
                                 onPress={()=>{changeModalVisible(true)}}>
                 <Text style={{fontSize:14, fontWeight:'bold', color:'#ffffff'}}>보내기</Text>
               </TouchableOpacity>
-
-           
-              <Modal 
-                transparent={true} animationType='slide' visible={isModalVisible}
-                onRequestClose={() => changeModalVisible(false)}
-               
-                >
-                <MentorReplyModal style={{alignItems:'center', justifyContent:'center'}}
-                  changeModalVisible={changeModalVisible}
-                  setData={setData}/>
-              </Modal>
-           
-
             
             </Contents>
         </Background>

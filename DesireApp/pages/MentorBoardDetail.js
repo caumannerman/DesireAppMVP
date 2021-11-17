@@ -106,7 +106,7 @@ function MentorBoardDetail(props){
                 </View>
 
                 <TouchableOpacity style={{backgroundColor:'#952bff', width: '77.77%', height: '6.5%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:50}}
-                                  onPress={()=>{props.navigation.navigate("MentorReply")}}>
+                                  onPress={()=>{props.navigation.navigate("MentorReply", {questionid:props.route.params.questionid})}}>
                   <Text style={{color:'#ffffff', fontSize:19, fontWeight:'bold'}}>답변하기</Text>
                 </TouchableOpacity>
               
