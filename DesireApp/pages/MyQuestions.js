@@ -135,15 +135,16 @@ function MyQuestion(props) {
 
   useEffect(() => {
     fetchQuestionList();
+   
   }, []);
 
 
   return (
     <Container>
       <Background
-        colors={['#ffffff', '#e9fafa', '#ffffff']}
-        start={{x: 0.3, y: 0.3}}
-        end={{x: 1.2, y: 1.2}}
+        colors={['#fff5ee', '#e9fafa', '#ffffff']}
+        start={{x: 0.1, y: 0.3}}
+        end={{x: 1.5, y: 1.2}}
         locations={[0, 0.3, 0.7]}>
         <Contents>
           <TitleView>

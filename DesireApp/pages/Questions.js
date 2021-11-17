@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -87,7 +87,7 @@ const BackButton = styled.TouchableOpacity`
 
 function Question(props) {
   const [isModalVisible, setisModalVisible] = useState(false);
-  const [chooseData, setchooseData] = useState();
+  const [chooseData, setchooseData] = useState('');
   const [questionTitle, setQuestionTitle] = useState('');
   const [questionText, setQuestionText] = useState('');
 
@@ -95,7 +95,7 @@ function Question(props) {
     setisModalVisible(bool);
   };
 
-  const setData = data => {
+  const setData = (data) => {
     setchooseData(data);
   };
 
@@ -123,6 +123,14 @@ function Question(props) {
     });
   };
 
+ useEffect(() => {
+    
+    if(chooseData==='GH'){ props.navigation.navigate("HomeStack")}
+    else{props.navigation.navigate("MyquestionStack"),props.navigation.navigate("MyQuestions",{tmp:chooseData})};
+    setData('')
+  }, [chooseData]);
+
+  
   return (
     <Container>
       <Background
