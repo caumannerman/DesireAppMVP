@@ -6,12 +6,16 @@ class UploadedAudioService {
   PAGINATION_LIMIT = 10;
 
   async create({name, file}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
+
     const formData = new FormData();
     formData.append('name', name);
     formData.append('file', file);
 
     return await axios
-      .post(`${API_V1_URL}/uploaded-audios/`, formData)
+      .post(`${API_V1_URL}/uploaded-audios/`, formData, {headers: authHeader})
       .then(res => {
         return res;
       })
@@ -21,8 +25,12 @@ class UploadedAudioService {
   }
 
   async getOne({id}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
+
     return await axios
-      .get(`${API_V1_URL}/uploaded-audios/${id}/`)
+      .get(`${API_V1_URL}/uploaded-audios/${id}/`, {headers: authHeader})
       .then(res => {
         return res;
       })

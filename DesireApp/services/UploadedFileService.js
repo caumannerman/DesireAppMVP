@@ -6,12 +6,16 @@ class UploadedFileService {
   PAGINATION_LIMIT = 10;
 
   async create({name, file}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
+
     const formData = new FormData();
     formData.append('name', name);
     formData.append('file', file);
 
     return await axios
-      .post(`${API_V1_URL}/uploaded-files/`, formData)
+      .post(`${API_V1_URL}/uploaded-files/`, formData, {headers: authHeader})
       .then(res => {
         return res;
       })
@@ -21,8 +25,12 @@ class UploadedFileService {
   }
 
   async getOne({id}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
+
     return await axios
-      .get(`${API_V1_URL}/uploaded-files/${id}/`)
+      .get(`${API_V1_URL}/uploaded-files/${id}/`, {headers: authHeader})
       .then(res => {
         return res;
       })
