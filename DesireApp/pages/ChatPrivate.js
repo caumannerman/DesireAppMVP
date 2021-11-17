@@ -117,7 +117,7 @@ function ChatPrivate(props){
         content: nowChat,
         
       }).then(() => {
-        alert('tjdrhd')
+      
       });
     };
   
