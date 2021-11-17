@@ -107,8 +107,7 @@ function MyAnswerDetail(props){
                   </View>
                   
                   <View style={{flexDirection: 'column', width:'40%'}}>
-                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}} numberOfLines={2} ellipsizeMode="tail">
-                      상대 닉네임</Text>
+                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}} numberOfLines={2} ellipsizeMode="tail">{nowAnswer.user&&nowAnswer.user.nickname}</Text>
                     <Text style={{fontSize: 12, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
                     
                   </View>

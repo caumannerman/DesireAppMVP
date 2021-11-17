@@ -131,7 +131,7 @@ function MyAnswers(props){
                     </View>
                     
                     <View style={{flexDirection: 'column',width:'67%' }}>
-                      <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>질문자닉네임</Text>
+                      <Text style={{fontSize: 16, fontWeight: '500', color:'#000000', marginBottom:1}}>{answer.question&&answer.question.user&&answer.question.user.nickname}</Text>
                       <Text style={{fontSize: 10, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
                       <Text style={{fontSize: 12, fontWeight: 'normal', color:'#000000', width:"85%"}} numberOfLines={1} ellipsizeMode="tail">{answer.content}</Text>
                     </View>
