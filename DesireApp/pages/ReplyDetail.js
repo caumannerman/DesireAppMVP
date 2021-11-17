@@ -4,6 +4,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Text, View, TouchableOpacity, ScrollView, Image, Modal} from 'react-native'
 import Satisfaction from '../components/Satisfaction';
 import AnswerService from '../services/AnswerService';
+import AnswerEvaluationService from '../services/AnswerEvaluationService';
+
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
@@ -62,19 +64,33 @@ const BackText = styled.Text`
 
 function ReplyDetail(props){
 
+
+  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+
+
   const [isModalVisible, setisModalVisible] = useState(false);
-  const [chooseData, setchooseData] = useState();
+  const [chooseData, setChooseData] = useState('');
+  const [chooseButton, setChooseButton] = useState('');
+  //props로 받은 answerId로 가져온 answer정보를 담을 곳
+  const [nowAnswer, setNowAnswer] = useState({});
+  //해당 답변에 평가가 달렸는지 여부
+  const [nowAnswerSatisfaction, setNowAnswerSatisfaction] = useState(0);
 
   const changeModalVisible = (bool) => {
     setisModalVisible(bool);
   }
 
   const setData = (data) => {
-    setchooseData(data);
+    setChooseData(data);
   }
 
-  //props로 받은 answerId로 가져온 answer정보를 담을 곳
-  const [nowAnswer, setNowAnswer] = useState({});
+  const setCButton = (data) =>{
+    setChooseButton(data);
+  }
+  const setNAS = (data) => {
+    setNowAnswerSatisfaction(data);
+  }
+  
 
   const fetchAnswer = async () => {
     await AnswerService.getOne({
@@ -85,10 +101,25 @@ function ReplyDetail(props){
     });
   };
 
+  const fetchAnswerSatisfactionList = async () => {
+    await AnswerEvaluationService.getList({
+      userId: TEMP_USER_ID,
+      answerId:props.route.params.answerId
+    }).then(res => {
+      setNAS(res.data.count);
+     
+      console.log(res.data.count);
+    });
+  };
+
   useEffect(() => {
     fetchAnswer();
+    fetchAnswerSatisfactionList();
+  }, [nowAnswerSatisfaction]);
 
-  }, []);
+
+
+  
 
   
 
@@ -111,13 +142,14 @@ function ReplyDetail(props){
                     <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
                   </View>
                   
-                  <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}}>{nowAnswer && nowAnswer.user &&  nowAnswer.user.email}</Text>
+                  <View style={{flexDirection: 'column', width:'40%'}}>
+                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}} numberOfLines={2} ellipsizeMode="tail">
+                      {nowAnswer && nowAnswer.user &&  nowAnswer.user.nickname}</Text>
                     <Text style={{fontSize: 12, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
                     
                   </View>
 
-                  <TouchableOpacity style={{ width:'25%', height:'40%', borderRadius:7, backgroundColor:'#952bff', marginLeft: '15%', alignItems:'center', justifyContent:'center'}}
+                  <TouchableOpacity style={{ position:'absolute', left:'70%', top:'30%',width:'25%', height:'40%', borderRadius:7, backgroundColor:'#952bff', alignItems:'center', justifyContent:'center'}}
                          onPress={()=>{props.navigation.navigate("ReplyDetail")}}>
                     <Text style={{color: '#ffffff', fontSize: 14, fontWeight:'600'}}>채팅요청</Text>
                   </TouchableOpacity>
@@ -132,8 +164,9 @@ function ReplyDetail(props){
 
                 </View>
 
-                <TouchableOpacity style={{backgroundColor:'#7bb9fa', width: '75%', height: '8%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:20}}
-                                  onPress={()=>changeModalVisible(true)}>
+                <TouchableOpacity style={{backgroundColor:(nowAnswerSatisfaction?'#000000':'#7bb9fa'), width: '75%', height: '8%', borderRadius: 5, alignItems:'center', justifyContent:'center', marginTop:20}}
+                                  onPress={()=>{if(!nowAnswerSatisfaction){changeModalVisible(true)}
+                                                else{alert("이미 답변하셨습니다."); }}}>
                   <Text style={{color:'#ffffff', fontSize:19, fontWeight:'bold'}}>답변 만족도 조사</Text>
                 </TouchableOpacity>
               
@@ -144,7 +177,10 @@ function ReplyDetail(props){
                 >
                 <Satisfaction 
                   changeModalVisible={changeModalVisible}
-                  setData={setData}/>
+                  setData={setData}
+                  setCButton={setCButton}
+                  setNAS={setNAS}
+                  answerid={props.route.params.answerId}/>
               </Modal>
             
             </Contents>
