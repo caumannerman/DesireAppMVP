@@ -2,16 +2,11 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
-  Alert,
   Dimensions,
   Image,
-  ScrollView,
   Platform,
   FlatList,
 } from 'react-native';
-import axios from 'axios';
-import {BACKEND_URL} from '../constants/constants';
-import {ActivityIndicator} from 'react-native';
 import QuestionService from '../services/QuestionService';
 
 
@@ -32,12 +27,14 @@ const Contents = styled.View`
 const TitleView = styled.View`
   flex-direction: row;
   top: 5%;
-  left: 5%;
+  
   align-items: center;
   height: 39px;
-  width: 85%;
+  width: 100%;
   justify-content: space-between;
   margin-bottom: 25px;
+  border-bottom-color:#929292;
+  border-bottom-width:0.5;
 `;
 
 const Title = styled.Text`
@@ -47,6 +44,8 @@ const Title = styled.Text`
   font-style: normal;
   align-items: center;
   justify-content: center;
+  margin-left: ${WIDTH*0.1};
+  margin-bottom: 7;
 `;
 
 const Glass = styled.TouchableOpacity`
@@ -54,16 +53,8 @@ const Glass = styled.TouchableOpacity`
   justify-content: center;
   height: 39px;
   width: 39px;
-`;
-
-const RowBox = styled.View`
-  left: ${WIDTH * 0.1111};
-  width: ${WIDTH * 0.7722};
-  height: ${WIDTH * 0.3639};
-  margin-top: 30px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  margin-right: ${WIDTH*0.07};
+  margin-bottom: 7;
 `;
 
 const Part = styled.TouchableOpacity`
@@ -75,7 +66,10 @@ const Part = styled.TouchableOpacity`
   border: #d0d0d0;
   flex-direction: column;
   justify-content: center;
-
+  margin-horizontal: ${WIDTH*0.02305};
+  margin-vertical: 15;
+  left:${WIDTH*0.005};
+  right: ${WIDTH*0.005};
   ${Platform.select({
     ios: {
       shadowColor: '#5a5a5a',
@@ -143,7 +137,6 @@ function MyQuestion(props) {
     fetchQuestionList();
   }, []);
 
- 
 
   return (
     <Container>
@@ -163,42 +156,38 @@ function MyQuestion(props) {
             </Glass>
           </TitleView>
 
-          <ScrollView
-            style={{
-              flex: 1,
-              flexDirection: 'column',
-              borderWidth: 1,
-              borderColor: '#999999',
-            }}
-            numColumns={2}>
-            {questionList.map(question => (
-              <RowBox>
-                <Part
-                  onPress={() => {
-                    const question_id = question.id;
-                    props.navigation.navigate('Reply', {questionId:question_id});
-                  }}>
-                   
-                  <PartDate>{question.created_on.substring(2,4)}.{question.created_on.substring(5,7)}.{question.created_on.substring(8,10)}</PartDate>
-                  <PartTitle numberOfLines={2} ellipsizeMode="tail">
-                    {question.title}
-                  </PartTitle>
-                  <PartReply>답장 {question.answer_count}개</PartReply>
-                </Part>
-                <Part
-                  onPress={() => {
-                    const question_id = question.id;
-                    props.navigation.navigate('Reply', {questionId:question_id});
-                  }}>
-                  <PartDate>{question.created_on.substring(2,4)}.{question.created_on.substring(5,7)}.{question.created_on.substring(8,10)}</PartDate>
-                  <PartTitle numberOfLines={2} ellipsizeMode="tail">
-                    {question.title}
-                  </PartTitle>
-                  <PartReply>답장 {question.answer_count}개</PartReply>
-                </Part>
-              </RowBox>
-            ))}
-          </ScrollView>
+          <FlatList
+           style={{
+            flex: 1,
+       
+            borderLeftWidth: (WIDTH*0.08),
+            borderRightWidth: (WIDTH*0.08),
+            borderColor: '#99999900',
+            
+            
+          
+          }}
+            keyExtractor={(item) => item.id}
+            data={questionList}
+            renderItem={({item}) => (
+              <Part
+                onPress={() => {
+                  const question_id = item.id;
+                  props.navigation.navigate('Reply', {questionId:question_id});
+                }}>
+                 
+                <PartDate>{item.created_on.substring(2,4)}.{item.created_on.substring(5,7)}.{item.created_on.substring(8,10)}</PartDate>
+                <PartTitle numberOfLines={2} ellipsizeMode="tail">
+                  {item.title}
+                </PartTitle>
+                <PartReply>답장 {item.answer_count}개</PartReply>
+              </Part>
+            )}
+            numColumns={2}
+          
+          />
+     
+          
 
         </Contents>
       </Background>
