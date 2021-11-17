@@ -6,6 +6,8 @@ import SignInStack from './SignInStack';
 import QuestionStack from './QuestionStack';
 import MyquestionStack from './MyquestionStack';
 import ChatStack from './ChatStack';
+import QBoardStack from './QBoardStack';
+import MyAnswerStack from './MyAnswerStack';
 
 import useAuth from '../services/useAuth';
 
@@ -136,8 +138,8 @@ const Tab = () => {
         }}
       />
       <Tabs.Screen
-        name="MyquestionStack"
-        component={MyquestionStack}
+        name="QBoardStack"
+        component={QBoardStack}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={styles.view}>
@@ -160,7 +162,69 @@ const Tab = () => {
                   fontWeight: 'normal',
                   marginTop: 3,
                 }}>
+                답변게시판
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="MyquestionStack"
+        component={MyquestionStack}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={styles.view}>
+              <Image
+                source={require('../constants/images/homepage/face.png')}
+                resizeMode="contain"
+                style={{
+                  width: 24,
+                  height: 24,
+                  marginTop: 5,
+                  tintColor: focused ? '#f89ccc' : '#952bff',
+                }}
+              />
+              <Text
+                style={{
+                  color: focused ? '#f89ccc' : '#952bff',
+                  height: 16,
+                  fontSize: 10,
+                  textAlign: 'center',
+                  fontWeight: 'normal',
+                  marginTop: 3,
+                }}>
                 내가 한 질문
+              </Text>
+            </View>
+          ),
+        }}
+      />
+       <Tabs.Screen
+        name="MyAnswerStack"
+        component={MyAnswerStack}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={styles.view}>
+              <Image
+                source={require('../constants/images/homepage/face.png')}
+                resizeMode="contain"
+                style={{
+                  width: 24,
+                  height: 24,
+                  marginTop: 5,
+                  tintColor: focused ? '#f89ccc' : '#952bff',
+                }}
+              />
+              <Text
+                style={{
+                  color: focused ? '#f89ccc' : '#952bff',
+                  height: 16,
+                  fontSize: 10,
+                  textAlign: 'center',
+                  fontWeight: 'normal',
+                  marginTop: 3,
+                }}>
+                내가 한 답변
               </Text>
             </View>
           ),

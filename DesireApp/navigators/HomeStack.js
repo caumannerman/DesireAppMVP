@@ -7,7 +7,7 @@ import Reply from '../pages/Reply';
 import ChatPrivate from '../pages/ChatPrivate';
 
 // 멘토용 페이지
-import MentorBoardDetail from '../pages/MentorBoardDatail';
+import MentorBoardDetail from '../pages/MentorBoardDetail';
 import MentorBoard from '../pages/MentorBoard';
 import MentorReply from '../pages/MentorReply';
 import SignIn from '../pages/SignIn';
@@ -24,10 +24,6 @@ const HomeStack = () => {
       <HStack.Screen name="Questions" component={Questions} />
       <HStack.Screen name="Reply" component={Reply} />
       <HStack.Screen name="ChatPrivate" component={ChatPrivate} />
-
-      <HStack.Screen name="MentorBoardDetail" component={MentorBoardDetail} />
-      <HStack.Screen name="MentorBoard" component={MentorBoard} />
-      <HStack.Screen name="MentorReply" component={MentorReply} />
     </HStack.Navigator>
   );
 };

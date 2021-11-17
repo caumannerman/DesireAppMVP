@@ -56,7 +56,7 @@ function SimpleModal(props) {
           }}
           onPress={() => {
             
-            closeModal(false, 'gohome');
+            closeModal(false, 'GH');
             
           }}>
           <Text
@@ -80,7 +80,7 @@ function SimpleModal(props) {
             borderRadius: 6,
           }}
           onPress={() => {
-            closeModal(false, 'gohome');
+            closeModal(false, 'MQ');
             
           }}>
           <Text

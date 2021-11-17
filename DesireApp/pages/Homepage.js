@@ -143,7 +143,7 @@ function Homepage(props){
 
               <View style={{position:'absolute', top:HEIGHT*0.0357,left:WIDTH*0.1111, flexDirection:'row',justifyContent:'space-between', width:WIDTH*0.8078, alignItems:'center'}}>
                 <Text style={{fontSize:20,fontWeight:'800',color:'#000000',width:WIDTH*0.22}}>DESIRE</Text>
-                <TouchableOpacity style={{height:'100%', width:40}} onPress={()=>{ props.navigation.navigate("MentorBoard")}}><Image resizeMode="contain" style={{flex:1}} source={require('../constants/images/homepage/notifications_24px.png')}/></TouchableOpacity>
+                <TouchableOpacity style={{height:'100%', width:40}} ><Image resizeMode="contain" style={{flex:1}} source={require('../constants/images/homepage/notifications_24px.png')}/></TouchableOpacity>
               </View>
 
               <Text style={{position:'absolute', top:HEIGHT*0.1014, left:WIDTH*0.1111,color:'#929292', fontSize:14,fontWeight:'500'}}>  {TEMP_USER_NICKNAME}님, 환영합니다.</Text>
