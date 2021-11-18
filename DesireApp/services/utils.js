@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function getAuthHeader() {
-  const accessToken = await AsyncStorage.getItem('accessToken')();
+  const accessToken = await AsyncStorage.getItem('accessToken');
 
   if (accessToken) {
     return {Authorization: `Bearer ${accessToken}`};

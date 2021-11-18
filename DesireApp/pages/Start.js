@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Dimensions, Image, View, Platform} from 'react-native';
+import { Dimensions, Image, View, Platform,Text, TouchableOpacity} from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -124,7 +124,6 @@ function Start(props){
                       <ButtonText2>답변자로 가입</ButtonText2>
                     </Button>
                 </ButtonView>
-
 
                 <View style={{width:'69.7%', height:'30.7%',position: 'absolute', bottom:'7%', left:'15.15%', alignItems:'center'}}>
                     <Image source={require('../constants/images/Start.png')} style={{resizeMode:'contain',flex:1}}/>

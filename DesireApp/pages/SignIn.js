@@ -51,6 +51,15 @@ const Button = styled.TouchableOpacity`
   height: 40px;
   width: 100%;
 `;
+const Button2 = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  background-color: #f34e4e;
+  border-radius: 4px;
+  height: 40px;
+  width: 30%;
+  
+`;
 const ButtonText = styled.Text`
   font-size: 14px;
   font-weight: bold;
@@ -65,7 +74,7 @@ function Join(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {isLoggedIn} = useAuth();
+  const {isLoggedIn,getAuth} = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [isModal1Visible, setisModal1Visible] = useState(false);
@@ -73,6 +82,7 @@ function Join(props) {
   const changeModal1Visible = bool => {
     setisModal1Visible(bool);
   };
+
 
   useEffect(() => {
     (async () => {
@@ -105,12 +115,15 @@ function Join(props) {
             }}>
             <TextInput
               placeholder="아이디"
+              value={email}
               onChangeText={text => {
                 setEmail(text);
               }}
             />
             <TextInput
               placeholder="비밀번호"
+              value={password}
+              secureTextEntry={true}
               onChangeText={text => {
                 setPassword(text);
               }}
@@ -120,7 +133,7 @@ function Join(props) {
               onPress={async () => {
                 //여기서 DB에 있는 아이디 ,비번이랑 비교
                 const tmplst = [
-                  validator.isEmail(email),
+                  validator.isEmail(email)&&
                   validator.isAlphanumeric(password) &&
                     !validator.isAlpha(password) &&
                     !validator.isNumeric(password) &&
@@ -133,21 +146,32 @@ function Join(props) {
                   changeModal1Visible(true);
                 } else {
                   // 유효하다면 로그인정보 저장하고 홈페이지로 전황
-                  // props.navigation.navigate('Homepage');
+
+
                   await login({email, password});
+                  const logCheck = await isLoggedIn();
+                  if(logCheck){
+                    console.log(logCheck);
+                    props.navigation.navigate('Tab');
+                  }
+                  else{
+                    changeModal1Visible(true)
+                  }
+                  
+                 
                 }
               }}>
               <ButtonText>로그인</ButtonText>
             </Button>
+            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+              <Button2 style={{backgroundColor: '#ff000000'}}></Button2>
+              <Button2 style={{backgroundColor: '#ff000000'}}></Button2>
+              <Button2 onPress={()=>{props.navigation.navigate("Start")}}>
+                <ButtonText>회원가입</ButtonText>
+              </Button2>
+            </View>
 
-            {loggedIn && (
-              <Button
-                onPress={async () => {
-                  await logout();
-                }}>
-                <ButtonText>로그아웃</ButtonText>
-              </Button>
-            )}
+           
           </View>
 
           <View
