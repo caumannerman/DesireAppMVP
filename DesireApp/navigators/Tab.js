@@ -73,6 +73,7 @@ const Tab = () => {
               </Text>
             </View>
           ),
+          unmountOnBlur: true 
         }}
       />
       <Tabs.Screen
@@ -104,6 +105,7 @@ const Tab = () => {
               </Text>
             </View>
           ),
+          unmountOnBlur: true 
         }}
       />
       <Tabs.Screen
@@ -135,6 +137,7 @@ const Tab = () => {
               </Text>
             </View>
           ),
+          unmountOnBlur: true 
         }}
       />
       <Tabs.Screen
@@ -166,6 +169,7 @@ const Tab = () => {
               </Text>
             </View>
           ),
+          unmountOnBlur: true 
         }}
       />
       <Tabs.Screen
@@ -197,6 +201,7 @@ const Tab = () => {
               </Text>
             </View>
           ),
+          unmountOnBlur: true 
         }}
       />
        <Tabs.Screen
@@ -228,6 +233,7 @@ const Tab = () => {
               </Text>
             </View>
           ),
+          unmountOnBlur: true 
         }}
       />
       <Tabs.Screen
@@ -264,6 +270,7 @@ const Tab = () => {
               </Text>
             </View>
           ),
+          unmountOnBlur: true 
         }}
       />
     </Tabs.Navigator>
