@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {Text, View, TouchableOpacity,Dimensions, ScrollView} from 'react-native'
+import {Text, View, TouchableOpacity,Dimensions, ScrollView,FlatList} from 'react-native'
 import produce from 'immer';
 import QuestionService from '../services/QuestionService';
 
@@ -100,8 +100,8 @@ function MentorBoard(props){
 
                 </ScrollView>
               </View>
-
-              <ScrollView style={{ position:'absolute', top:HEIGHT*0.2019,width:'100%', height:'100%'}}>
+              <View style={{  top:HEIGHT*0.2019,width:'100%',height:'100%'}}>
+              <ScrollView style={{ flex:1}}>
                 {questionList.map(question => (
                   <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:WIDTH*0.9135, height:HEIGHT*0.16,
                             left:WIDTH*0.0432, flexDirection:'column', borderRadius:12, marginTop:15, justifyContent:'center'}}
@@ -123,6 +123,7 @@ function MentorBoard(props){
                 ))}
                 
               </ScrollView>
+              </View>
             </Contents>
         </Background>
       </Container>

@@ -52,9 +52,9 @@ const CheckView = styled.ScrollView`
 
 function Profile(props) {
   const [nickname, setNickname] = useState('');
-  const [isPhoto, setPhoto] = useState(false);
+  const [isPhoto, setIsPhoto] = useState(false);
   const changePhoto = bool => {
-    setPhoto(bool);
+    setIsPhoto(bool);
   };
   const [profileImage, setProfileImage] = useState(null);
   const [designFields, setDesignFields] = useState([
@@ -63,6 +63,26 @@ function Profile(props) {
     {category: '제품디자인', isCheck: false, value: '제품디자인'},
     {category: '시각디자인', isCheck: false, value: '시각디자인'},
   ]);
+
+  const onSubmit = async () => {
+
+    const selectedDesignFieldNames = designFields
+                .filter(designField => designField.isCheck)
+                .map(designFieldName => designFieldName.value);
+
+    await registerUser({
+      email: props.route.params.email,
+      password: props.route.params.pwd,
+      mmChoice: props.route.params.mmChoice,
+      nickname,
+      designFields: selectedDesignFieldNames,
+      profileImage,
+    }).then(() => {
+      alert("전송하였습니다");
+      
+    });
+  };
+
 
   return (
     <Container>
@@ -248,19 +268,10 @@ function Profile(props) {
               width: '77.77%',
             }}
             onPress={() => {
-              const selectedDesignFieldNames = designFields
-                .filter(designField => designField.isCheck)
-                .map(designFieldName => designFieldName.value);
+              
 
-              registerUser({
-                email: props.route.params.email,
-                password: props.route.params.pwd,
-                mmChoice: props.route.params.mmChoice,
-                nickname,
-                designFields: selectedDesignFieldNames,
-                profileImage,
-              });
-              props.navigation.navigate('HomeStack');
+              onSubmit();
+              props.navigation.navigate('SignIn');
             }}>
             <ButtonText>시작하기</ButtonText>
           </TouchableOpacity>

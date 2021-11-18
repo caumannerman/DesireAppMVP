@@ -18,7 +18,6 @@ const HomeStack = () => {
   return (
     <HStack.Navigator screenOptions={{headerShown: false}}>
       
-      <HStack.Screen name="SignIn" component={SignIn} />
       <HStack.Screen name="Homepage" component={Homepage} />
       
       <HStack.Screen name="Questions" component={Questions} />

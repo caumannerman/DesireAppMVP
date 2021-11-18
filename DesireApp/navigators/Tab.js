@@ -10,13 +10,14 @@ import QBoardStack from './QBoardStack';
 import MyAnswerStack from './MyAnswerStack';
 
 import useAuth from '../services/useAuth';
+import { getAuthHeader } from '../services/utils';
 
 const Tabs = createBottomTabNavigator();
 
 const Tab = () => {
-  const {isLoggedIn} = useAuth();
+  const {isLoggedIn,getAuth} = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const [nowAccType, setNowAccType] = useState('');
   const styles = {
     view: {
       alignItems: 'center',
@@ -35,47 +36,25 @@ const Tab = () => {
       console.log('isLoggedIn: ', tempLoggedIn);
       setLoggedIn(tempLoggedIn);
     })();
+
+    if(isLoggedIn){(async () => {
+      const nowAuth = await getAuth();
+      setNowAccType(nowAuth.accType);
+    })();}
+   
+    
   }, []);
 
   return (
+    (loggedIn===false)?<SignInStack/>:
+     
     <Tabs.Navigator
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {backgroundColor: '#ffffff'},
       }}>
-      <Tabs.Screen
-        name="SignInStack"
-        component={SignInStack}
-        options={{
-          tabBarIcon: ({focused}) => (
-            <View style={styles.view}>
-              <Image
-                source={require('../constants/images/homepage/home.png')}
-                resizeMode="contain"
-                style={{
-                  width: 24,
-                  height: 24,
-                  marginTop: 5,
-                  tintColor: focused ? '#f89ccc' : '#952bff',
-                }}
-              />
-              <Text
-                style={{
-                  color: focused ? '#f89ccc' : '#952bff',
-                  height: 16,
-                  fontSize: 10,
-                  textAlign: 'center',
-                  fontWeight: 'normal',
-                  marginTop: 3,
-                }}>
-                가입하기
-              </Text>
-            </View>
-          ),
-          unmountOnBlur: true 
-        }}
-      />
+      
       <Tabs.Screen
         name="HomeStack"
         component={HomeStack}
@@ -108,7 +87,7 @@ const Tab = () => {
           unmountOnBlur: true 
         }}
       />
-      <Tabs.Screen
+     {nowAccType==='ME'?<Tabs.Screen
         name="QuestionStack"
         component={QuestionStack}
         options={{
@@ -139,7 +118,7 @@ const Tab = () => {
           ),
           unmountOnBlur: true 
         }}
-      />
+      />:
       <Tabs.Screen
         name="QBoardStack"
         component={QBoardStack}
@@ -171,8 +150,9 @@ const Tab = () => {
           ),
           unmountOnBlur: true 
         }}
-      />
-      <Tabs.Screen
+      />}
+      
+      {nowAccType==='ME'? <Tabs.Screen
         name="MyquestionStack"
         component={MyquestionStack}
         options={{
@@ -203,7 +183,7 @@ const Tab = () => {
           ),
           unmountOnBlur: true 
         }}
-      />
+      />:
        <Tabs.Screen
         name="MyAnswerStack"
         component={MyAnswerStack}
@@ -235,7 +215,7 @@ const Tab = () => {
           ),
           unmountOnBlur: true 
         }}
-      />
+      />}
       <Tabs.Screen
         name="ChatStack"
         component={ChatStack}
