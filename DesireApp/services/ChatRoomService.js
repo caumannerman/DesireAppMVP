@@ -6,13 +6,16 @@ class ChatRoomService {
   PAGINATION_LIMIT = 10;
 
   async create({senderId, recipientId}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
     const data = {
       sender: senderId,
       recipient: recipientId,
     };
 
     return await axios
-      .post(`${API_V1_URL}/chat-rooms/`, data)
+      .post(`${API_V1_URL}/chat-rooms/`, data, {headers: authHeader})
       .then(res => {
         return res;
       })
@@ -28,6 +31,9 @@ class ChatRoomService {
     senderId,
     recipientId,
   }) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
     const params = {
       offset,
       limit,
@@ -37,7 +43,7 @@ class ChatRoomService {
     };
 
     return await axios
-      .get(`${API_V1_URL}/chat-rooms/`, {params})
+      .get(`${API_V1_URL}/chat-rooms/`, {params, headers: authHeader})
       .then(res => {
         return res;
       })
@@ -47,8 +53,11 @@ class ChatRoomService {
   }
 
   async getOne({id}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
     return await axios
-      .get(`${API_V1_URL}/chat-rooms/${id}/`)
+      .get(`${API_V1_URL}/chat-rooms/${id}/`, {headers: authHeader})
       .then(res => {
         return res;
       })

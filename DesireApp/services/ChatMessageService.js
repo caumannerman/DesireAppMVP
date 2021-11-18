@@ -14,6 +14,9 @@ class ChatMessageService {
     uploadedFileId,
     uploadedVideoId,
   }) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
     const data = {
       user: userId,
       chatroom: chatRoomId,
@@ -25,7 +28,7 @@ class ChatMessageService {
     };
 
     return await axios
-      .post(`${API_V1_URL}/chat-messages/`, data)
+      .post(`${API_V1_URL}/chat-messages/`, data, {headers: authHeader})
       .then(res => {
         return res;
       })
@@ -41,6 +44,9 @@ class ChatMessageService {
     userId,
     chatRoomId,
   }) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
     const params = {
       offset,
       limit,
@@ -50,7 +56,7 @@ class ChatMessageService {
     };
 
     return await axios
-      .get(`${API_V1_URL}/chat-messages/`, {params})
+      .get(`${API_V1_URL}/chat-messages/`, {params, headers: authHeader})
       .then(res => {
         return res;
       })
@@ -60,8 +66,12 @@ class ChatMessageService {
   }
 
   async getOne({id}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
+
     return await axios
-      .get(`${API_V1_URL}/chat-messages/${id}/`)
+      .get(`${API_V1_URL}/chat-messages/${id}/`, {headers: authHeader})
       .then(res => {
         return res;
       })

@@ -1,11 +1,17 @@
 import axios from 'axios';
 
 import {API_V1_URL} from '../constants/constants';
+import {refreshTokens} from './AuthService';
+import {getAuthHeader} from './utils';
 
 class AnswerEvaluationService {
   PAGINATION_LIMIT = 10;
 
   async create({userId, answerId, evaluation}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
+
     const data = {
       user: userId,
       answer: answerId,
@@ -13,7 +19,7 @@ class AnswerEvaluationService {
     };
 
     return await axios
-      .post(`${API_V1_URL}/answer-evaluations/`, data)
+      .post(`${API_V1_URL}/answer-evaluations/`, data, {headers: authHeader})
       .then(res => {
         return res;
       })
@@ -30,6 +36,10 @@ class AnswerEvaluationService {
     answerId,
     evaluation,
   }) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
+
     const params = {
       offset,
       limit,
@@ -40,7 +50,7 @@ class AnswerEvaluationService {
     };
 
     return await axios
-      .get(`${API_V1_URL}/answer-evaluations/`, {params})
+      .get(`${API_V1_URL}/answer-evaluations/`, {params, headers: authHeader})
       .then(res => {
         return res;
       })
@@ -50,6 +60,8 @@ class AnswerEvaluationService {
   }
 
   async getOne({id}) {
+    await refreshTokens();
+
     return await axios
       .get(`${API_V1_URL}/answer-evaluations/${id}/`)
       .then(res => {

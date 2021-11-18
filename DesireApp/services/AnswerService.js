@@ -6,6 +6,9 @@ class AnswerService {
   PAGINATION_LIMIT = 20;
 
   async create({userId, content, questionId}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
     const data = {
       user: userId,
       content,
@@ -13,7 +16,7 @@ class AnswerService {
     };
 
     return await axios
-      .post(`${API_V1_URL}/answers/`, data)
+      .post(`${API_V1_URL}/answers/`, data, {headers: authHeader})
       .then(res => {
         return res;
       })
@@ -29,16 +32,19 @@ class AnswerService {
     userId,
     questionId,
   }) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
     const params = {
       offset,
       limit,
       ordering,
       user__id: userId,
-      question__id:questionId,
+      question__id: questionId,
     };
 
     return await axios
-      .get(`${API_V1_URL}/answers/`, {params})
+      .get(`${API_V1_URL}/answers/`, {params, headers: authHeader})
       .then(res => {
         return res;
       })
@@ -48,8 +54,11 @@ class AnswerService {
   }
 
   async getOne({id}) {
+    await refreshTokens();
+
+    const authHeader = await getAuthHeader();
     return await axios
-      .get(`${API_V1_URL}/answers/${id}/`)
+      .get(`${API_V1_URL}/answers/${id}/`, {headers: authHeader})
       .then(res => {
         return res;
       })
