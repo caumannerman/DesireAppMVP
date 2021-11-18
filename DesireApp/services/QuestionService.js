@@ -3,7 +3,7 @@ import axios from 'axios';
 import {API_V1_URL} from '../constants/constants';
 
 class QuestionService {
-  PAGINATION_LIMIT = 10;
+  PAGINATION_LIMIT = 20;
 
   async create({userId, title, questionText, categories}) {
     const data = {
