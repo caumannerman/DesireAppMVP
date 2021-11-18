@@ -2,7 +2,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {API_V1_URL, storageKeys} from '../constants/constants';
-import {refreshTokens} from './AuthService';
 import {getAuthHeader} from './utils';
 async function login({email, password}) {
   const data = {email, password};
