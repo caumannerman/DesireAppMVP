@@ -20,7 +20,9 @@ import UploadedFileService from '../services/UploadedFileService';
 import UploadedVideoService from '../services/UploadedVideoService';
 import useAuth from '../services/useAuth';
 
-import {launchCamera,launchImageLibrary} from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import * as mime from 'react-native-mime-types';
+import {hasExtension} from '../services/utils';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -130,6 +132,7 @@ function Question(props) {
   };
 
   const [photo, setPhoto] = useState(null);
+  const [video, setVideo] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -242,11 +245,17 @@ function Question(props) {
               }}>
               첨부된 파일:
             </Text>
-            <Text
-              numberOfLines={1}
-              style={{flex: 1, width: '70%', alignSelf: 'center'}}>{`${
-              photo && photo.name ? photo.name : ''
-            }`}</Text>
+            {[photo, video].map(
+              media =>
+                media && (
+                  <Text
+                    numberOfLines={1}
+                    ellipsizeMode="middle"
+                    style={{flex: 1, alignSelf: 'center'}}>{`${
+                    media && media.name ? media.name : ''
+                  }`}</Text>
+                ),
+            )}
           </View>
 
           <View
@@ -281,11 +290,26 @@ function Question(props) {
                   },
                   async response => {
                     if (response && response.assets[0]) {
+                      /* 파일 확장자가 없으면 붙여서 전송 */
+                      let fileNameField = '';
+                      let fileName = '';
+                      if (hasExtension(response.assets[0].fileName)) {
+                        fileNameField = response.assets[0].fileName;
+                        fileName = response.assets[0].fileName;
+                      } else {
+                        fileNameField = `${
+                          response.assets[0].fileName
+                        }.${mime.extension(response.assets[0].type)}`;
+                        fileName = `${
+                          response.assets[0].fileName
+                        }.${mime.extension(response.assets[0].type)}`;
+                      }
+
                       await UploadedImageService.create({
-                        name: response.assets[0].fileName,
+                        name: fileNameField,
                         file: {
                           uri: response.assets[0].uri,
-                          name: response.assets[0].fileName,
+                          name: fileName,
                           type: response.assets[0].type,
                         },
                       }).then(res => setPhoto(res.data));
@@ -300,7 +324,43 @@ function Question(props) {
               <FileText>사진</FileText>
             </FileOpacity>
 
-            <FileOpacity>
+            <FileOpacity
+              onPress={async () => {
+                await launchImageLibrary(
+                  {
+                    mediaType: 'video',
+                    quality: 1,
+                    includeBase64: true,
+                  },
+                  async response => {
+                    /* 파일 확장자가 없으면 붙여서 전송 */
+                    let fileNameField = '';
+                    let fileName = '';
+                    if (hasExtension(response.assets[0].fileName)) {
+                      fileNameField = response.assets[0].fileName;
+                      fileName = response.assets[0].fileName;
+                    } else {
+                      fileNameField = `${
+                        response.assets[0].fileName
+                      }.${mime.extension(response.assets[0].type)}`;
+                      fileName = `${
+                        response.assets[0].fileName
+                      }.${mime.extension(response.assets[0].type)}`;
+                    }
+
+                    if (response && response.assets[0]) {
+                      await UploadedVideoService.create({
+                        name: fileNameField,
+                        file: {
+                          uri: response.assets[0].uri,
+                          name: fileName,
+                          type: response.assets[0].type,
+                        },
+                      }).then(res => setVideo(res.data));
+                    }
+                  },
+                );
+              }}>
               <Image
                 source={require('../constants/images/question/video.png')}
                 resizeMode="contain"
