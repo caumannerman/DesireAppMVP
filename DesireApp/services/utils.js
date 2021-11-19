@@ -19,4 +19,8 @@ async function logOut() {
   await AsyncStorage.removeItem('refreshToken');
 }
 
-export {getAuthHeader, getFormDataHeader, logOut};
+/** 파일 확장자명이 존재하는지 확인 */
+const hasExtension = filename =>
+  /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
+
+export {getAuthHeader, getFormDataHeader, logOut, hasExtension};
