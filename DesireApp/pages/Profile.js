@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -12,7 +12,10 @@ import {
 import produce from 'immer';
 
 import {registerUser} from '../services/UserService';
-
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import * as mime from 'react-native-mime-types';
+import {hasExtension} from '../services/utils';
+import UploadedImageService from '../services/UploadedImageService';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -53,15 +56,16 @@ const CheckView = styled.ScrollView`
 function Profile(props) {
   const [nickname, setNickname] = useState('');
   const [isPhoto, setIsPhoto] = useState(false);
-  const changePhoto = bool => {
+  const changeIsPhoto = bool => {
     setIsPhoto(bool);
   };
-  const [profileImage, setProfileImage] = useState(null);
+ const [photo,setPhoto] = useState(null);
+  const [profileImage, setProfileImage] = useState('');
   const [designFields, setDesignFields] = useState([
-    {category: 'UIUX', isCheck: false, value: 'UI/UX'},
-    {category: 'BIBX', isCheck: false, value: 'BI/BX'},
-    {category: '제품디자인', isCheck: false, value: '제품디자인'},
-    {category: '시각디자인', isCheck: false, value: '시각디자인'},
+    {category: 'UIUX', isCheck: false, value: 'UI/UX',key:1},
+    {category: 'BIBX', isCheck: false, value: 'BI/BX',key:2},
+    {category: '제품디자인', isCheck: false, value: '제품디자인',key:3},
+    {category: '시각디자인', isCheck: false, value: '시각디자인',key:4},
   ]);
 
   const onSubmit = async () => {
@@ -82,6 +86,10 @@ function Profile(props) {
       
     });
   };
+
+  useEffect(() => {
+    
+  }, [photo]);
 
 
   return (
@@ -118,18 +126,68 @@ function Profile(props) {
               height: WIDTH * 0.2666,
               borderRadius: 50,
               backgroundColor: '#e3e3e3',
-              alignItems: 'center',
-              justifyContent: 'center',
+             
+            }}
+            onPress={async () => {
+              await launchImageLibrary(
+                {
+                  mediaType: 'photo',
+                  quality: 1,
+                  maxWidth: 300,
+                  maxHeight: 300,
+                  includeBase64: true,
+                },
+                async response => {
+                  if (response && response.assets[0]) {
+                    /* 파일 확장자가 없으면 붙여서 전송 */
+                    let fileNameField = '';
+                    let fileName = '';
+                    if (hasExtension(response.assets[0].fileName)) {
+                      fileNameField = response.assets[0].fileName;
+                      fileName = response.assets[0].fileName;
+                      await setPhoto(response.assets[0].uri);
+                      await setProfileImage({uri:response.assets[0].uri,
+                        name: fileName, 
+                        type: response.assets[0].type});
+                      await setIsPhoto(true);
+                    } else {
+                      fileNameField = `${
+                        response.assets[0].fileName
+                      }.${mime.extension(response.assets[0].type)}`;
+                      fileName = `${
+                        response.assets[0].fileName
+                      }.${mime.extension(response.assets[0].type)}`;
+                      await setPhoto(response.assets[0].uri);
+                      await setProfileImage({uri:response.assets[0].uri,
+                                             name: fileName, 
+                                             type: response.assets[0].type});
+                      await setIsPhoto(true);
+                    }
+                    
+                  }
+                },
+              );
             }}>
+              {isPhoto?
+            <Image
+              source={{uri:photo}}
+              style={{
+                width: '100%',
+                height:'100%' ,
+                resizeMode: 'cover',
+                borderRadius: 50
+              }}
+            />:
             <Image
               source={require('../constants/images/EmptyProfile.png')}
               style={{
-                width: isPhoto ? '100%' : '45%',
-                height: isPhoto ? '100%' : '45%',
+                width:  '45%',
+                height:  '45%',
                 resizeMode: 'contain',
-                borderRadius: isPhoto ? 50 : 0,
+                borderRadius:0,
               }}
             />
+            }
           </TouchableOpacity>
           <Text
             style={{

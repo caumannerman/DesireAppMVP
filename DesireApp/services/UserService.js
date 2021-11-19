@@ -23,7 +23,7 @@ async function registerUser({
   // "ME", "MO"
   formData.append('acc_type', mmChoice);
 
-  //formData.append('profile_image', profileImage);
+  formData.append('profile_image', profileImage);
 
   return await axios
     .post(`${API_V1_URL}/users/`, formData)
