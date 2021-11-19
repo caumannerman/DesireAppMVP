@@ -142,7 +142,7 @@ function MyQuestion(props) {
       const  {userId} = await getAuth();
       setUserId(userId);
     })();
-    fetchQuestionList();
+    userId&& fetchQuestionList();
    
   }, []);
 

@@ -102,16 +102,17 @@ function Homepage(props){
   const TEMP_USER_NICKNAME = "새싹디자이너";
 
   const [designFields, setDesignFields] = useState([
-    {category: 'UIUX', isCheck: false, value: 'UI/UX'},
-    {category: 'BIBX', isCheck: false, value: 'BI/BX'},
-    {category: '제품디자인', isCheck: false, value: '제품디자인'},
-    {category: '시각디자인', isCheck: false, value: '시각디자인'},
+    {category: 'UIUX', isCheck: false, value: 'UI/UX',key:1},
+    {category: 'BIBX', isCheck: false, value: 'BI/BX',key:2},
+    {category: '제품디자인', isCheck: false, value: '제품디자인',key:3},
+    {category: '시각디자인', isCheck: false, value: '시각디자인',key:4},
   ]);
 
-  const {isLoggedIn,getAuth} = useAuth();
+  const {getAuth} = useAuth();
 
   const [questionList, setQuestionList] = useState([]);
   const fetchQuestionList = async () => {
+    
     await QuestionService.getList({
       offset: 0,
       limit: 1000,
@@ -120,6 +121,7 @@ function Homepage(props){
     }).then(res => {
       setQuestionList(res.data.results);
       console.log(res.data.results);
+      console.log("fetchQ"+userId);
     });
   };
 
@@ -141,14 +143,18 @@ function Homepage(props){
 
 
   useEffect(() => {
+    
     (async () => {
       const nowAuth = await getAuth();
       setNowAccType(nowAuth.accType);
       setUserId(nowAuth.userId);
+      const tmpauth = nowAuth.userId;
+      console.log("lllllllll"+tmpauth);
     })();
-  
-    fetchQuestionList();
-    fetchCRList();
+    
+    userId&&fetchQuestionList();
+    userId&&fetchCRList();
+   
     
   }, []);
 

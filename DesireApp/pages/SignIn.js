@@ -152,6 +152,7 @@ function Join(props) {
                   const logCheck = await isLoggedIn();
                   if(logCheck){
                     console.log(logCheck);
+                    console.log(getAuth());
                     props.navigation.navigate('Tab');
                   }
                   else{

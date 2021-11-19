@@ -54,7 +54,7 @@ function Chat(props){
       const  {userId} = await getAuth();
       setUserId(userId);
     })();
-    fetchCRList();
+    userId&&fetchCRList();
   }, []);
 
     return(
