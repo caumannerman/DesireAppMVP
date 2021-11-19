@@ -18,6 +18,7 @@ import UploadedAudioService from '../services/UploadedAudioService';
 import UploadedImageService from '../services/UploadedImageService';
 import UploadedFileService from '../services/UploadedFileService';
 import UploadedVideoService from '../services/UploadedVideoService';
+import useAuth from '../services/useAuth';
 
 import {launchCamera,launchImageLibrary} from 'react-native-image-picker';
 
@@ -89,10 +90,9 @@ const BackButton = styled.TouchableOpacity`
   margin-bottom: 10;
 `;
 
-
 function Question(props) {
-  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
-
+  const {getAuth} = useAuth();
+  const [userId, setUserId] = useState();
   const [isModalVisible, setisModalVisible] = useState(false);
   const [chooseData, setchooseData] = useState('');
   const [questionTitle, setQuestionTitle] = useState('');
@@ -113,15 +113,13 @@ function Question(props) {
     {category: '시각디자인', value: '시각디자인', isCheck: false},
   ]);
 
- 
-
   const onSubmit = async () => {
     const selectedCategoryNames = categories
       .filter(category => category.isCheck)
       .map(selectedCategory => selectedCategory.value);
 
     await QuestionService.create({
-      userId: TEMP_USER_ID,
+      userId: userId,
       title: questionTitle,
       questionText,
       categories: selectedCategoryNames,
@@ -132,17 +130,17 @@ function Question(props) {
   };
 
   const [photo, setPhoto] = useState(null);
- 
- useEffect(() => {
-    
+
+  useEffect(() => {
+    (async () => {
+      const {userId} = await getAuth();
+      setUserId(userId);
+    })();
     //if(chooseData==='GH'){ props.navigation.navigate("HomeStack")}
     //else{props.navigation.navigate("MyquestionStack"),props.navigation.navigate("MyQuestions",{tmp:chooseData})};
     //setData('')
-
   }, []);
 
-
- 
   return (
     <Container>
       <Background
