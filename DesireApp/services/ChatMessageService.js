@@ -6,15 +6,7 @@ import {getAuthHeader} from './utils';
 class ChatMessageService {
   PAGINATION_LIMIT = 30;
 
-  async create({
-    userId,
-    chatRoomId,
-    content,
-    uploadedAudioId,
-    uploadedImageId,
-    uploadedFileId,
-    uploadedVideoId,
-  }) {
+  async create({userId, chatRoomId, content}) {
     await refreshTokens();
 
     const authHeader = await getAuthHeader();
@@ -22,10 +14,6 @@ class ChatMessageService {
       user: userId,
       chatroom: chatRoomId,
       content,
-      uploaded_audio: uploadedAudioId,
-      uploaded_image: uploadedImageId,
-      uploaded_file: uploadedFileId,
-      uploaded_video: uploadedVideoId,
     };
 
     return await axios

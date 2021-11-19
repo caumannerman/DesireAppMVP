@@ -18,6 +18,7 @@ import UploadedAudioService from '../services/UploadedAudioService';
 import UploadedImageService from '../services/UploadedImageService';
 import UploadedFileService from '../services/UploadedFileService';
 import UploadedVideoService from '../services/UploadedVideoService';
+import useAuth from '../services/useAuth';
 
 import {launchCamera,launchImageLibrary} from 'react-native-image-picker';
 
@@ -89,10 +90,9 @@ const BackButton = styled.TouchableOpacity`
   margin-bottom: 10;
 `;
 
-
 function Question(props) {
-  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
-
+  const {getAuth} = useAuth();
+  const [userId, setUserId] = useState();
   const [isModalVisible, setisModalVisible] = useState(false);
   const [chooseData, setchooseData] = useState('');
   const [questionTitle, setQuestionTitle] = useState('');
@@ -113,35 +113,34 @@ function Question(props) {
     {category: '시각디자인', value: '시각디자인', isCheck: false},
   ]);
 
- 
-
   const onSubmit = async () => {
     const selectedCategoryNames = categories
       .filter(category => category.isCheck)
       .map(selectedCategory => selectedCategory.value);
 
     await QuestionService.create({
-      userId: TEMP_USER_ID,
+      userId: userId,
       title: questionTitle,
       questionText,
       categories: selectedCategoryNames,
+      uploadedImageId: photo?.id,
     }).then(() => {
       changeModalVisible(true);
     });
   };
 
   const [photo, setPhoto] = useState(null);
- 
- useEffect(() => {
-    
+
+  useEffect(() => {
+    (async () => {
+      const {userId} = await getAuth();
+      setUserId(userId);
+    })();
     //if(chooseData==='GH'){ props.navigation.navigate("HomeStack")}
     //else{props.navigation.navigate("MyquestionStack"),props.navigation.navigate("MyQuestions",{tmp:chooseData})};
     //setData('')
-
   }, []);
 
-
- 
   return (
     <Container>
       <Background
@@ -234,9 +233,20 @@ function Question(props) {
             </ScrollView>
           </View>
 
-          <View style={{width:'100%', height:30, flexDirection:'row'}}>
-            <Text style={{marginLeft:10,width: WIDTH* 0.25,alignSelf:'center'}}>첨부된 파일:</Text>
-            <Text style={{width: "70%",alignSelf:'center'}}>lkkl</Text>
+          <View style={{width: '100%', height: 30, flexDirection: 'row'}}>
+            <Text
+              style={{
+                marginLeft: 10,
+                width: WIDTH * 0.25,
+                alignSelf: 'center',
+              }}>
+              첨부된 파일:
+            </Text>
+            <Text
+              numberOfLines={1}
+              style={{flex: 1, width: '70%', alignSelf: 'center'}}>{`${
+              photo && photo.name ? photo.name : ''
+            }`}</Text>
           </View>
 
           <View
@@ -254,21 +264,35 @@ function Question(props) {
 -질문을 보내면 수정/삭제가 불가합니다.
 -모든 이미지 파일은 안전하게 워터마크가 부착되어집니다.
                 `}
-                value={questionText}
-                onChangeText={text=>setQuestionText(text)}
-         >
-                
-              </TextInput>
-             
+              value={questionText}
+              onChangeText={text => setQuestionText(text)}></TextInput>
           </View>
-     
-  
 
           <File>
-            <FileOpacity onPress={() => { launchImageLibrary({mediaType:'photo', quality:1, maxWidth:300,maxHeight:300,includeBase64:true}, response=>{
-              //console.log('kkk',response.assets[0].uri);
-              setPhoto(response.assets[0].uri)
-            })}}>
+            <FileOpacity
+              onPress={async () => {
+                await launchImageLibrary(
+                  {
+                    mediaType: 'photo',
+                    quality: 1,
+                    maxWidth: 300,
+                    maxHeight: 300,
+                    includeBase64: true,
+                  },
+                  async response => {
+                    if (response && response.assets[0]) {
+                      await UploadedImageService.create({
+                        name: response.assets[0].fileName,
+                        file: {
+                          uri: response.assets[0].uri,
+                          name: response.assets[0].fileName,
+                          type: response.assets[0].type,
+                        },
+                      }).then(res => setPhoto(res.data));
+                    }
+                  },
+                );
+              }}>
               <Image
                 source={require('../constants/images/question/image.png')}
                 resizeMode="contain"
