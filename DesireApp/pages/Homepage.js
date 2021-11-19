@@ -19,8 +19,8 @@ const Contents = styled.View`
   flex-direction: column;
 `;
 const Part = styled.TouchableOpacity`
-  height: ${WIDTH*0.3639};
-  width: ${WIDTH*0.3639-10};
+  height: ${HEIGHT*0.1489};
+  width: ${HEIGHT*0.1589};
   border-radius: 16px;
   margin-right: ${WIDTH*0.04};
   background: #ffffff;
@@ -77,7 +77,7 @@ const BText = styled.Text`
 const PartText = styled.Text`
   position: absolute;
   left: 11.45%;
-  top: 50%;
+  top: 60%;
   color: #828282;
   font-style: normal;
   font-weight: 500;
@@ -166,8 +166,8 @@ function Homepage(props){
                 <TouchableOpacity style={{height:'100%', width:40}} ><Image resizeMode="contain" style={{flex:1}} source={require('../constants/images/homepage/notifications_24px.png')}/></TouchableOpacity>
               </View>
 
-              <Text style={{position:'absolute', top:HEIGHT*0.1014, left:WIDTH*0.1111,color:'#929292', fontSize:14,fontWeight:'500'}}>  {TEMP_USER_NICKNAME}님, 환영합니다.</Text>
-              <View style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.1457,width:WIDTH*0.7778, height: WIDTH*0.5444, flexDirection:'column',borderRadius:16,borderWidth:1, borderColor:'#ebebeb', backgroundColor:'#ffffff'}}>
+              <Text style={{position:'absolute', top:HEIGHT*0.0894, left:WIDTH*0.1111,color:'#929292', fontSize:14,fontWeight:'500'}}>  {TEMP_USER_NICKNAME}님, 환영합니다.</Text>
+              <View style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.1299,width:WIDTH*0.7778, height: WIDTH*0.5044, flexDirection:'column',borderRadius:16,borderWidth:1, borderColor:'#ebebeb', backgroundColor:'#ffffff'}}>
                   <Text style={{position:'absolute', top:'11%', left:'7.14%',fontSize:16,fontWeight:'bold',color:'#2c2c2c'}}>디자인 일을 하며 생긴 어려움</Text>
                   {nowAccType==="ME"?
                   <Text style={{position:'absolute', top:'25.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>일을하며 생긴 어려움 바로 멘토님에게! </Text>:
@@ -187,7 +187,7 @@ function Homepage(props){
               </View>
 
                
-              <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.4514 , width: WIDTH*0.3, height:HEIGHT*0.033}} 
+              <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.4114 , width: WIDTH*0.3, height:HEIGHT*0.033}} 
               onPress={()=>{nowAccType==="ME"?props.navigation.navigate("MyquestionStack"):props.navigation.navigate("MyAnswerStack")}}>
                 
                 {nowAccType==="ME"?
@@ -197,7 +197,7 @@ function Homepage(props){
          
 
                 {nowAccType==='ME'?
-                <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.4943, height:WIDTH*0.3639}} > 
+                <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.4543, height:WIDTH*0.3639}} > 
                 {questionList.map(question => (
                   <Part onPress={() => {
                     const question_id = question.id;
@@ -205,7 +205,7 @@ function Homepage(props){
                   }}><PartTitle numberOfLines={2} ellipsizeMode="tail">{question.title}</PartTitle><PartReply>답장 {question.answer_count}개</PartReply><PartDate>{question.created_on.substring(2,4)}.{question.created_on.substring(5,7)}.{question.created_on.substring(8,10)}</PartDate></Part>
                 ))}
                 </ScrollView>:
-                <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.4943, height:WIDTH*0.3639}} > 
+                <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.4543, height:WIDTH*0.3639}} > 
                 {designFields.map(dfield => (
                   <Part onPress={() => {
                     const dfield_category = dfield.category;
@@ -218,18 +218,18 @@ function Homepage(props){
 
 
 
-              <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.7185, width: WIDTH*0.3, height:WIDTH*0.3639}} 
+              <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.6385, width: WIDTH*0.3, height:WIDTH*0.3639}} 
               onPress={()=>{props.navigation.navigate("ChatStack")}}>
                 <Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>1대1 채팅     »</Text>
                 </TouchableOpacity>
 
-                <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.7643, height:HEIGHT*0.2}} > 
+                <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.6793, height:HEIGHT*0.2}} > 
                   {chatRoomList.map(chatroom => (
                   <Part  onPress={()=>{
                     const chatroomid = chatroom.id;
                     props.navigation.navigate("ChatPrivate", {chatroomid:chatroomid, chatrecipient:chatroom.recipient.nickname})}}>
                       <Image source={require('../constants/images/homepage/human.png')} ></Image>
-                      <PartText numberOfLines={2} ellipsizeMode="tail">{chatroom&&chatroom.latest_chat_message&&chatroom.latest_chat_message.content}</PartText>
+                      <PartText numberOfLines={1} ellipsizeMode="tail">{chatroom&&chatroom.latest_chat_message&&chatroom.latest_chat_message.content}</PartText>
                       <PartChat>채팅 중</PartChat>
                       <PartDate>{chatroom.created_on&&chatroom.created_on.slice(2,4)}.{chatroom.created_on&&chatroom.created_on.slice(5,7)}.{chatroom.created_on&&chatroom.created_on.slice(8,10)}</PartDate>
                   </Part>
