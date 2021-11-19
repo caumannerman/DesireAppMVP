@@ -7,7 +7,15 @@ import {getAuthHeader} from './utils';
 class AnswerService {
   PAGINATION_LIMIT = 20;
 
-  async create({userId, content, questionId}) {
+  async create({
+    userId,
+    content,
+    questionId,
+    uploadedAudioId,
+    uploadedImageId,
+    uploadedFileId,
+    uploadedVideoId,
+  }) {
     await refreshTokens();
 
     const authHeader = await getAuthHeader();
@@ -15,6 +23,10 @@ class AnswerService {
       user: userId,
       content,
       question: questionId,
+      uploaded_audio: uploadedAudioId,
+      uploaded_image: uploadedImageId,
+      uploaded_file: uploadedFileId,
+      uploaded_video: uploadedVideoId,
     };
 
     return await axios
