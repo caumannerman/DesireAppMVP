@@ -139,7 +139,7 @@ function Reply(props){
                  
                   <View style={{width: '80%', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
                     <Text style={{fontWeight: '800', fontSize: 16, color:'#000000'}} >{nowQuestion.title}</Text>
-                    <Text style={{fontWeight: 'bold', fontSize: 12, color:'#000000'}}>{nowQuestion.created_on}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 12, color:'#000000'}}>{nowQuestion.created_on&&nowQuestion.created_on.slice(2,10)}</Text>
                   </View>
 
                   <View style={{ width:'77%', height: '45%'}}>
@@ -167,7 +167,11 @@ function Reply(props){
                                 props.navigation.navigate("ReplyDetail", {answerId:answer_id, answerRecipient:answer_recipient_id})}}>
                     
                     <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                      {answer.user.profile_image!= null?
+                      <Image source={{url:answer.user.profile_image}} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>:
                       <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                      }
+
                     </View>
                     
                     <View style={{flexDirection: 'column',width:'67%' }}>

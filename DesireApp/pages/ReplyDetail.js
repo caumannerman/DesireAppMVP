@@ -140,13 +140,14 @@ function ReplyDetail(props){
     
   };
 
-  
+  const [profImage, setProfImage] = useState(null);
 
 
   useEffect(() => {
     fetchAnswer();
     fetchAnswerSatisfactionList()
     checkChatRoom();
+    setProfImage(nowAnswer&&nowAnswer.results&&nowAnswer.results.user&&nowAnswer.results.user.profile_image);
   }, [nowAnswerSatisfaction]);
 
     return(
@@ -165,7 +166,10 @@ function ReplyDetail(props){
                                  >
                   
                   <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  {profImage!= null?
+                      <Image source={{url:profImage}} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>:
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                      }
                   </View>
                   
                   <View style={{flexDirection: 'column', width:'40%'}}>
