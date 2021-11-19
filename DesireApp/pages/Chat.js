@@ -41,7 +41,7 @@ function Chat(props){
     await ChatRoomService.getList({
       userId,
       ordering: '-created_on',
-      senderId: '8136385e-42af-493f-a938-f7b6fdc97e69',
+      senderId: userId,
     
     }).then(res => {
       setChatRoomList(res.data.results);
