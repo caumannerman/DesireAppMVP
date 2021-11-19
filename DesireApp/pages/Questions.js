@@ -145,9 +145,6 @@ function Question(props) {
       const {userId} = await getAuth();
       setUserId(userId);
     })();
-    //if(chooseData==='GH'){ props.navigation.navigate("HomeStack")}
-    //else{props.navigation.navigate("MyquestionStack"),props.navigation.navigate("MyQuestions",{tmp:chooseData})};
-    //setData('')
   }, [photo,video,document,audio]);
 
   return (
