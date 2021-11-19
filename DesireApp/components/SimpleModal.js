@@ -57,7 +57,7 @@ function SimpleModal(props) {
           onPress={() => {
             
             closeModal(false, 'GH');
-            
+            props.navigation.navigate("HomeStack");
           }}>
           <Text
             style={{
@@ -81,6 +81,8 @@ function SimpleModal(props) {
           }}
           onPress={() => {
             closeModal(false, 'MQ');
+            props.navigation.navigate("MyquestionStack");
+
             
           }}>
           <Text
