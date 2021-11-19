@@ -49,16 +49,21 @@ const Tab = () => {
     (loggedIn===false)?<SignInStack/>:
      
     <Tabs.Navigator
+      
       screenOptions={{
+        tabBarHideOnKeyboard: true,        
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {backgroundColor: '#ffffff'},
-      }}>
+      }}
+    >
       
       <Tabs.Screen
         name="HomeStack"
         component={HomeStack}
+        
         options={{
+          
           tabBarIcon: ({focused}) => (
             <View style={styles.view}>
               <Image
@@ -91,6 +96,7 @@ const Tab = () => {
         name="QuestionStack"
         component={QuestionStack}
         options={{
+          tabBarHideOnKeyboard:true,
           tabBarIcon: ({focused}) => (
             <View style={styles.view}>
               <Image
@@ -123,6 +129,7 @@ const Tab = () => {
         name="QBoardStack"
         component={QBoardStack}
         options={{
+          tabBarHideOnKeyboard:true,
           tabBarIcon: ({focused}) => (
             <View style={styles.view}>
               <Image
