@@ -19,7 +19,7 @@ import UploadedImageService from '../services/UploadedImageService';
 import UploadedFileService from '../services/UploadedFileService';
 import UploadedVideoService from '../services/UploadedVideoService';
 import useAuth from '../services/useAuth';
-
+import DocumentPicker from 'react-native-document-picker';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import * as mime from 'react-native-mime-types';
 import {hasExtension} from '../services/utils';
@@ -127,6 +127,9 @@ function Question(props) {
       categories: selectedCategoryNames,
       uploadedImageId: photo?.id,
       uploadedVideoId: video?.id,
+      uploadedAudioId: audio?.id,
+      uploadedFileId: document?.id
+
     }).then(() => {
       changeModalVisible(true);
     });
@@ -134,6 +137,8 @@ function Question(props) {
 
   const [photo, setPhoto] = useState(null);
   const [video, setVideo] = useState(null);
+  const [document, setDocument] = useState(null);
+  const [audio, setAudio] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -143,7 +148,7 @@ function Question(props) {
     //if(chooseData==='GH'){ props.navigation.navigate("HomeStack")}
     //else{props.navigation.navigate("MyquestionStack"),props.navigation.navigate("MyQuestions",{tmp:chooseData})};
     //setData('')
-  }, []);
+  }, [photo,video,document,audio]);
 
   return (
     <Container>
@@ -155,7 +160,7 @@ function Question(props) {
         <Contents>
           <TitleView>
             <Title>질문하기</Title>
-            <BackButton onPress={()=>{props.navigation.navigate("Homepage")}}>
+            <BackButton onPress={()=>{props.navigation.navigate("HomeStack")}}>
                   <Text style={{color: '#000000', fontSize: 15, fontWeight: '800', textAlign: 'center', marginRight:10}}>이전</Text>
                 </BackButton>
           </TitleView>
@@ -246,7 +251,7 @@ function Question(props) {
               }}>
               첨부된 파일:
             </Text>
-            {[photo, video].map(
+            {[photo, video,document,audio].map(
               media =>
                 media && (
                   <Text
@@ -368,14 +373,68 @@ function Question(props) {
               />
               <FileText>동영상</FileText>
             </FileOpacity>
-            <FileOpacity>
+            <FileOpacity
+             onPress={async () => {
+             
+              const res = await DocumentPicker.pick(
+                {
+                  type: [DocumentPicker.types.plainText,
+                    DocumentPicker.types.pdf,
+                    DocumentPicker.types.zip,
+                    DocumentPicker.types.csv,
+                    DocumentPicker.types.doc,
+                    DocumentPicker.types.docx,
+                    DocumentPicker.types.ppt,
+                    DocumentPicker.types.pptx,
+                    DocumentPicker.types.xls,
+                    DocumentPicker.types.xlsx,
+                    DocumentPicker.types.images],
+                });
+                console.log(res[0].name);
+                console.log("lslslls");
+                
+              
+                if (res && res[0]) {
+                  await UploadedFileService.create({
+                    name: res[0].name,
+                    file: {
+                      uri: res[0].uri,
+                      name: res[0].name,
+                      type: res[0].type,
+                    },
+                  }).then(res => setDocument(res.data));
+                }
+              
+              
+            }}>
               <Image
                 source={require('../constants/images/question/file.png')}
                 resizeMode="contain"
               />
               <FileText>파일</FileText>
             </FileOpacity>
-            <FileOpacity>
+            <FileOpacity
+            onPress={async () => {
+             
+              const res = await DocumentPicker.pick(
+                {
+                  type: [DocumentPicker.types.audio],
+                });
+                console.log(res[0].name);               
+              
+                if (res && res[0]) {
+                  await UploadedAudioService.create({
+                    name: res[0].name,
+                    file: {
+                      uri: res[0].uri,
+                      name: res[0].name,
+                      type: res[0].type,
+                    },
+                  }).then(res => setAudio(res.data));
+                }
+              
+              
+            }}>
               <Image
                 source={require('../constants/images/question/voice.png')}
                 resizeMode="contain"
@@ -411,6 +470,7 @@ function Question(props) {
               style={{alignItems: 'center', justifyContent: 'center'}}
               changeModalVisible={changeModalVisible}
               setData={setData}
+              navigation={props.navigation}
             />
           </Modal>
         </Contents>
