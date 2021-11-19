@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Text, View, TouchableOpacity, ScrollView, Image, Platform,Dimensions} from 'react-native'
 import QuestionService from '../services/QuestionService';
 import AnswerService from '../services/AnswerService';
+import useAuth from '../services/useAuth';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -79,7 +80,9 @@ const ReplyButton = styled.TouchableOpacity`
 
 
 function Reply(props){
-
+  const {getAuth} = useAuth();
+  const [userId, setUserId] = useState();
+  
   const [isQVisible, setQVisible] = useState(false);
 
   const changeQVisible = (bool) => {
@@ -115,6 +118,10 @@ function Reply(props){
   }
 
   useEffect(() => {
+    (async ()=> {
+      const  {userId} = await getAuth();
+      setUserId(userId);
+    })();
     fetchAnswer();
     fetchQuestion();
   }, []);

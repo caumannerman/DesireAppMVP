@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView, TextInput} from 'react-native';
 import ChatMessageService from '../services/ChatMessageService';
+import useAuth from '../services/useAuth';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -81,9 +82,9 @@ const ChatText = styled.Text`
 `;
 
 function ChatPrivate(props){
-
-  // 임시로 넣어놓은 내 아이디 
-  const tmpMyId = '8136385e-42af-493f-a938-f7b6fdc97e69'
+  const {getAuth} = useAuth();
+   const [userId, setUserId] = useState();
+   
 
     const [nowChat, setNowChat] = useState('');
    
@@ -93,6 +94,7 @@ function ChatPrivate(props){
 
     const fetchChatMessages = async () => {
       await ChatMessageService.getList({
+        userId:userId,
         ordering: '-created_on - descending',
         chatRoomId: props.route.params.chatroomid,
       
@@ -103,16 +105,19 @@ function ChatPrivate(props){
     };
   
     useEffect(() => {
+      (async ()=> {
+        const  {userId} = await getAuth();
+        setUserId(userId);
+      })();
       fetchChatMessages();
     }, );
     
-    const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
     // 전송버튼 누르면 chat을 서버로 보냄
    
     const postChatMessage = async () => {
   
       await ChatMessageService.create({
-        userId: TEMP_USER_ID,
+        userId: userId,
         chatRoomId: props.route.params.chatroomid,
         content: nowChat,
         
@@ -156,7 +161,7 @@ function ChatPrivate(props){
                   <Text style={{textAlign: 'center', marginTop:30, marginBottom: 30}}>멘토님과 1대1 매칭을 통해 궁금한 것을 물어보세요.</Text>
                   
                   {chatMessages.map(item => (
-                    (item.user.id===tmpMyId?
+                    (item.user.id===userId?
                       <MyChatView>
                         <ChatText>
                           {item.content}

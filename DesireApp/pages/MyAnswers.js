@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Text, View, TouchableOpacity, ScrollView, Image, Platform,Dimensions} from 'react-native'
 import AnswerService from '../services/AnswerService';
+import useAuth from '../services/useAuth';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -78,7 +79,10 @@ const ReplyButton = styled.TouchableOpacity`
 
 
 function MyAnswers(props){
-  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+  const {getAuth} = useAuth();
+   const [userId, setUserId] = useState();
+   
+  
 
   //User id가 한 Answer들을 저장할 곳
   const [nowIdMyAnswer, setNowIdMyAnswer] = useState([]);
@@ -88,7 +92,7 @@ function MyAnswers(props){
       offset: 0,
       limit: 1000,
       ordering: '-created_on',
-      userId:TEMP_USER_ID,
+      userId:userId,
     }).then(res => {
       setNowIdMyAnswer(res.data.results);
       console.log(res.data.results);
@@ -97,6 +101,10 @@ function MyAnswers(props){
   }
 
   useEffect(() => {
+    (async ()=> {
+      const  {userId} = await getAuth();
+      setUserId(userId);
+    })();
     fetchAnswer();
   }, []);
 

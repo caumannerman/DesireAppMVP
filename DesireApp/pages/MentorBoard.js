@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Text, View, TouchableOpacity,Dimensions, ScrollView,FlatList} from 'react-native'
 import produce from 'immer';
 import QuestionService from '../services/QuestionService';
+import useAuth from '../services/useAuth';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -21,14 +22,16 @@ const Contents = styled.View`
 `;
 
 function MentorBoard(props){
-  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+  const {getAuth} = useAuth();
+   const [userId, setUserId] = useState();
+   
   const [lastChoice, setLastChoice] = useState('UI/UX');
 
   const [categories, setCategories] = useState([
-    {category: 'UIUX', value: 'UI/UX', isCheck: false},
-    {category: 'BIBX', value: 'BI/BX', isCheck: false},
-    {category: '제품디자인', value: '제품디자인', isCheck: false},
-    {category: '시각디자인', value: '시각디자인', isCheck: false},
+    {category: 'UIUX', value: 'UI/UX', isCheck: false,key:1},
+    {category: 'BIBX', value: 'BI/BX', isCheck: false,key:2},
+    {category: '제품디자인', value: '제품디자인', isCheck: false,key:3},
+    {category: '시각디자인', value: '시각디자인', isCheck: false,key:4},
   ]);
    //lastChoice가 바뀔 때마다 load해와서 렌더링 해줘야한다. 
    const [questionList, setQuestionList] = useState([]);
@@ -47,6 +50,10 @@ function MentorBoard(props){
    };
 
   useEffect(() => {
+    (async ()=> {
+      const  {userId} = await getAuth();
+      setUserId(userId);
+    })();
      fetchQuestionList();
   },[lastChoice] );
 

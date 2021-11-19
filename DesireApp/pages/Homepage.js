@@ -5,6 +5,8 @@ import { Dimensions,  ScrollView,View, Text, TouchableOpacity} from 'react-nativ
 import ChatRoomService from '../services/ChatRoomService';
 import useAuth from '../services/useAuth';
 import QuestionService from '../services/QuestionService';
+
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -93,8 +95,10 @@ const Image = styled.Image`
 `;
 
 function Homepage(props){
+ 
+   const [userId, setUserId] = useState();
+   
   
-  const TEMP_USER_ID = "8136385e-42af-493f-a938-f7b6fdc97e69";
   const TEMP_USER_NICKNAME = "새싹디자이너";
 
   const [designFields, setDesignFields] = useState([
@@ -112,7 +116,7 @@ function Homepage(props){
       offset: 0,
       limit: 1000,
       ordering: '-created_on',
-      userId: TEMP_USER_ID,
+      userId: userId,
     }).then(res => {
       setQuestionList(res.data.results);
       console.log(res.data.results);
@@ -124,7 +128,7 @@ function Homepage(props){
   const fetchCRList = async () => {
     await ChatRoomService.getList({
       ordering: '-created_on',
-      senderId: TEMP_USER_ID,
+      senderId: userId,
     
     }).then(res => {
       setChatRoomList(res.data.results);
@@ -140,10 +144,10 @@ function Homepage(props){
     (async () => {
       const nowAuth = await getAuth();
       setNowAccType(nowAuth.accType);
+      setUserId(nowAuth.userId);
     })();
+  
     fetchQuestionList();
-
-
     fetchCRList();
     
   }, []);

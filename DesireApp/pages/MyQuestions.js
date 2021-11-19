@@ -8,7 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import QuestionService from '../services/QuestionService';
-
+import useAuth from '../services/useAuth';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -119,6 +119,10 @@ const PartReply = styled.Text`
 `;
 
 function MyQuestion(props) {
+  const {getAuth} = useAuth();
+   const [userId, setUserId] = useState();
+   
+
   const [questionList, setQuestionList] = useState([]);
 
   const fetchQuestionList = async () => {
@@ -126,7 +130,7 @@ function MyQuestion(props) {
       offset: 0,
       limit: 1000,
       ordering: '-created_on',
-      userId: '8136385e-42af-493f-a938-f7b6fdc97e69',
+      userId: userId,
     }).then(res => {
       setQuestionList(res.data.results);
       console.log(res.data.results);
@@ -134,6 +138,10 @@ function MyQuestion(props) {
   };
 
   useEffect(() => {
+    (async ()=> {
+      const  {userId} = await getAuth();
+      setUserId(userId);
+    })();
     fetchQuestionList();
    
   }, []);

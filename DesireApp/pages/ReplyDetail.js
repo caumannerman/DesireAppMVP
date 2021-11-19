@@ -6,6 +6,7 @@ import Satisfaction from '../components/Satisfaction';
 import AnswerService from '../services/AnswerService';
 import AnswerEvaluationService from '../services/AnswerEvaluationService';
 import ChatRoomService from '../services/ChatRoomService';
+import useAuth from '../services/useAuth';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -64,9 +65,8 @@ const BackText = styled.Text`
 
 
 function ReplyDetail(props){
-
-
-  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+  const {getAuth} = useAuth();
+   const [userId, setUserId] = useState();
 
 
   const [isModalVisible, setisModalVisible] = useState(false);
@@ -105,7 +105,7 @@ function ReplyDetail(props){
 
   const fetchAnswerSatisfactionList = async () => {
     await AnswerEvaluationService.getList({
-      userId: TEMP_USER_ID,
+      userId: userId,
       answerId:props.route.params.answerId
     }).then(res => {
       setNAS(res.data.count);
@@ -117,7 +117,7 @@ function ReplyDetail(props){
   const checkChatRoom = async () => {
     
     await ChatRoomService.getList({
-      senderId: TEMP_USER_ID,
+      senderId: userId,
       recipientId:props.route.params.answerRecipient,
     }).then(res => {
        setChatRoomNum(res.data.count);
@@ -129,7 +129,7 @@ function ReplyDetail(props){
   const onSubmit = async () => {
 
     await ChatRoomService.create({
-      senderId: TEMP_USER_ID,
+      senderId: userId,
       recipientId: props.route.params.answerRecipient,
      
     }).then(() => {
@@ -144,6 +144,10 @@ function ReplyDetail(props){
 
 
   useEffect(() => {
+    (async ()=> {
+      const  {userId} = await getAuth();
+      setUserId(userId);
+    })();
     fetchAnswer();
     fetchAnswerSatisfactionList()
     checkChatRoom();

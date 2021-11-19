@@ -13,6 +13,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import * as mime from 'react-native-mime-types';
 import {hasExtension} from '../services/utils';
 
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -87,7 +88,9 @@ const BackText = styled.Text`
 
 function MentorReply(props){
 
-  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+   
+
+  
   const [answerText, setAnswerText] = useState('');
   const {getAuth} = useAuth();
   const [userId, setUserId] = useState();
@@ -95,7 +98,7 @@ function MentorReply(props){
   const onSubmit = async () => {
 
     await AnswerService.create({
-      userId: TEMP_USER_ID,
+      userId: userId,
       content: answerText,
       questionId: props.route.params.questionid,
       uploadedImageId: photo?.id,
@@ -119,6 +122,7 @@ function MentorReply(props){
       const {userId} = await getAuth();
       setUserId(userId);
     })();
+    
   }, [photo,video,document,audio]);
 
 

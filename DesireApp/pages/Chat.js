@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView} from 'react-native';
 import ChatRoomService from '../services/ChatRoomService';
+import useAuth from '../services/useAuth';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -30,13 +31,15 @@ const Glass = styled.TouchableOpacity`
 
 function Chat(props){
 
-
+   const {getAuth} = useAuth();
+   const [userId, setUserId] = useState();
   //props로 받은 answerId로 가져온 answer정보를 담을 곳
   const [chatRoomList, setChatRoomList] = useState([]);
 
   
   const fetchCRList = async () => {
     await ChatRoomService.getList({
+      userId,
       ordering: '-created_on',
       senderId: '8136385e-42af-493f-a938-f7b6fdc97e69',
     
@@ -47,6 +50,10 @@ function Chat(props){
   };
 
   useEffect(() => {
+    (async ()=> {
+      const  {userId} = await getAuth();
+      setUserId(userId);
+    })();
     fetchCRList();
   }, []);
 

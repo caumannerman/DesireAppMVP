@@ -7,6 +7,7 @@ import AnswerService from '../services/AnswerService';
 import AnswerEvaluationService from '../services/AnswerEvaluationService';
 import ChatRoomService from '../services/ChatRoomService';
 
+
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
@@ -65,8 +66,7 @@ const BackText = styled.Text`
 
 function MyAnswerDetail(props){
 
-
-  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
+   
 
   //props로 받은 answerId로 가져온 answer정보를 담을 곳
   const [nowAnswer, setNowAnswer] = useState({});
@@ -84,6 +84,7 @@ function MyAnswerDetail(props){
 
 
   useEffect(() => {
+   
     fetchAnswer();
   }, []);
 
