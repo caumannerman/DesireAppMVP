@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Dimensions,  ScrollView,View, Text, TouchableOpacity} from 'react-native';
-import QuestionService from '../services/QuestionService';
 import ChatRoomService from '../services/ChatRoomService';
-
+import useAuth from '../services/useAuth';
+import QuestionService from '../services/QuestionService';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -97,6 +97,15 @@ function Homepage(props){
   const TEMP_USER_ID = "8136385e-42af-493f-a938-f7b6fdc97e69";
   const TEMP_USER_NICKNAME = "새싹디자이너";
 
+  const [designFields, setDesignFields] = useState([
+    {category: 'UIUX', isCheck: false, value: 'UI/UX'},
+    {category: 'BIBX', isCheck: false, value: 'BI/BX'},
+    {category: '제품디자인', isCheck: false, value: '제품디자인'},
+    {category: '시각디자인', isCheck: false, value: '시각디자인'},
+  ]);
+
+  const {isLoggedIn,getAuth} = useAuth();
+
   const [questionList, setQuestionList] = useState([]);
   const fetchQuestionList = async () => {
     await QuestionService.getList({
@@ -123,9 +132,20 @@ function Homepage(props){
     });
   };
 
+  const [nowAccType, setNowAccType] = useState('');
+  
+
+
   useEffect(() => {
+    (async () => {
+      const nowAuth = await getAuth();
+      setNowAccType(nowAuth.accType);
+    })();
     fetchQuestionList();
+
+
     fetchCRList();
+    
   }, []);
 
 
@@ -149,11 +169,17 @@ function Homepage(props){
               <Text style={{position:'absolute', top:HEIGHT*0.1014, left:WIDTH*0.1111,color:'#929292', fontSize:14,fontWeight:'500'}}>  {TEMP_USER_NICKNAME}님, 환영합니다.</Text>
               <View style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.1457,width:WIDTH*0.7778, height: WIDTH*0.5444, flexDirection:'column',borderRadius:16,borderWidth:1, borderColor:'#ebebeb', backgroundColor:'#ffffff'}}>
                   <Text style={{position:'absolute', top:'11%', left:'7.14%',fontSize:16,fontWeight:'bold',color:'#2c2c2c'}}>디자인 일을 하며 생긴 어려움</Text>
-                  <Text style={{position:'absolute', top:'25.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>일을하며 생긴 어려움 바로 멘토님에게! </Text>
-                  <Text style={{position:'absolute', top:'35.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>마음 편하게 언제 어디든 질문하세요.</Text>
+                  {nowAccType==="ME"?
+                  <Text style={{position:'absolute', top:'25.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>일을하며 생긴 어려움 바로 멘토님에게! </Text>:
+                  <Text style={{position:'absolute', top:'25.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>일을하며 어려움이 생긴 후배에게 </Text>}
+                   {nowAccType==="ME"?
+                  <Text style={{position:'absolute', top:'35.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>마음 편하게 언제 어디든 질문하세요.</Text>:
+                  <Text style={{position:'absolute', top:'35.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>답변을 하고 리워드를 받으세요.</Text>}
 
-                  <TouchableOpacity style={{position:'absolute', top:'51.6%', left:'7.14%',backgroundColor:'#952bff', borderRadius:4,justifyContent:'center',width:WIDTH*0.2987,height:WIDTH*0.1049}} onPress={()=>{props.navigation.navigate("QuestionStack")}}>
-                      <BText>질문하기</BText>
+                  <TouchableOpacity style={{position:'absolute', top:'51.6%', left:'7.14%',backgroundColor:'#952bff', borderRadius:4,justifyContent:'center',width:WIDTH*0.2987,height:WIDTH*0.1049}} 
+                  onPress={()=>{nowAccType==="ME"?props.navigation.navigate("QuestionStack"):props.navigation.navigate("QBoardStack")}}>
+                  {nowAccType==="ME"?
+                      <BText>질문하기</BText>:<BText>답변하기</BText>}
                   </TouchableOpacity>
 
                   <Image resizeMode="contain" source={require('../constants/images/homepage/group2173.png')} style={{position:'absolute', top:'51.6%', left:'57.14%'}}/>
@@ -162,12 +188,15 @@ function Homepage(props){
 
                
               <TouchableOpacity style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.4514 , width: WIDTH*0.3, height:HEIGHT*0.033}} 
-              onPress={()=>{props.navigation.navigate("MyquestionStack")}}>
-                <Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>내가 한 질문  »</Text>
+              onPress={()=>{nowAccType==="ME"?props.navigation.navigate("MyquestionStack"):props.navigation.navigate("MyAnswerStack")}}>
+                
+                {nowAccType==="ME"?
+                <Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>내가 한 질문  »</Text>:
+                <Text style={{fontSize:16,fontWeight:'normal',fontWeight:'500',color:'#000000'}}>답변 게시판  »</Text>}
                 </TouchableOpacity>
          
 
- 
+                {nowAccType==='ME'?
                 <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.4943, height:WIDTH*0.3639}} > 
                 {questionList.map(question => (
                   <Part onPress={() => {
@@ -175,7 +204,16 @@ function Homepage(props){
                     props.navigation.navigate('Reply', {questionId:question_id});
                   }}><PartTitle numberOfLines={2} ellipsizeMode="tail">{question.title}</PartTitle><PartReply>답장 {question.answer_count}개</PartReply><PartDate>{question.created_on.substring(2,4)}.{question.created_on.substring(5,7)}.{question.created_on.substring(8,10)}</PartDate></Part>
                 ))}
+                </ScrollView>:
+                <ScrollView horizontal={true} style = {{position:'absolute',left:WIDTH*0.1111, top:HEIGHT*0.4943, height:WIDTH*0.3639}} > 
+                {designFields.map(dfield => (
+                  <Part onPress={() => {
+                    const dfield_category = dfield.category;
+                    props.navigation.navigate('QBoardStack');
+                  }}><PartTitle numberOfLines={2} ellipsizeMode="tail">{dfield.category}{"\n"}게시판</PartTitle><PartReply>입장하기</PartReply></Part>
+                ))}
                 </ScrollView>
+                }
              
 
 

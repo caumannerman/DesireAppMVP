@@ -5130,6 +5130,11 @@
   "resolved" "https://registry.npmjs.org/mime-db/-/mime-db-1.50.0.tgz"
   "version" "1.50.0"
 
+"mime-db@~1.37.0":
+  "integrity" "sha512-R3C4db6bgQhlIhPU48fUtdVmKnflq+hRdad7IyKhtFj06VPNVdk2RhiYL3UjQIlso8L+YxAtFkobT0VK+S/ybg=="
+  "resolved" "https://registry.npmjs.org/mime-db/-/mime-db-1.37.0.tgz"
+  "version" "1.37.0"
+
 "mime-types@^2.1.12", "mime-types@^2.1.27", "mime-types@~2.1.19", "mime-types@~2.1.24":
   "integrity" "sha512-plLElXp7pRDd0bNZHw+nMd52vRYjLwQjygaNg7ddJ2uJtTlmnTCjWuPKxVu6//AdaRuME84SvLW91sIkBqGT0g=="
   "resolved" "https://registry.npmjs.org/mime-types/-/mime-types-2.1.33.tgz"
@@ -5917,6 +5922,13 @@
   "integrity" "sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg=="
   "resolved" "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz"
   "version" "2.5.6"
+
+"react-native-mime-types@^2.3.0":
+  "integrity" "sha512-9l/kkT1QM0i0xAKkOADkP6jIMhqiS+R/eSKBS/lsUmuMYMqboClyrwTFFZwUcaVIN0SpeH4wOKhYTqCnFgRsEw=="
+  "resolved" "https://registry.npmjs.org/react-native-mime-types/-/react-native-mime-types-2.3.0.tgz"
+  "version" "2.3.0"
+  dependencies:
+    "mime-db" "~1.37.0"
 
 "react-native-safe-area-context@^3.3.2", "react-native-safe-area-context@>= 3.0.0":
   "integrity" "sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q=="
