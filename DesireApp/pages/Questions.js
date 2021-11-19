@@ -126,6 +126,7 @@ function Question(props) {
       questionText,
       categories: selectedCategoryNames,
       uploadedImageId: photo?.id,
+      uploadedVideoId: video?.id,
     }).then(() => {
       changeModalVisible(true);
     });
@@ -268,7 +269,7 @@ function Question(props) {
             }}>
             <TextInput
               style={{width: '90%', height: '100%'}}
-              placeholder={`궁금한 내용을 질문해주세요 
+              placeholder={`궁금한 내용을 질문해주세요
 -명확한상황 설명과 받고자 하는 답변내용을 적어주세요
 -질문을 보내면 수정/삭제가 불가합니다.
 -모든 이미지 파일은 안전하게 워터마크가 부착되어집니다.
@@ -383,7 +384,7 @@ function Question(props) {
             </FileOpacity>
           </File>
 
-          
+
 
           <TouchableOpacity
             style={{
