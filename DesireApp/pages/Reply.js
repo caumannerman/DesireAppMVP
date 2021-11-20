@@ -175,10 +175,10 @@ function Reply(props){
                                               const answer_recipient_id = answer.user.id;
                                 props.navigation.navigate("ReplyDetail", {answerId:answer_id, answerRecipient:answer_recipient_id})}}>
                     
-                    <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <View style={{borderWidth: 1 , borderColor:'#ffaacc', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
                       {answer.user.profile_image!= null?
-                      <Image source={{url:answer.user.profile_image}} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>:
-                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                      <Image source={{url:answer.user.profile_image}} resizeMode='cover' style={{width: '100%', height: '100%',borderRadius:50}}></Image>:
+                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='cover' style={{width: '100%', height: '100%',borderRadius:50}}></Image>
                       }
 
                     </View>
