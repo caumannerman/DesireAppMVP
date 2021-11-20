@@ -121,6 +121,7 @@ function MentorReply(props){
     (async () => {
       const {userId} = await getAuth();
       setUserId(userId);
+      
     })();
     
   }, [photo,video,document,audio]);
@@ -135,7 +136,7 @@ function MentorReply(props){
 
 
               <TitleView>
-                <Title>답변하기s</Title>
+                <Title>답변하기</Title>
                 <BackButton onPress={()=>{props.navigation.goBack()}}><BackText>이전</BackText></BackButton>
               </TitleView>
               

@@ -111,26 +111,26 @@ function Homepage(props){
   const {getAuth} = useAuth();
 
   const [questionList, setQuestionList] = useState([]);
-  const fetchQuestionList = async () => {
+  const fetchQuestionList = async (tempUserId) => {
     
     await QuestionService.getList({
       offset: 0,
       limit: 1000,
       ordering: '-created_on',
-      userId: userId,
+      userId: tempUserId,
     }).then(res => {
       setQuestionList(res.data.results);
       console.log(res.data.results);
-      console.log("fetchQ"+userId);
+      console.log("fetchQ"+tempUserId);
     });
   };
 
   //props로 받은 answerId로 가져온 answer정보를 담을 곳--내가 sender인 채팅방만 가져오면 됨 
   const [chatRoomList, setChatRoomList] = useState([]);
-  const fetchCRList = async () => {
+  const fetchCRList = async (tempUserId) => {
     await ChatRoomService.getList({
       ordering: '-created_on',
-      senderId: userId,
+      senderId: tempUserId,
     
     }).then(res => {
       setChatRoomList(res.data.results);
@@ -145,15 +145,17 @@ function Homepage(props){
   useEffect(() => {
     
     (async () => {
-      const nowAuth = await getAuth();
-      setNowAccType(nowAuth.accType);
-      setUserId(nowAuth.userId);
-      const tmpauth = nowAuth.userId;
-      console.log("lllllllll"+tmpauth);
+
+        const  {userId} = await getAuth();
+        setUserId(userId);
+        const  {accType} = await getAuth();
+        setNowAccType(accType);
+      
+      const tempUserId = userId;
+      await fetchQuestionList(tempUserId);
+      await fetchCRList(tempUserId);
     })();
-    
-    userId&&fetchQuestionList();
-    userId&&fetchCRList();
+
    
     
   }, []);

@@ -36,7 +36,7 @@ function MentorBoard(props){
    //lastChoice가 바뀔 때마다 load해와서 렌더링 해줘야한다. 
    const [questionList, setQuestionList] = useState([]);
 
-   const fetchQuestionList = async () => {
+   const fetchQuestionList = async (tempUserId) => {
      const lastC = lastChoice;
      await QuestionService.getList({
        offset: 0,
@@ -53,8 +53,10 @@ function MentorBoard(props){
     (async ()=> {
       const  {userId} = await getAuth();
       setUserId(userId);
+      const tempUserId = userId;
+      await fetchQuestionList(tempUserId);
     })();
-     fetchQuestionList();
+   
   },[lastChoice] );
 
 

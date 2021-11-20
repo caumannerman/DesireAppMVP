@@ -103,9 +103,9 @@ function ReplyDetail(props){
     });
   };
 
-  const fetchAnswerSatisfactionList = async () => {
+  const fetchAnswerSatisfactionList = async (tempUserId) => {
     await AnswerEvaluationService.getList({
-      userId: userId,
+      userId: tempUserId,
       answerId:props.route.params.answerId
     }).then(res => {
       setNAS(res.data.count);
@@ -114,10 +114,10 @@ function ReplyDetail(props){
     });
   };
 
-  const checkChatRoom = async () => {
+  const checkChatRoom = async (tempUserId) => {
     
     await ChatRoomService.getList({
-      senderId: userId,
+      senderId: tempUserId,
       recipientId:props.route.params.answerRecipient,
     }).then(res => {
        setChatRoomNum(res.data.count);
@@ -147,11 +147,14 @@ function ReplyDetail(props){
     (async ()=> {
       const  {userId} = await getAuth();
       setUserId(userId);
+      const tempUserId = userId;
+      await fetchAnswer();
+      await fetchAnswerSatisfactionList(tempUserId);
+      await fetchChatRoom(tempUserId);
+      await fetchAnswer(tempUserId);
     })();
-    fetchAnswer();
-    fetchAnswerSatisfactionList()
-    checkChatRoom();
-    setProfImage(nowAnswer&&nowAnswer.results&&nowAnswer.results.user&&nowAnswer.results.user.profile_image);
+   
+    userId&&setProfImage(nowAnswer&&nowAnswer.results&&nowAnswer.results.user&&nowAnswer.results.user.profile_image);
   }, [nowAnswerSatisfaction]);
 
     return(

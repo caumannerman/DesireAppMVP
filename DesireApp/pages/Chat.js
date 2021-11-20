@@ -37,11 +37,11 @@ function Chat(props){
   const [chatRoomList, setChatRoomList] = useState([]);
 
   
-  const fetchCRList = async () => {
+  const fetchCRList = async (tempUserId) => {
     await ChatRoomService.getList({
       userId,
       ordering: '-created_on',
-      senderId: userId,
+      senderId: tempUserId,
     
     }).then(res => {
       setChatRoomList(res.data.results);
@@ -53,8 +53,10 @@ function Chat(props){
     (async ()=> {
       const  {userId} = await getAuth();
       setUserId(userId);
+      const tempUserId = userId;
+      await fetchCRList(tempUserId);
     })();
-    userId&&fetchCRList();
+ 
   }, []);
 
     return(

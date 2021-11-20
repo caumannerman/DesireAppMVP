@@ -87,12 +87,12 @@ function MyAnswers(props){
   //User id가 한 Answer들을 저장할 곳
   const [nowIdMyAnswer, setNowIdMyAnswer] = useState([]);
 
-  const fetchAnswer = async() =>{
+  const fetchAnswer = async(tempUserId) =>{
     await AnswerService.getList({
       offset: 0,
       limit: 1000,
       ordering: '-created_on',
-      userId:userId,
+      userId:tempUserId,
     }).then(res => {
       setNowIdMyAnswer(res.data.results);
       console.log(res.data.results);
@@ -103,9 +103,12 @@ function MyAnswers(props){
   useEffect(() => {
     (async ()=> {
       const  {userId} = await getAuth();
+      console.log(userId);
       setUserId(userId);
+      const tempUserId = userId;
+      await fetchAnswer(tempUserId);
     })();
-    fetchAnswer();
+
   }, []);
 
   

@@ -92,9 +92,9 @@ function ChatPrivate(props){
       //props로 받은 answerId로 가져온 answer정보를 담을 곳
     const [chatMessages, setChatMessages] = useState([]);
 
-    const fetchChatMessages = async () => {
+    const fetchChatMessages = async (tempUserId) => {
       await ChatMessageService.getList({
-        userId:userId,
+        userId:tempUserId,
         ordering: '-created_on - descending',
         chatRoomId: props.route.params.chatroomid,
       
@@ -108,8 +108,10 @@ function ChatPrivate(props){
       (async ()=> {
         const  {userId} = await getAuth();
         setUserId(userId);
+        const tempUserId = userId;
+      await fetchChatMessages(tempUserId);
       })();
-      userId&&fetchChatMessages();
+  
     }, );
     
     // 전송버튼 누르면 chat을 서버로 보냄

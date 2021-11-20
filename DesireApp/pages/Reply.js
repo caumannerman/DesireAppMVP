@@ -94,7 +94,7 @@ function Reply(props){
   //해당 질문에 달린 Answer들을 저장할 곳
   const [nowQuestionAnswer, setNowQuestionAnswer] = useState([]);
 
-  const fetchQuestion = async () => {
+  const fetchQuestion = async (tempUserId) => {
     await QuestionService.getOne({
       id: props.route.params.questionId,
     }).then(res => {
@@ -103,7 +103,7 @@ function Reply(props){
     });
   };
 
-  const fetchAnswer = async() =>{
+  const fetchAnswer = async(tempUserId) =>{
     await AnswerService.getList({
       offset: 0,
       limit: 1000,
@@ -121,9 +121,11 @@ function Reply(props){
     (async ()=> {
       const  {userId} = await getAuth();
       setUserId(userId);
+      const tempUserId = userId;
+      await fetchAnswer(tempUserId);
+      await fetchQuestion(tempUserId);
     })();
-    fetchAnswer();
-    fetchQuestion();
+  
   }, []);
 
   

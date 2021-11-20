@@ -120,18 +120,20 @@ const PartReply = styled.Text`
 
 function MyQuestion(props) {
   const {getAuth} = useAuth();
-   const [userId, setUserId] = useState();
+   const [userId, setUserId] = useState(null);
    
 
   const [questionList, setQuestionList] = useState([]);
 
-  const fetchQuestionList = async () => {
+  const fetchQuestionList = async (tempUserId) => {
+    
     await QuestionService.getList({
       offset: 0,
       limit: 1000,
       ordering: '-created_on',
-      userId: userId,
+      userId: tempUserId,
     }).then(res => {
+      console.log(tempUserId);
       setQuestionList(res.data.results);
       console.log(res.data.results);
     });
@@ -141,8 +143,11 @@ function MyQuestion(props) {
     (async ()=> {
       const  {userId} = await getAuth();
       setUserId(userId);
+      const tempUserId = userId;
+      await fetchQuestionList(tempUserId);
     })();
-    userId&& fetchQuestionList();
+   
+   
    
   }, []);
 
