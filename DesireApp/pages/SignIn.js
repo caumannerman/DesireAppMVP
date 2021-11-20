@@ -119,6 +119,7 @@ function Join(props) {
               onChangeText={text => {
                 setEmail(text);
               }}
+              autoCapitalize="none"
             />
             <TextInput
               placeholder="비밀번호"
@@ -126,7 +127,7 @@ function Join(props) {
               secureTextEntry={true}
               onChangeText={text => {
                 setPassword(text);
-              }}
+              }}autoCapitalize="none"
             />
 
             <Button
