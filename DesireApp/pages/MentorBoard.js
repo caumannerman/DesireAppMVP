@@ -107,8 +107,8 @@ function MentorBoard(props){
 
                 </ScrollView>
               </View>
-              <View style={{  top:HEIGHT*0.2019,width:'100%',height:'100%'}}>
-              <ScrollView style={{ flex:1}}>
+              
+              <ScrollView style={{ top:HEIGHT*0.2019,flex:1}}>
                 {questionList.map(question => (
                   <TouchableOpacity style={{backgroundColor: '#ffffff', borderWidth: 1, borderColor:'#d0d0d0', width:WIDTH*0.9135, height:HEIGHT*0.16,
                             left:WIDTH*0.0432, flexDirection:'column', borderRadius:12, marginTop:15, justifyContent:'center'}}
@@ -130,7 +130,7 @@ function MentorBoard(props){
                 ))}
                 
               </ScrollView>
-              </View>
+
             </Contents>
         </Background>
       </Container>
