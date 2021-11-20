@@ -103,9 +103,9 @@ function ReplyDetail(props){
     });
   };
 
-  const fetchAnswerSatisfactionList = async (tempUserId) => {
+  const fetchAnswerSatisfactionList = async () => {
     await AnswerEvaluationService.getList({
-      userId: tempUserId,
+    
       answerId:props.route.params.answerId
     }).then(res => {
       setNAS(res.data.count);
@@ -114,7 +114,7 @@ function ReplyDetail(props){
     });
   };
 
-  const checkChatRoom = async (tempUserId) => {
+  const fetchChatRoom = async (tempUserId) => {
     
     await ChatRoomService.getList({
       senderId: tempUserId,
@@ -139,22 +139,17 @@ function ReplyDetail(props){
     });
     
   };
-
-  const [profImage, setProfImage] = useState(null);
-
-
   useEffect(() => {
     (async ()=> {
       const  {userId} = await getAuth();
       setUserId(userId);
       const tempUserId = userId;
-      await fetchAnswer();
-      await fetchAnswerSatisfactionList(tempUserId);
+      await fetchAnswerSatisfactionList();
       await fetchChatRoom(tempUserId);
       await fetchAnswer(tempUserId);
     })();
    
-    userId&&setProfImage(nowAnswer&&nowAnswer.results&&nowAnswer.results.user&&nowAnswer.results.user.profile_image);
+   
   }, [nowAnswerSatisfaction]);
 
     return(
@@ -219,7 +214,8 @@ function ReplyDetail(props){
                   setData={setData}
                   setCButton={setCButton}
                   setNAS={setNAS}
-                  answerid={props.route.params.answerId}/>
+                  answerid={props.route.params.answerId}
+                  userid={userId}/>
               </Modal>
             
             </Contents>

@@ -22,7 +22,7 @@ const Contents = styled.View`
 `;
 
 function MentorBoard(props){
-  const {getAuth} = useAuth();
+
    const [userId, setUserId] = useState();
    
   const [lastChoice, setLastChoice] = useState('UI/UX');
@@ -36,13 +36,13 @@ function MentorBoard(props){
    //lastChoice가 바뀔 때마다 load해와서 렌더링 해줘야한다. 
    const [questionList, setQuestionList] = useState([]);
 
-   const fetchQuestionList = async (tempUserId) => {
-     const lastC = lastChoice;
+   const fetchQuestionList = async (lacc) => {
+    
      await QuestionService.getList({
        offset: 0,
        limit: 1000,
        ordering: '-created_on',
-       categoryNamesIn: lastC
+       categoryNamesIn: lacc
      }).then(res => {
        setQuestionList(res.data.results);
        console.log(res.data.results);
@@ -50,12 +50,10 @@ function MentorBoard(props){
    };
 
   useEffect(() => {
-    (async ()=> {
-      const  {userId} = await getAuth();
-      setUserId(userId);
-      const tempUserId = userId;
-      await fetchQuestionList(tempUserId);
-    })();
+    const lac = lastChoice;
+    console.log(lac);
+    {lac&&fetchQuestionList(lac);}
+
    
   },[lastChoice] );
 
