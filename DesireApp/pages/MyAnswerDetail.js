@@ -103,12 +103,12 @@ function MyAnswerDetail(props){
               <View style={{backgroundColor: '#e4ecf7', borderWidth: 1, borderColor:'#d0d0d0', width:'100%', marginTop:20, height:91,flexDirection:'row', alignItems:'center'}}
                                  >
                   
-                  <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                  <View style={{borderWidth: 1 , borderColor:'#ffaacc', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
+                    <Image source={{uri:nowAnswer.question&&nowAnswer.question.user&&nowAnswer.question.user.profile_image}} resizeMode='cover' style={{width: '100%', height: '100%',borderRadius:50}}></Image>
                   </View>
                   
                   <View style={{flexDirection: 'column', width:'40%'}}>
-                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}} numberOfLines={2} ellipsizeMode="tail">{nowAnswer.user&&nowAnswer.user.nickname}</Text>
+                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:3}} numberOfLines={2} ellipsizeMode="tail">{nowAnswer.question&&nowAnswer.question.user&&nowAnswer.question.user.nickname}</Text>
                     <Text style={{fontSize: 12, fontWeight: '500', color:'#858585', marginBottom:5}}>4년차 / UX 디자이너</Text>
                     
                   </View>
