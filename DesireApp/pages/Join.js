@@ -102,12 +102,12 @@ function Join(props){
                     <Title>회원가입</Title>
                 </TitleView>
                 <View style={{position:'absolute', top:'21.13%',left:'11.11%', width:'77.77%',height:'36.58%',flexDirection:'column', justifyContent:'space-between'}}>
-                  <TextInput placeholder="이메일 주소" onChangeText={(text) => {setEmail(text)}}></TextInput>
-                  <TextInput placeholder="비밀번호" onChangeText={(text) => {setPassword(text)}}></TextInput>
+                  <TextInput placeholder="이메일 주소" autoCapitalize="none" onChangeText={(text) => {setEmail(text)}}></TextInput>
+                  <TextInput placeholder="비밀번호" autoCapitalize="none" onChangeText={(text) => {setPassword(text)}}></TextInput>
                   <TextView>
                     <Text>8자 이상,숫자포함</Text>
                   </TextView>
-                  <TextInput placeholder="비밀번호 확인" onChangeText={(text) => {setPassword2(text)}}></TextInput>
+                  <TextInput placeholder="비밀번호 확인" autoCapitalize="none" onChangeText={(text) => {setPassword2(text)}}></TextInput>
 
                   <Button onPress={()=>{
                     const tmplst = [validator.isEmail(email),(validator.isAlphanumeric(password)&& (!validator.isAlpha(password) && !validator.isNumeric(password)))&&password.length>7,validator.equals(password,password2)]
