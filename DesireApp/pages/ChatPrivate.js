@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Dimensions, Image, View, TouchableOpacity, Text, ScrollView, TextInput} from 'react-native';
 import ChatMessageService from '../services/ChatMessageService';
 import useAuth from '../services/useAuth';
-
+import ChatRoomService from '../services/ChatRoomService';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -83,8 +83,9 @@ const ChatText = styled.Text`
 
 function ChatPrivate(props){
   const {getAuth} = useAuth();
+ 
    const [userId, setUserId] = useState();
-   
+   const [accType, setAccType] = useState('');
 
     const [nowChat, setNowChat] = useState('');
    
@@ -92,9 +93,23 @@ function ChatPrivate(props){
       //props로 받은 answerId로 가져온 answer정보를 담을 곳
     const [chatMessages, setChatMessages] = useState([]);
 
+
+    const [chatRoomData, setChatRoomData] = useState([]);
+    
+    const [tick, setTick] = useState(false);
+    const [reload, SetReload] = useState(false);
+
+    const fetchChatRoomData = async () => {
+      await ChatRoomService.getOne({
+        id: props.route.params.chatroomid,
+      }).then(res => {
+        setChatRoomData(res.data);
+      
+      });
+    };
     const fetchChatMessages = async (tempUserId) => {
       await ChatMessageService.getList({
-        userId:tempUserId,
+       
         ordering: '-created_on - descending',
         chatRoomId: props.route.params.chatroomid,
       
@@ -104,19 +119,9 @@ function ChatPrivate(props){
       });
     };
   
-    useEffect(() => {
-      (async ()=> {
-        const  {userId} = await getAuth();
-        setUserId(userId);
-        const tempUserId = userId;
-      await fetchChatMessages(tempUserId);
-      })();
-  
-    }, );
-    
-    // 전송버튼 누르면 chat을 서버로 보냄
+     // 전송버튼 누르면 chat을 서버로 보냄
    
-    const postChatMessage = async () => {
+     const postChatMessage = async () => {
   
       await ChatMessageService.create({
         userId: userId,
@@ -128,6 +133,23 @@ function ChatPrivate(props){
       });
     };
   
+
+    useEffect(() => {
+      
+      (async ()=> {
+        const  {userId,accType} = await getAuth();
+  
+      setUserId(userId);
+      setAccType(accType);
+        
+        const tempUserId = userId;
+        await fetchChatRoomData();
+      await fetchChatMessages(tempUserId);
+      })();
+  
+    }, [tick,reload]);
+    
+   
 
     return(
     
@@ -141,11 +163,14 @@ function ChatPrivate(props){
                                  >
                   
                   <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                    <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                    {accType==="MO"?
+                    <Image source={{uri:chatRoomData&&chatRoomData.sender&&chatRoomData.sender.profile_image}} resizeMode='cover' style={{width: '100%', height: '100%',borderRadius:50}}></Image>:
+                    <Image source={{uri:chatRoomData&&chatRoomData.recipient&&chatRoomData.recipient.profile_image}} resizeMode='cover' style={{width: '100%', height: '100%',borderRadius:50}}></Image>
+                    }
                   </View>
                   
                   <View style={{flexDirection: 'column' }}>
-                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:2}}>{props.route.params.chatrecipient}</Text>
+                    <Text style={{fontSize: 18, fontWeight: '500', color:'#000000', marginBottom:2}}>{props.route.params.chatnickname}</Text>
                     <Text style={{fontSize: 15, fontWeight: '500', color:'#a0a0a0', marginBottom:3}}>2MIN</Text>
                     
                   </View>
@@ -183,14 +208,15 @@ function ChatPrivate(props){
                 </ScrollView>
                  
                 <View style={{width:'100%', height: 50,  backgroundColor:'#ffffff', alignItems:'center', flexDirection:'row'}}>
-                    <TouchableOpacity  style={{width:'10%', height:50,  alignItems:'center', justifyContent:'center'}}>
-                      <Image source={require('../constants/images/addfile.png')} resizeMode='contain'  style={{width:'40%',height:'40%'}}/>
+                    <TouchableOpacity  style={{width:'10%', height:50,  alignItems:'center', justifyContent:'center'}} onPress={()=>{SetReload(!reload)}}>
+                      <Image source={require('../constants/images/addfile.png')} resizeMode='contain'  style={{width:'40%',height:'40%'}}
+                      />
                     </TouchableOpacity>
 
                     <TextInput style={{width:'74%', height: 40,  backgroundColor:'#ffffff'}} onChangeText={(text)=>setNowChat(text)} value={nowChat} onSubmitEditing={()=>{setNowChat("")}}></TextInput>
 
                     <TouchableOpacity  style={{width:'10%', height:50, magrinRight:'3%',alignItems:'center', justifyContent:'center'}}
-                           onPress={()=> {if(nowChat !== ""){ postChatMessage();setNowChat("")} } }>
+                           onPress={()=> {if(nowChat !== ""){ postChatMessage();setNowChat("");setTick(!tick)} } }>
                       <Image source={require('../constants/images/chatsend.png')} resizeMode='contain' style={{width:'60%',height:'60%'}}/>
                     </TouchableOpacity>
                   
