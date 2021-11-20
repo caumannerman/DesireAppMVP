@@ -173,8 +173,10 @@ function ReplyDetail(props){
                                  >
                   
                   <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                  {profImage!= null?
-                      <Image source={{url:profImage}} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>:
+                
+                  {nowAnswer&&nowAnswer.user&&nowAnswer.user.profile_image!= null?
+                       
+                      <Image source={{url:nowAnswer&&nowAnswer.user&&nowAnswer.user.profile_image}} resizeMode='cover' style={{width: '100%', height: '100%',borderRadius:50}}></Image>:
                       <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
                       }
                   </View>
