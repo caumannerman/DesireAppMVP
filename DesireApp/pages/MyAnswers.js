@@ -138,7 +138,7 @@ function MyAnswers(props){
                                 props.navigation.navigate("MyAnswerDetail", {answerId:answer_id})}}>
                     
                     <View style={{borderWidth: 2 , borderColor:'#ffa0ff', height: 70, width: 70, borderRadius: 50, marginHorizontal: '5%'}}>
-                      <Image source={require('../constants/images/homepage/human.png')} resizeMode='contain' style={{width: '100%', height: '100%'}}></Image>
+                      <Image source={{uri:answer.question&&answer.question.user&&answer.question.user.profile_image}} resizeMode='cover' style={{width: '100%', height: '100%',borderRadius:50}}></Image>
                     </View>
                     
                     <View style={{flexDirection: 'column',width:'67%' }}>
