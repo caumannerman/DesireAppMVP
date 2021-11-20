@@ -92,7 +92,7 @@ const BackButton = styled.TouchableOpacity`
   margin-bottom: 10;
 `;
 
-function Question(props) {
+function Questions(props) {
   const {getAuth} = useAuth();
   const [userId, setUserId] = useState();
   const [isModalVisible, setisModalVisible] = useState(false);
@@ -109,16 +109,20 @@ function Question(props) {
   };
 
   const [categories, setCategories] = useState([
-    {category: 'UIUX', value: 'UI/UX', isCheck: false},
-    {category: 'BIBX', value: 'BI/BX', isCheck: false},
-    {category: '제품디자인', value: '제품디자인', isCheck: false},
-    {category: '시각디자인', value: '시각디자인', isCheck: false},
+    {category: 'UIUX', value: 'UI/UX', isCheck: false, key:1},
+    {category: 'BIBX', value: 'BI/BX', isCheck: false, key:2},
+    {category: '제품디자인', value: '제품디자인', isCheck: false, key:3},
+    {category: '시각디자인', value: '시각디자인', isCheck: false, key:4},
   ]);
 
   const onSubmit = async () => {
     const selectedCategoryNames = categories
       .filter(category => category.isCheck)
       .map(selectedCategory => selectedCategory.value);
+    
+      if(selectedCategoryNames.length==0){selectedCategoryNames.push('UI/UX')};
+      console.log("lll");
+      console.log(selectedCategoryNames);
 
     await QuestionService.create({
       userId: userId,
@@ -145,7 +149,10 @@ function Question(props) {
       const {userId} = await getAuth();
       setUserId(userId);
     })();
-  }, [photo,video,document,audio]);
+    console.log(categories
+      .filter(category => category.isCheck)
+      .map(selectedCategory => selectedCategory.value));
+    }, [categories,photo,video,document,audio]);
 
   return (
     <Container>
@@ -208,13 +215,16 @@ function Question(props) {
             <ScrollView style={{height: '100%'}} horizontal={true}>
               {categories.map(item => (
                 <TouchableOpacity
-                  onPress={() => {
+                  onPress={ () => {
                     setCategories(
                       produce(categories, draft => {
                         const index = categories.indexOf(item);
                         draft[index].isCheck = !categories[index].isCheck;
+                        console.log(draft[index].isCheck);
+
                       }),
                     );
+                    
                   }}
                   style={{
                     height: 41,
@@ -476,4 +486,4 @@ function Question(props) {
   );
 }
 
-export default Question;
+export default Questions;
