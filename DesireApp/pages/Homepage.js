@@ -110,6 +110,7 @@ function Homepage(props){
 
   const {getAuth} = useAuth();
 
+
   const [questionList, setQuestionList] = useState([]);
   const fetchQuestionList = async (tempUserId) => {
     
@@ -127,7 +128,8 @@ function Homepage(props){
 
   //props로 받은 answerId로 가져온 answer정보를 담을 곳--내가 sender인 채팅방만 가져오면 됨 
   const [chatRoomList, setChatRoomList] = useState([]);
-  const fetchCRList = async (tempUserId) => {
+  //멘티용
+  const fetchCRList_ME = async (tempUserId) => {
     await ChatRoomService.getList({
       ordering: '-created_on',
       senderId: tempUserId,
@@ -137,24 +139,37 @@ function Homepage(props){
       console.log(res.data.results);
     });
   };
+//멘토용 
+  const fetchCRList_MO = async (tempUserId) => {
+    await ChatRoomService.getList({
+      ordering: '-created_on',
+      recipientId: tempUserId,
+    
+    }).then(res => {
+      setChatRoomList(res.data.results);
+      console.log(res.data.results);
+    });
+  };
 
   const [nowAccType, setNowAccType] = useState('');
-  
-
+ 
 
   useEffect(() => {
     
     (async () => {
 
-        const  {userId} = await getAuth();
+        const  {userId,accType} = await getAuth();
         setUserId(userId);
-        const  {accType} = await getAuth();
         setNowAccType(accType);
       
       const tempUserId = userId;
       await fetchQuestionList(tempUserId);
-      await fetchCRList(tempUserId);
+      {accType==="ME"?
+      await fetchCRList_ME(tempUserId):
+      await fetchCRList_MO(tempUserId)}
     })();
+
+    
 
    
     
@@ -173,13 +188,13 @@ function Homepage(props){
             <Contents>
 
 
-              <View style={{position:'absolute', top:HEIGHT*0.0357,left:WIDTH*0.1111, flexDirection:'row',justifyContent:'space-between', width:WIDTH*0.8078, alignItems:'center'}}>
+              <View style={{position:'absolute', top:HEIGHT*0.0557,left:WIDTH*0.1111, flexDirection:'row',justifyContent:'space-between', width:WIDTH*0.8078, alignItems:'center'}}>
                 <Text style={{fontSize:20,fontWeight:'800',color:'#000000',width:WIDTH*0.22}}>DESIRE</Text>
                 <TouchableOpacity style={{height:'100%', width:40}} ><Image resizeMode="contain" style={{flex:1}} source={require('../constants/images/homepage/notifications_24px.png')}/></TouchableOpacity>
               </View>
 
-              <Text style={{position:'absolute', top:HEIGHT*0.0894, left:WIDTH*0.1111,color:'#929292', fontSize:14,fontWeight:'500'}}>  {TEMP_USER_NICKNAME}님, 환영합니다.</Text>
-              <View style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.1299,width:WIDTH*0.7778, height: WIDTH*0.5044, flexDirection:'column',borderRadius:16,borderWidth:1, borderColor:'#ebebeb', backgroundColor:'#ffffff'}}>
+              <Text style={{position:'absolute', top:HEIGHT*0.0994, left:WIDTH*0.1111,color:'#929292', fontSize:14,fontWeight:'500'}}>  {TEMP_USER_NICKNAME}님, 환영합니다.</Text>
+              <View style={{position:'absolute', left:WIDTH*0.1111,top:HEIGHT*0.1399,width:WIDTH*0.7778, height: WIDTH*0.5044, flexDirection:'column',borderRadius:16,borderWidth:1, borderColor:'#ebebeb', backgroundColor:'#ffffff'}}>
                   <Text style={{position:'absolute', top:'11%', left:'7.14%',fontSize:16,fontWeight:'bold',color:'#2c2c2c'}}>디자인 일을 하며 생긴 어려움</Text>
                   {nowAccType==="ME"?
                   <Text style={{position:'absolute', top:'25.5%', left:'7.14%',fontSize:14,fontWeight:'normal',color:'#5f5f5f'}}>일을하며 생긴 어려움 바로 멘토님에게! </Text>:
