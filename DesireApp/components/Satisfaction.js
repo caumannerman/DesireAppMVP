@@ -11,6 +11,7 @@ const HEIGHT = Dimensions.get('window').height;
 
 const Satisfaction = (props) => {
 
+
    closeModal = (bool,data,data2,satisNum) => {
       props.changeModalVisible(bool);
       props.setData(data);
@@ -26,12 +27,11 @@ const Satisfaction = (props) => {
  
   const [lastChoice, setLastChoice] = useState('');
 
-  const TEMP_USER_ID = '8136385e-42af-493f-a938-f7b6fdc97e69';
 
   const onSubmit = async () => {
     
     await AnswerEvaluationService.create({
-      userId: TEMP_USER_ID,
+      userId: props.userid,
       answerId: props.answerid,
       evaluation: lastChoice,
      
@@ -40,6 +40,8 @@ const Satisfaction = (props) => {
     });
   };
 
+
+  
 
 
 
