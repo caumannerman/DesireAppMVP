@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Dimensions,  ScrollView,View, Text, TouchableOpacity} from 'react-native';
+import { Dimensions,  ScrollView,View, Text, TouchableOpacity,Image} from 'react-native';
 import ChatRoomService from '../services/ChatRoomService';
 import useAuth from '../services/useAuth';
 import QuestionService from '../services/QuestionService';
@@ -87,12 +87,7 @@ const PartText = styled.Text`
   width: 77.77%;
 `;
 
-const Image = styled.Image`
-  position: absolute;
-  left: 11.45%;
-  top: 12%;
-  
-`;
+
 
 function Homepage(props){
  
@@ -255,18 +250,15 @@ function Homepage(props){
                   <Part  onPress={()=>{
                     const chatroomid = chatroom.id;
                     props.navigation.navigate("ChatPrivate", {chatroomid:chatroomid, chatrecipient:chatroom.recipient.nickname})}}>
-                      <Image source={require('../constants/images/homepage/human.png')} ></Image>
+                      <Image source={{uri:chatroom.sender&&chatroom.sender.profile_image}} style={{position:'absolute',left:'11.45%',top:'7%',borderRadius:50, borderWidth:1, borderColor:'#ffaacc', width:HEIGHT*0.0709, height:HEIGHT*0.0709}} resizeMode='cover'></Image>
                       <PartText numberOfLines={1} ellipsizeMode="tail">{chatroom&&chatroom.latest_chat_message&&chatroom.latest_chat_message.content}</PartText>
                       <PartChat>채팅 중</PartChat>
                       <PartDate>{chatroom.created_on&&chatroom.created_on.slice(2,4)}.{chatroom.created_on&&chatroom.created_on.slice(5,7)}.{chatroom.created_on&&chatroom.created_on.slice(8,10)}</PartDate>
                   </Part>
-                  
+                 
                 
                   ))}
                  </ScrollView>
-          
-
-
             </Contents>
         </Background>
       </Container>
