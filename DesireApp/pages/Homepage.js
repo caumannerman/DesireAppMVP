@@ -250,7 +250,9 @@ function Homepage(props){
                   <Part  onPress={()=>{
                     const chatroomid = chatroom.id;
                     props.navigation.navigate("ChatPrivate", {chatroomid:chatroomid, chatrecipient:chatroom.recipient.nickname})}}>
-                      <Image source={{uri:chatroom.sender&&chatroom.sender.profile_image}} style={{position:'absolute',left:'11.45%',top:'7%',borderRadius:50, borderWidth:1, borderColor:'#ffaacc', width:HEIGHT*0.0709, height:HEIGHT*0.0709}} resizeMode='cover'></Image>
+                        {nowAccType==="MO"?
+                      <Image source={{uri:chatroom.sender&&chatroom.sender.profile_image}} style={{position:'absolute',left:'11.45%',top:'7%',borderRadius:50, borderWidth:1, borderColor:'#ffaacc', width:HEIGHT*0.0709, height:HEIGHT*0.0709}} resizeMode='cover'></Image>:
+                      <Image source={{uri:chatroom.recipient&&chatroom.recipient.profile_image}} style={{position:'absolute',left:'11.45%',top:'7%',borderRadius:50, borderWidth:1, borderColor:'#ffaacc', width:HEIGHT*0.0709, height:HEIGHT*0.0709}} resizeMode='cover'></Image> }
                       <PartText numberOfLines={1} ellipsizeMode="tail">{chatroom&&chatroom.latest_chat_message&&chatroom.latest_chat_message.content}</PartText>
                       <PartChat>채팅 중</PartChat>
                       <PartDate>{chatroom.created_on&&chatroom.created_on.slice(2,4)}.{chatroom.created_on&&chatroom.created_on.slice(5,7)}.{chatroom.created_on&&chatroom.created_on.slice(8,10)}</PartDate>
