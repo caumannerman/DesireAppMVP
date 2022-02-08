@@ -1,5 +1,7 @@
 # DesireAppMVP
 
+## 구동영상 유튜브 링크 : https://youtu.be/cEYUPrqeQO4
+
 ## Development with Android Emulator
 
 ### Open metro
